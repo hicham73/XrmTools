@@ -1,0 +1,434 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{388DC128-0BA4-4EDA-8A15-A0202C25C092}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Xrm.DevOPs.Manager</RootNamespace>
+    <AssemblyName>Xrm.DevOPs.Manager</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Crm.Sdk.Proxy, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.9.0.0.7\lib\net452\Microsoft.Crm.Sdk.Proxy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=3.17.3.35304, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.3.17.3\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.Platform, Version=3.17.3.35304, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.3.17.3\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Sdk, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.9.0.0.7\lib\net452\Microsoft.Xrm.Sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Sdk.Deployment, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.Deployment.9.0.0.7\lib\net452\Microsoft.Xrm.Sdk.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Sdk.Workflow, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.Workflow.9.0.0.5\lib\net452\Microsoft.Xrm.Sdk.Workflow.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Tooling.Connector, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.XrmTooling.CoreAssembly.9.0.0.7\lib\net452\Microsoft.Xrm.Tooling.Connector.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Activities.Presentation" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Workflow.Activities" />
+    <Reference Include="System.Workflow.ComponentModel" />
+    <Reference Include="System.Workflow.Runtime" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Xrm.DevOPs.Deployment">
+      <HintPath>..\Xrm.DevOPs.Deployment\bin\Debug\Xrm.DevOPs.Deployment.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Diff\DiffGenerator.cs" />
+    <Compile Include="Entities\PluginAssembly.cs" />
+    <Compile Include="Entities\PluginType.cs" />
+    <Compile Include="Entities\SdkMessage.cs" />
+    <Compile Include="Entities\SdkMessageFilter.cs" />
+    <Compile Include="Entities\SdkMessageProcessingStep.cs" />
+    <Compile Include="Entities\SdkMessageProcessingStepImage.cs" />
+    <Compile Include="Entities\SdkMessageProcessingStepSecureConfig.cs" />
+    <Compile Include="Entities\SdkMessageProcessingStepState.cs" />
+    <Compile Include="Entities\ServiceEndpoint.cs" />
+    <Compile Include="Entities\SystemUser.cs" />
+    <Compile Include="Helpers\MetadataHelper.cs" />
+    <Compile Include="Helpers\OrganizationHelper.cs" />
+    <Compile Include="Helpers\SolutionHelper.cs" />
+    <Compile Include="UI\Forms\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\PropertiesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\PropertiesForm.Designer.cs">
+      <DependentUpon>PropertiesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Diff\DiffResult.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Setting.cs" />
+    <Compile Include="UI\Forms\SolutionTransferDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\SolutionTransferDlg.Designer.cs">
+      <DependentUpon>SolutionTransferDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\CrmTreeNode.cs" />
+    <Compile Include="UI\EntityViewer.cs" />
+    <Compile Include="UI\SolutionExplorer.cs" />
+    <Compile Include="Util\Log.cs" />
+    <Compile Include="Util\Mapping.cs" />
+    <Compile Include="Wrappers\CrmOrganization.cs" />
+    <Compile Include="Wrappers\CrmSolution.cs" />
+    <EmbeddedResource Include="UI\Forms\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\PropertiesForm.resx">
+      <DependentUpon>PropertiesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="UI\Forms\SolutionTransferDlg.resx">
+      <DependentUpon>SolutionTransferDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="images\groups\activitieswall_images.png" />
+    <Content Include="images\groups\control_imgs.png" />
+    <Content Include="images\groups\entity16.png" />
+    <Content Include="images\groups\entity_imgs.png" />
+    <Content Include="images\groups\formentityimages.png" />
+    <Content Include="images\groups\grid_ctrl_imgs.png" />
+    <Content Include="images\groups\inlineedit_images.png" />
+    <Content Include="images\groups\navbar_header.png" />
+    <Content Include="images\groups\navbar_images.png" />
+    <Content Include="images\groups\pcc_images.png" />
+    <Content Include="images\groups\process_control_images.png" />
+    <Content Include="images\groups\refresh_commandbar_images.png" />
+    <Content Include="images\groups\ribbon.png" />
+    <Content Include="images\groups\ribbonhomepage.png" />
+    <Content Include="images\groups\rollup_runtime_images.png" />
+    <Content Include="images\groups\ruleeditor_images.png" />
+    <Content Include="images\groups\searchwidget_images.png" />
+    <Content Include="images\groups\socialinsight_images.png" />
+    <Content Include="images\groups\visualization.png" />
+    <Content Include="images\icons\16_help.gif" />
+    <Content Include="images\icons\16_L_check.gif" />
+    <Content Include="images\icons\16_save.gif" />
+    <Content Include="images\icons\16_saveclose.gif" />
+    <Content Include="images\icons\addNew.gif" />
+    <Content Include="images\icons\alternatekey_16.png" />
+    <Content Include="images\icons\blank_11.gif" />
+    <Content Include="images\icons\businessrule_16.png" />
+    <Content Include="images\icons\ClientExtension_16.png" />
+    <Content Include="images\icons\component.png" />
+    <Content Include="images\icons\exportsolution.png" />
+    <Content Include="images\icons\Filter_16.png" />
+    <Content Include="images\icons\hierarchysettings.png" />
+    <Content Include="images\icons\icon %281%29.gif" />
+    <Content Include="images\icons\icon %282%29.gif" />
+    <Content Include="images\icons\icon %283%29.gif" />
+    <Content Include="images\icons\icon %284%29.gif" />
+    <Content Include="images\icons\icon %285%29.gif" />
+    <Content Include="images\icons\icon %286%29.gif" />
+    <Content Include="images\icons\icon %287%29.gif" />
+    <Content Include="images\icons\icon %288%29.gif" />
+    <Content Include="images\icons\icon.gif" />
+    <Content Include="images\icons\ico_16_1.gif" />
+    <Content Include="images\icons\ico_16_10.gif" />
+    <Content Include="images\icons\ico_16_1001.png" />
+    <Content Include="images\icons\ico_16_1010.gif" />
+    <Content Include="images\icons\ico_16_1011.gif" />
+    <Content Include="images\icons\ico_16_1013.gif" />
+    <Content Include="images\icons\ico_16_1016.gif" />
+    <Content Include="images\icons\ico_16_1022.gif" />
+    <Content Include="images\icons\ico_16_1024.gif" />
+    <Content Include="images\icons\ico_16_1025.gif" />
+    <Content Include="images\icons\ico_16_1026.gif" />
+    <Content Include="images\icons\ico_16_1028.gif" />
+    <Content Include="images\icons\ico_16_1030.gif" />
+    <Content Include="images\icons\ico_16_1030_8.gif" />
+    <Content Include="images\icons\ico_16_1032.gif" />
+    <Content Include="images\icons\ico_16_1036.gif" />
+    <Content Include="images\icons\ico_16_1038.gif" />
+    <Content Include="images\icons\ico_16_1039.gif" />
+    <Content Include="images\icons\ico_16_1048.gif" />
+    <Content Include="images\icons\ico_16_1049.gif" />
+    <Content Include="images\icons\ico_16_1055.gif" />
+    <Content Include="images\icons\ico_16_1056.gif" />
+    <Content Include="images\icons\ico_16_1071.gif" />
+    <Content Include="images\icons\ico_16_1080.gif" />
+    <Content Include="images\icons\ico_16_1083.gif" />
+    <Content Include="images\icons\ico_16_1084.gif" />
+    <Content Include="images\icons\ico_16_1085.gif" />
+    <Content Include="images\icons\ico_16_1088.gif" />
+    <Content Include="images\icons\ico_16_1089.gif" />
+    <Content Include="images\icons\ico_16_1090.gif" />
+    <Content Include="images\icons\ico_16_1091.gif" />
+    <Content Include="images\icons\ico_16_1111.png" />
+    <Content Include="images\icons\ico_16_1112.png" />
+    <Content Include="images\icons\ico_16_112.gif" />
+    <Content Include="images\icons\ico_16_1141.gif" />
+    <Content Include="images\icons\ico_16_1142.gif" />
+    <Content Include="images\icons\ico_16_1144.gif" />
+    <Content Include="images\icons\ico_16_1145.gif" />
+    <Content Include="images\icons\ico_16_1146.gif" />
+    <Content Include="images\icons\ico_16_1147.gif" />
+    <Content Include="images\icons\ico_16_1148.gif" />
+    <Content Include="images\icons\ico_16_1149.gif" />
+    <Content Include="images\icons\ico_16_1150.gif" />
+    <Content Include="images\icons\ico_16_1151.gif" />
+    <Content Include="images\icons\ico_16_1152.gif" />
+    <Content Include="images\icons\ico_16_1200.png" />
+    <Content Include="images\icons\ico_16_123.gif" />
+    <Content Include="images\icons\ico_16_1234.png" />
+    <Content Include="images\icons\ico_16_1235.gif" />
+    <Content Include="images\icons\ico_16_1236.png" />
+    <Content Include="images\icons\ico_16_127.gif" />
+    <Content Include="images\icons\ico_16_129.gif" />
+    <Content Include="images\icons\ico_16_1333.gif" />
+    <Content Include="images\icons\ico_16_2.gif" />
+    <Content Include="images\icons\ico_16_2010.gif" />
+    <Content Include="images\icons\ico_16_2011.gif" />
+    <Content Include="images\icons\ico_16_2013.gif" />
+    <Content Include="images\icons\ico_16_2020.gif" />
+    <Content Include="images\icons\ico_16_2029.gif" />
+    <Content Include="images\icons\ico_16_3.gif" />
+    <Content Include="images\icons\ico_16_3231.png" />
+    <Content Include="images\icons\ico_16_3234.gif" />
+    <Content Include="images\icons\ico_16_4.gif" />
+    <Content Include="images\icons\ico_16_4000.gif" />
+    <Content Include="images\icons\ico_16_4001.gif" />
+    <Content Include="images\icons\ico_16_4002.gif" />
+    <Content Include="images\icons\ico_16_4007.gif" />
+    <Content Include="images\icons\ico_16_4009.gif" />
+    <Content Include="images\icons\ico_16_4200.gif" />
+    <Content Include="images\icons\ico_16_4201.gif" />
+    <Content Include="images\icons\ico_16_4202.gif" />
+    <Content Include="images\icons\ico_16_4204.gif" />
+    <Content Include="images\icons\ico_16_4206.gif" />
+    <Content Include="images\icons\ico_16_4207.gif" />
+    <Content Include="images\icons\ico_16_4208.gif" />
+    <Content Include="images\icons\ico_16_4209.gif" />
+    <Content Include="images\icons\ico_16_4210.gif" />
+    <Content Include="images\icons\ico_16_4211.gif" />
+    <Content Include="images\icons\ico_16_4212.gif" />
+    <Content Include="images\icons\ico_16_4214.gif" />
+    <Content Include="images\icons\ico_16_4216.gif" />
+    <Content Include="images\icons\ico_16_4230.gif" />
+    <Content Include="images\icons\ico_16_4251.gif" />
+    <Content Include="images\icons\ico_16_4300.gif" />
+    <Content Include="images\icons\ico_16_4400.gif" />
+    <Content Include="images\icons\ico_16_4401.gif" />
+    <Content Include="images\icons\ico_16_4402.gif" />
+    <Content Include="images\icons\ico_16_4406.png" />
+    <Content Include="images\icons\ico_16_4411.gif" />
+    <Content Include="images\icons\ico_16_4414.gif" />
+    <Content Include="images\icons\ico_16_4502.gif" />
+    <Content Include="images\icons\ico_16_4503.gif" />
+    <Content Include="images\icons\ico_16_4605.png" />
+    <Content Include="images\icons\ico_16_4608.png" />
+    <Content Include="images\icons\ico_16_4618.png" />
+    <Content Include="images\icons\ico_16_4703.png" />
+    <Content Include="images\icons\ico_16_4710.png" />
+    <Content Include="images\icons\ico_16_5.png" />
+    <Content Include="images\icons\ico_16_50.gif" />
+    <Content Include="images\icons\ico_16_7100.gif" />
+    <Content Include="images\icons\ico_16_7101.png" />
+    <Content Include="images\icons\ico_16_78.gif" />
+    <Content Include="images\icons\ico_16_8.gif" />
+    <Content Include="images\icons\ico_16_8181.gif" />
+    <Content Include="images\icons\ico_16_8199.gif" />
+    <Content Include="images\icons\ico_16_85.gif" />
+    <Content Include="images\icons\ico_16_9.gif" />
+    <Content Include="images\icons\ico_16_9006.png" />
+    <Content Include="images\icons\ico_16_9100.gif" />
+    <Content Include="images\icons\ico_16_9105.gif" />
+    <Content Include="images\icons\ico_16_9106.gif" />
+    <Content Include="images\icons\ico_16_92.gif" />
+    <Content Include="images\icons\ico_16_9300.png" />
+    <Content Include="images\icons\ico_16_9301.png" />
+    <Content Include="images\icons\ico_16_9333.gif" />
+    <Content Include="images\icons\ico_16_9502.png" />
+    <Content Include="images\icons\ico_16_9507.png" />
+    <Content Include="images\icons\ico_16_9508.png" />
+    <Content Include="images\icons\ico_16_9600.png" />
+    <Content Include="images\icons\ico_16_9602.png" />
+    <Content Include="images\icons\ico_16_9603.png" />
+    <Content Include="images\icons\ico_16_9605.gif" />
+    <Content Include="images\icons\ico_16_9606.gif" />
+    <Content Include="images\icons\ico_16_9700.gif" />
+    <Content Include="images\icons\ico_16_9701.gif" />
+    <Content Include="images\icons\ico_16_9702.gif" />
+    <Content Include="images\icons\ico_16_9703.gif" />
+    <Content Include="images\icons\ico_16_9750.gif" />
+    <Content Include="images\icons\ico_16_9752.gif" />
+    <Content Include="images\icons\ico_16_9753.png" />
+    <Content Include="images\icons\ico_16_9801.gif" />
+    <Content Include="images\icons\ico_16_9804.png" />
+    <Content Include="images\icons\ico_16_9869.gif" />
+    <Content Include="images\icons\ico_16_99.gif" />
+    <Content Include="images\icons\ico_16_9930.png" />
+    <Content Include="images\icons\ico_16_9953.png" />
+    <Content Include="images\icons\ico_16_9954.png" />
+    <Content Include="images\icons\ico_16_9955.png" />
+    <Content Include="images\icons\ico_16_9958.gif" />
+    <Content Include="images\icons\ico_16_9959.png" />
+    <Content Include="images\icons\ico_16_9997.gif" />
+    <Content Include="images\icons\ico_16_forms.png" />
+    <Content Include="images\icons\ico_16_insertCheck.gif" />
+    <Content Include="images\icons\ico_16_relationshipsn21.gif" />
+    <Content Include="images\icons\ico_16_relationshipsn2n.gif" />
+    <Content Include="images\icons\ico_16_systemEntity.gif" />
+    <Content Include="images\icons\ico_16_views.png" />
+    <Content Include="images\icons\ico_16_visualizations.gif" />
+    <Content Include="images\icons\ico_18_7100.gif" />
+    <Content Include="images\icons\ico_18_attributes.gif" />
+    <Content Include="images\icons\ico_18_entityinfo.gif" />
+    <Content Include="images\icons\ico_18_messages.gif" />
+    <Content Include="images\icons\ico_18_relationships.gif" />
+    <Content Include="images\icons\ico_fhe_7100.png" />
+    <Content Include="images\icons\mnu_actions.gif" />
+    <Content Include="images\icons\navcollapsedarrow16_silver.png" />
+    <Content Include="images\icons\poperties_16.png" />
+    <Content Include="images\icons\PostConfigRules_16px.png" />
+    <Content Include="images\icons\PostConfig_16px.png" />
+    <Content Include="images\icons\publish.png" />
+    <Content Include="images\icons\publishall.gif" />
+    <Content Include="images\icons\tab_line.gif" />
+    <Content Include="images\icons\translations.gif" />
+    <Content Include="images\icons\transparent_spacer.gif" />
+    <Content Include="images\other\appmenu_back.gif" />
+    <Content Include="images\other\app_back %281%29.png" />
+    <Content Include="images\other\app_back.png" />
+    <Content Include="images\other\ButtonNormalGradient %281%29.png" />
+    <Content Include="images\other\ButtonNormalGradient.png" />
+    <Content Include="images\other\ButtonSelectedGradient.png" />
+    <Content Include="images\other\contextmenu_hover_18.png" />
+    <Content Include="images\other\contextmenu_hover_20 %281%29.png" />
+    <Content Include="images\other\contextmenu_hover_20.png" />
+    <Content Include="images\other\FormFooterGradient.png" />
+    <Content Include="images\other\FormHeaderGradientTop.png" />
+    <Content Include="images\other\formnav_header_back.gif" />
+    <Content Include="images\other\FormTabLinkGradient.png" />
+    <Content Include="images\other\form_toolbar_back.png" />
+    <Content Include="images\other\GridColumnGradient.png" />
+    <Content Include="images\other\GridToolbarBkgd.png" />
+    <Content Include="images\other\masthead.jpg" />
+    <Content Include="images\other\masthead_live.jpg" />
+    <Content Include="images\other\mast_back.gif" />
+    <Content Include="images\other\menu_margin.gif" />
+    <Content Include="images\other\mnu_hSpacerGrid.png" />
+    <Content Include="images\other\nav_header_back.gif" />
+    <Content Include="images\other\nav_hover_highlight %281%29.png" />
+    <Content Include="images\other\nav_hover_highlight.png" />
+    <Content Include="images\other\processdesigner_images.png" />
+    <Content Include="images\other\process_designer_images.png" />
+    <Content Include="images\other\repeat-x-1.png" />
+    <Content Include="images\other\repeat-x-14.png" />
+    <Content Include="images\other\repeat-x-15.png" />
+    <Content Include="images\other\repeat-x-16.png" />
+    <Content Include="images\other\RightClickMenuChannel.png" />
+    <Content Include="images\other\TabFlat.gif" />
+    <Content Include="images\other\tablet_masthead_images.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Xrm.DevOPs.ComponentModel\Xrm.DevOPs.ComponentModel.csproj">
+      <Project>{99bb5b1f-73c7-4ee8-acb1-094a5c41209b}</Project>
+      <Name>Xrm.DevOPs.ComponentModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xrm.DevOPs.Controls\Xrm.DevOPs.Controls.csproj">
+      <Project>{5c239913-1379-421a-8a9c-33e4f3b66a37}</Project>
+      <Name>Xrm.DevOPs.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xrm.DevOPs.PowerShell\Xrm.DevOPs.PowerShell.csproj">
+      <Project>{2BD66E2A-9B1B-4E48-8D83-DAA48D40316D}</Project>
+      <Name>Xrm.DevOPs.PowerShell</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
