@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace Xrm.DevOPs.Controls
 {
     public partial class EntityDiffControl: UserControl
     {
         List<ResultView> resultViews;
+
         public EntityDiffControl()
         {
             InitializeComponent();
@@ -26,6 +22,7 @@ namespace Xrm.DevOPs.Controls
                 new ResultView(gbWorkflows, lvWorkflows),
                 new ResultView(gbPlugins, lvPlugins),
                 new ResultView(gbPluginSteps, lvPluginSteps),
+                new ResultView(gbTemplates, lvTemplates),
 
             };
         }
@@ -66,6 +63,10 @@ namespace Xrm.DevOPs.Controls
         {
             get { return lvPluginSteps; }
         }
+        public ListView LVTemplates
+        {
+            get { return lvTemplates; }
+        }
 
         public void OptimizeDisplay()
         {
@@ -84,7 +85,6 @@ namespace Xrm.DevOPs.Controls
             }
 
         }
-
 
     }
 

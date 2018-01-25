@@ -78,10 +78,6 @@
             this.columnHeader37 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader38 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader39 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader40 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader42 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader43 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader44 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gbWorkflows = new System.Windows.Forms.GroupBox();
             this.lvWorkflows = new System.Windows.Forms.ListView();
             this.columnHeader29 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -103,6 +99,12 @@
             this.columnHeader60 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader61 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader52 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.gbTemplates = new System.Windows.Forms.GroupBox();
+            this.lvTemplates = new System.Windows.Forms.ListView();
+            this.columnHeader53 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader56 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader57 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader58 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gbAttributes.SuspendLayout();
             this.gbOneToMany.SuspendLayout();
             this.gbManyToMany.SuspendLayout();
@@ -112,6 +114,7 @@
             this.gbWorkflows.SuspendLayout();
             this.gbPlugins.SuspendLayout();
             this.gbPluginSteps.SuspendLayout();
+            this.gbTemplates.SuspendLayout();
             this.SuspendLayout();
             // 
             // lvAttributes
@@ -467,11 +470,7 @@
             this.columnHeader50,
             this.columnHeader37,
             this.columnHeader38,
-            this.columnHeader39,
-            this.columnHeader40,
-            this.columnHeader42,
-            this.columnHeader43,
-            this.columnHeader44});
+            this.columnHeader39});
             this.lvViews.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvViews.FullRowSelect = true;
             this.lvViews.GridLines = true;
@@ -494,33 +493,14 @@
             // 
             // columnHeader38
             // 
-            this.columnHeader38.Text = "Primary Entity";
-            this.columnHeader38.Width = 100;
+            this.columnHeader38.Text = "Type";
+            this.columnHeader38.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader38.Width = 300;
             // 
             // columnHeader39
             // 
-            this.columnHeader39.Text = "Related Entity";
-            this.columnHeader39.Width = 100;
-            // 
-            // columnHeader40
-            // 
-            this.columnHeader40.Text = "Field";
-            this.columnHeader40.Width = 100;
-            // 
-            // columnHeader42
-            // 
-            this.columnHeader42.Text = "Primary Entity";
-            this.columnHeader42.Width = 100;
-            // 
-            // columnHeader43
-            // 
-            this.columnHeader43.Text = "Related Entity";
-            this.columnHeader43.Width = 100;
-            // 
-            // columnHeader44
-            // 
-            this.columnHeader44.Text = "Field";
-            this.columnHeader44.Width = 100;
+            this.columnHeader39.Text = "Type";
+            this.columnHeader39.Width = 300;
             // 
             // gbWorkflows
             // 
@@ -690,11 +670,62 @@
             this.columnHeader52.Text = "State";
             this.columnHeader52.Width = 50;
             // 
+            // gbTemplates
+            // 
+            this.gbTemplates.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.gbTemplates.Controls.Add(this.lvTemplates);
+            this.gbTemplates.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gbTemplates.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbTemplates.Location = new System.Drawing.Point(0, 660);
+            this.gbTemplates.Name = "gbTemplates";
+            this.gbTemplates.Size = new System.Drawing.Size(1188, 75);
+            this.gbTemplates.TabIndex = 14;
+            this.gbTemplates.TabStop = false;
+            this.gbTemplates.Text = "Templates";
+            // 
+            // lvTemplates
+            // 
+            this.lvTemplates.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader53,
+            this.columnHeader56,
+            this.columnHeader57,
+            this.columnHeader58});
+            this.lvTemplates.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvTemplates.FullRowSelect = true;
+            this.lvTemplates.GridLines = true;
+            this.lvTemplates.Location = new System.Drawing.Point(3, 16);
+            this.lvTemplates.Name = "lvTemplates";
+            this.lvTemplates.Size = new System.Drawing.Size(1182, 56);
+            this.lvTemplates.TabIndex = 0;
+            this.lvTemplates.UseCompatibleStateImageBehavior = false;
+            this.lvTemplates.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader53
+            // 
+            this.columnHeader53.Text = "Name";
+            this.columnHeader53.Width = 200;
+            // 
+            // columnHeader56
+            // 
+            this.columnHeader56.Text = "Type";
+            this.columnHeader56.Width = 100;
+            // 
+            // columnHeader57
+            // 
+            this.columnHeader57.Text = "Description";
+            this.columnHeader57.Width = 300;
+            // 
+            // columnHeader58
+            // 
+            this.columnHeader58.Text = "Description";
+            this.columnHeader58.Width = 300;
+            // 
             // EntityDiffControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.gbTemplates);
             this.Controls.Add(this.gbPluginSteps);
             this.Controls.Add(this.gbPlugins);
             this.Controls.Add(this.gbWorkflows);
@@ -716,6 +747,7 @@
             this.gbWorkflows.ResumeLayout(false);
             this.gbPlugins.ResumeLayout(false);
             this.gbPluginSteps.ResumeLayout(false);
+            this.gbTemplates.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -765,10 +797,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader37;
         private System.Windows.Forms.ColumnHeader columnHeader38;
         private System.Windows.Forms.ColumnHeader columnHeader39;
-        private System.Windows.Forms.ColumnHeader columnHeader40;
-        private System.Windows.Forms.ColumnHeader columnHeader42;
-        private System.Windows.Forms.ColumnHeader columnHeader43;
-        private System.Windows.Forms.ColumnHeader columnHeader44;
         private System.Windows.Forms.GroupBox gbWorkflows;
         private System.Windows.Forms.ListView lvWorkflows;
         private System.Windows.Forms.ColumnHeader columnHeader29;
@@ -796,5 +824,11 @@
         private System.Windows.Forms.ColumnHeader columnHeader61;
         private System.Windows.Forms.ColumnHeader columnHeader51;
         private System.Windows.Forms.ColumnHeader columnHeader52;
+        private System.Windows.Forms.GroupBox gbTemplates;
+        private System.Windows.Forms.ListView lvTemplates;
+        private System.Windows.Forms.ColumnHeader columnHeader53;
+        private System.Windows.Forms.ColumnHeader columnHeader56;
+        private System.Windows.Forms.ColumnHeader columnHeader57;
+        private System.Windows.Forms.ColumnHeader columnHeader58;
     }
 }

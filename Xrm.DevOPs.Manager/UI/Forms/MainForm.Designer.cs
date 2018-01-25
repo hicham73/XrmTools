@@ -429,14 +429,14 @@
             // allToolStripMenuItem
             // 
             this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.allToolStripMenuItem.Text = "All";
             this.allToolStripMenuItem.Click += new System.EventHandler(this.allToolStripMenuItem_Click);
             // 
             // customToolStripMenuItem
             // 
             this.customToolStripMenuItem.Name = "customToolStripMenuItem";
-            this.customToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.customToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.customToolStripMenuItem.Text = "Custom";
             this.customToolStripMenuItem.Click += new System.EventHandler(this.customToolStripMenuItem_Click);
             // 
@@ -454,9 +454,9 @@
             this.entityDiffControl1.AutoScroll = true;
             this.entityDiffControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.entityDiffControl1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.entityDiffControl1.Location = new System.Drawing.Point(0, 91);
+            this.entityDiffControl1.Location = new System.Drawing.Point(0, 76);
             this.entityDiffControl1.Name = "entityDiffControl1";
-            this.entityDiffControl1.Size = new System.Drawing.Size(1046, 607);
+            this.entityDiffControl1.Size = new System.Drawing.Size(1046, 622);
             this.entityDiffControl1.TabIndex = 2;
             // 
             // clbDiffOptions
@@ -487,7 +487,7 @@
             this.clbDiffOptions.Location = new System.Drawing.Point(0, 27);
             this.clbDiffOptions.MultiColumn = true;
             this.clbDiffOptions.Name = "clbDiffOptions";
-            this.clbDiffOptions.Size = new System.Drawing.Size(1046, 64);
+            this.clbDiffOptions.Size = new System.Drawing.Size(1046, 49);
             this.clbDiffOptions.TabIndex = 1;
             // 
             // menuStrip2
@@ -506,8 +506,9 @@
             // 
             // miLoadEntities
             // 
+            this.miLoadEntities.Image = global::Xrm.DevOPs.Manager.Properties.Resources.ico_16_9801;
             this.miLoadEntities.Name = "miLoadEntities";
-            this.miLoadEntities.Size = new System.Drawing.Size(86, 23);
+            this.miLoadEntities.Size = new System.Drawing.Size(102, 23);
             this.miLoadEntities.Text = "Load Entities";
             this.miLoadEntities.Click += new System.EventHandler(this.MILoadEntities_Click);
             // 

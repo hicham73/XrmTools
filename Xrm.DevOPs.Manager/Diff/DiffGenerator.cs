@@ -31,6 +31,10 @@ namespace Xrm.DevOPs.Manager.Diff
             var includeWorkflows = false;
             var includePlugins = false;
             var includePluginSteps = false;
+            var includeEmailTemplates = false;
+            var includeMailMergeTemplates = false;
+            var includeContractTemplates = false;
+            var includeArticleTemplates = false;
 
             foreach (var comp in options)
             {
@@ -52,6 +56,18 @@ namespace Xrm.DevOPs.Manager.Diff
                     case "Plugins Steps":
                         includePluginSteps = true;
                         break;
+                    case "Email Templates":
+                        includeEmailTemplates = true;
+                        break;
+                    case "Mail Merge Templates":
+                        includeMailMergeTemplates = true;
+                        break;
+                    case "Contract Templates":
+                        includeContractTemplates = true;
+                        break;
+                    case "Article Templates":
+                        includeArticleTemplates = true;
+                        break;
                 }
             }
 
@@ -64,8 +80,17 @@ namespace Xrm.DevOPs.Manager.Diff
             if (includePlugins && !IsCompared("plugins"))
                 DiffPlugins();
 
-            if(includePluginSteps && !IsCompared("pluginsteps"))
+            if (includePluginSteps && !IsCompared("pluginsteps"))
                 DiffSdkMessageProcessingSteps();
+
+            if (includeEmailTemplates && !IsCompared("emailtemplates"))
+                DiffTemapltes("template", _diffResult.Templates, new string[] { "title", "description" }, "title");
+            if (includeMailMergeTemplates && !IsCompared("mailmergetemplates"))
+                DiffTemapltes("mailmergetemplate", _diffResult.Templates, new string[] { "name", "description" }, "name");
+            if (includeContractTemplates && !IsCompared("articletemplates"))
+                DiffTemapltes("kbarticletemplate", _diffResult.Templates, new string[] { "title", "description" }, "title");
+            if (includeArticleTemplates && !IsCompared("contracttemplates"))
+                DiffTemapltes("contracttemplate", _diffResult.Templates, new string[] { "name", "description" }, "name");
 
 
             return _diffResult;
@@ -246,13 +271,13 @@ namespace Xrm.DevOPs.Manager.Diff
             var forms1 = LeftService.RetrieveMultiple(qe).Entities;
             var forms2 = RightService.RetrieveMultiple(qe).Entities;
 
-            List<ComponentDiff<Entity>> formsDif = new List<ComponentDiff<Entity>>();
+            List<ComponentDiff<Entity>> formsDiff = new List<ComponentDiff<Entity>>();
             foreach (var f1 in forms1)
             {
                 var f2 = forms2.Where(x => x.Id == f1.Id).FirstOrDefault();
                 if (f2 == null)
                 {
-                    formsDif.Add(new ComponentDiff<Entity>()
+                    edr.Forms.Add(new ComponentDiff<Entity>()
                     {
                         Name = f1.GetAttributeValue<string>("name"),
                         Left = f1,
@@ -264,7 +289,7 @@ namespace Xrm.DevOPs.Manager.Diff
                 var f1 = forms1.Where(x => x.Id == f2.Id).FirstOrDefault();
                 if (f1 == null)
                 {
-                    formsDif.Add(new ComponentDiff<Entity>()
+                    edr.Forms.Add(new ComponentDiff<Entity>()
                     {
                         Name = f2.GetAttributeValue<string>("name"),
                         Right = f2,
@@ -277,6 +302,39 @@ namespace Xrm.DevOPs.Manager.Diff
             #endregion
 
             #region Views
+            // Instantiate QueryExpression QEsavedquery
+            qe = new QueryExpression("savedquery");
+            qe.Criteria.AddCondition(new ConditionExpression("returnedtypecode", ConditionOperator.Equal, edr.EntityInfo.ObjectTypeCode));
+            qe.ColumnSet.AddColumns("name", "querytype", "returnedtypecode", "iscustom");
+
+            var views1 = LeftService.RetrieveMultiple(qe).Entities;
+            var views2 = RightService.RetrieveMultiple(qe).Entities;
+
+            List<ComponentDiff<Entity>> viewsDiff = new List<ComponentDiff<Entity>>();
+            foreach (var v1 in views1)
+            {
+                var v2 = views2.Where(x => x.GetAttributeValue<string>("name") == v1.GetAttributeValue<string>("name")).FirstOrDefault();
+                if (v2 == null)
+                {
+                    edr.Views.Add(new ComponentDiff<Entity>()
+                    {
+                        Name = v1.GetAttributeValue<string>("name"),
+                        Left = v1,
+                    });
+                }
+            }
+            foreach (var v2 in views2)
+            {
+                var v1 = views1.Where(x => x.GetAttributeValue<string>("name") == v2.GetAttributeValue<string>("name")).FirstOrDefault();
+                if (v1 == null)
+                {
+                    edr.Views.Add(new ComponentDiff<Entity>()
+                    {
+                        Name = v2.GetAttributeValue<string>("name"),
+                        Right = v2,
+                    });
+                }
+            }
 
             #endregion
 
@@ -393,7 +451,43 @@ namespace Xrm.DevOPs.Manager.Diff
                 }
             }
         }
+        public void DiffTemapltes(string entityName, List<ComponentDiff<Entity>> diffList, string[] columns, string key)
+        {
+            var qe = new QueryExpression(entityName);
+            qe.ColumnSet.AddColumns(columns);
+            qe.Criteria.AddCondition("ismanaged", ConditionOperator.Equal, false);
 
+
+            var temps1 = LeftService.RetrieveMultiple(qe).Entities;
+            var temps2 = RightService.RetrieveMultiple(qe).Entities;
+
+            foreach (var temp1 in temps1)
+            {
+                var s2 = temps2.Where(x => x.GetAttributeValue<string>(key) == temp1.GetAttributeValue<string>(key)).FirstOrDefault();
+                if (s2 == null)
+                {
+                    diffList.Add(new ComponentDiff<Entity>()
+                    {
+                        EntityName = entityName,
+                        Name = temp1.GetAttributeValue<string>(key),
+                        Left = temp1,
+                    });
+                }
+            }
+            foreach (var temp2 in temps2)
+            {
+                var s1 = temps1.Where(x => x.GetAttributeValue<string>(key) == temp2.GetAttributeValue<string>(key)).FirstOrDefault();
+                if (s1 == null)
+                {
+                    diffList.Add(new ComponentDiff<Entity>()
+                    {
+                        EntityName = entityName,
+                        Name = temp2.GetAttributeValue<string>(key),
+                        Right = temp2,
+                    });
+                }
+            }
+        }
         public bool IsCompared(string name)
         {
             if (_compared.Contains(name))

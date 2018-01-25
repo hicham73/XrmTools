@@ -367,13 +367,29 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                         entityDiff.EntityInfo.LogicalName,
                         fd.Name,
                         left?.GetAttributeValue<string>("name"),
-                        left?.GetAttributeValue<OptionSetValue>("type").Value.ToString(),
+                        left?.GetAttributeValue<OptionSetValue>("type")?.Value.ToString(),
                         right?.GetAttributeValue<string>("name"),
-                        right?.GetAttributeValue<OptionSetValue>("type").Value.ToString(),
+                        right?.GetAttributeValue<OptionSetValue>("type")?.Value.ToString(),
                     });
 
                     ColorColumns(item, 2, 6);
                     entityDiffControl1.LVForms.Items.Add(item);
+
+                }
+                foreach (var vd in entityDiff.Views)
+                {
+                    var left = vd.Left;
+                    var right = vd.Right;
+
+                    var item = new ListViewItem(new string[] {
+                        entityDiff.EntityInfo.LogicalName,
+                        vd.Name,
+                        left?.GetAttributeValue<OptionSetValue>("type")?.Value.ToString(),
+                        right?.GetAttributeValue<OptionSetValue>("type")?.Value.ToString(),
+                    });
+
+                    ColorColumns(item, 2, 4);
+                    entityDiffControl1.LVViews.Items.Add(item);
 
                 }
             }
@@ -385,9 +401,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
                 var item = new ListViewItem(new string[] {
                     wd.Name,
-                    left?.GetAttributeValue<string>("name"),
                     left?.GetAttributeValue<OptionSetValue>("category").Value.ToString(),
-                    right?.GetAttributeValue<string>("name"),
                     right?.GetAttributeValue<OptionSetValue>("category").Value.ToString(),
                 });
 
@@ -427,6 +441,22 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                     right?.GetAttributeValue<OptionSetValue>("statecode")?.Value.ToString(),
                 });
                 ColorColumns(item, 1, 7);
+
+                entityDiffControl1.LVPlugins.Items.Add(item);
+            }
+
+            foreach (var temp in _diffGenerator.DiffResult.Templates)
+            {
+                var left = temp.Left;
+                var right = temp.Right;
+
+                var item = new ListViewItem(new string[] {
+                    temp.Name,
+                    temp.EntityName,
+                    left?.GetAttributeValue<string>("description"),
+                    right?.GetAttributeValue<string>("description"),
+                });
+                ColorColumns(item, 2, 4);
 
                 entityDiffControl1.LVPlugins.Items.Add(item);
             }

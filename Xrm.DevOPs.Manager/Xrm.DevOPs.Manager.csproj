@@ -104,12 +104,6 @@
     <Compile Include="Helpers\MetadataHelper.cs" />
     <Compile Include="Helpers\OrganizationHelper.cs" />
     <Compile Include="Helpers\SolutionHelper.cs" />
-    <Compile Include="UI\Forms\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Forms\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Forms\PropertiesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,9 +133,6 @@
     <Compile Include="Util\Mapping.cs" />
     <Compile Include="Wrappers\CrmOrganization.cs" />
     <Compile Include="Wrappers\CrmSolution.cs" />
-    <EmbeddedResource Include="UI\Forms\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\PropertiesForm.resx">
       <DependentUpon>PropertiesForm.cs</DependentUpon>
     </EmbeddedResource>

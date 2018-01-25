@@ -14,6 +14,7 @@ namespace Xrm.DevOPs.Manager.Diff
         public List<ComponentDiff<Entity>> Workflows = new List<ComponentDiff<Entity>>();
         public List<ComponentDiff<Entity>> Plugins = new List<ComponentDiff<Entity>>();
         public List<ComponentDiff<Entity>> SdkMessageProcessingSteps = new List<ComponentDiff<Entity>>();
+        public List<ComponentDiff<Entity>> Templates = new List<ComponentDiff<Entity>>();
     }
 
     public class EntityDiffResult
@@ -27,6 +28,7 @@ namespace Xrm.DevOPs.Manager.Diff
         public List<ComponentDiff<OneToManyRelationshipMetadata>> OneToManyRelationships = new List<ComponentDiff<OneToManyRelationshipMetadata>>();
         public List<ComponentDiff<ManyToManyRelationshipMetadata>> ManyToManyRelationships = new List<ComponentDiff<ManyToManyRelationshipMetadata>>();
         public List<ComponentDiff<Entity>> Forms = new List<ComponentDiff<Entity>>();
+        public List<ComponentDiff<Entity>> Views = new List<ComponentDiff<Entity>>();
 
         internal bool IsEmpty()
         {
@@ -36,6 +38,8 @@ namespace Xrm.DevOPs.Manager.Diff
 
     public class ComponentDiff<T>
     {
+        public string Key { get; set; }
+        public string EntityName { get; set; }
         public string Name { get; set; }
         public T Left { get; set; }
         public T Right { get; set; }
