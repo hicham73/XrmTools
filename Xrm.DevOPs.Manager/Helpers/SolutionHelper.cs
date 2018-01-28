@@ -65,7 +65,7 @@ namespace Xrm.DevOPs.Manager.Helpers
                 {
                     var parentSol = sols.Where(x => x.Id != null && sol.ParentSolutionId != null && x.Id == sol.ParentSolutionId.Id).FirstOrDefault<CrmSolution>();
                     if (parentSol != null)
-                        parentSol.ChildSolutions.Add(sol);
+                        parentSol.ChildSolutions.Components.Add(sol);
                 }
             }
 

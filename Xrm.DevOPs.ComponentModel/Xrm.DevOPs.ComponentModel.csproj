@@ -50,6 +50,7 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,13 +60,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttributeComponent.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="ContractTemplate.cs" />
     <Compile Include="CrmComponent.cs" />
     <Compile Include="CrmComponentCollection.cs" />
+    <Compile Include="CrmTreeNode.cs" />
     <Compile Include="EmailTemplateComponent.cs" />
     <Compile Include="EntityComponent.cs" />
     <Compile Include="EnumTypes.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="KbArticleTemplate.cs" />
     <Compile Include="MailMergeTemplate.cs" />
     <Compile Include="ManyToManyRelationshipComponent.cs" />

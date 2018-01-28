@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using Xrm.DevOPs.ComponentModel;
 using Xrm.DevOPs.Controls;
-
+using Xrm.DevOPs.Manager.ComponentModel;
 
 namespace Xrm.DevOPs.Manager.UI
 {
@@ -38,7 +38,7 @@ namespace Xrm.DevOPs.Manager.UI
 
         public TabPage Page { get { return _page; } }
         public EntityDetailControl EntityDetail { get { return _entityDetail; } }
-        public void ShowAssets(CrmTreeNode entityNode)
+        public void ShowAssets<T>(CrmTreeNode<T> entityNode)
         {
             var entityComponent = (EntityComponent)entityNode.Component;
 

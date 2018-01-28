@@ -8,8 +8,9 @@ namespace Xrm.DevOPs.ComponentModel
     {
         Entity e;
 
-        public RoutingRuleComponent(Entity e)
+        public RoutingRuleComponent(CrmComponent c, Entity e)
         {
+            ComponentType = c.ComponentType;
             this.e = e;
         }
 

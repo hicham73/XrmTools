@@ -7,8 +7,9 @@ namespace Xrm.DevOPs.ComponentModel
     {
         Entity e;
 
-        public RoleComponent(Entity e)
+        public RoleComponent(CrmComponent c, Entity e)
         {
+            ComponentType = c.ComponentType;
             this.e = e;
         }
 

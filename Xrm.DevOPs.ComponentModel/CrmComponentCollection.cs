@@ -13,6 +13,11 @@ namespace Xrm.DevOPs.ComponentModel
         {
             Components = components;
         }
-        public List<T> Components;
+
+        public CrmComponentCollection()
+        {
+        }
+
+        public List<T> Components = new List<T>();
     }
 }

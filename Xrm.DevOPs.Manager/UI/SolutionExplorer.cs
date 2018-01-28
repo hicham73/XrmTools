@@ -1,8 +1,9 @@
 ﻿using System.Windows.Forms;
 using Xrm.DevOPs.Manager.Wrappers;
-
 using Xrm.DevOPs.Manager.UI.Forms;
 using Xrm.DevOPs.ComponentModel;
+using Xrm.DevOPs.Controls;
+using Xrm.DevOPs.Manager.ComponentModel;
 
 namespace Xrm.DevOPs.Manager.UI
 {
@@ -15,8 +16,6 @@ namespace Xrm.DevOPs.Manager.UI
         TabControl pageContainer;
         ImageList imageList;
 
-        PropertiesForm propertiesForm;
-
         public SolutionExplorer(string name, ImageList imageList)
         {
             this.imageList = imageList;
@@ -27,8 +26,6 @@ namespace Xrm.DevOPs.Manager.UI
             container.TabIndex = 1;
             container.Text = name;
             container.UseVisualStyleBackColor = true;
-            
-
 
             split = new SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(split)).BeginInit();
@@ -61,12 +58,11 @@ namespace Xrm.DevOPs.Manager.UI
 
 
         }
-
         public TabPage Container { get { return container; } }
         public TreeView Tree { get { return tree; } }
         public SplitContainer Split { get { return split; } }
 
-        public TabControl PageContainer { get { return pageContainer; }  }
+        public TabControl PageContainer { get { return pageContainer; } }
 
         private void TVSolDetail_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -74,8 +70,7 @@ namespace Xrm.DevOPs.Manager.UI
             var node = tv.SelectedNode;
             if (node.Tag?.ToString() == "Entity")
             {
-                var entityNode = (CrmTreeNode)node;
-
+                var entityNode = (CrmTreeNode<EntityComponent>)node;
                 var controls = pageContainer.Controls.Find(entityNode.Name, false);
 
                 if (controls.Length == 0)
@@ -86,283 +81,342 @@ namespace Xrm.DevOPs.Manager.UI
                 }
                 pageContainer.SelectTab(entityNode.Name);
             }
-            else if (node.Tag?.ToString() == "OptionSet")
+            else
             {
-                if(propertiesForm == null)
-                    propertiesForm = new PropertiesForm();
-                var optionSetNode = (CrmTreeNode)node;
+                switch (node.Tag?.ToString())
+                {
+                    case "OptionSets":
+                        ShowCollection<OptionSetComponent>(node, "OptionSets", "Option Sets");
+                        break;
+                    case "WebResources":
+                        ShowCollection<WebResourceComponent>(node, "WebResources", "Web Resources");
+                        break;
+                    case "EmailTemplates":
+                        ShowCollection<EmailTemplateComponent>(node, "EmailTemplates", "Email Templates");
+                        break;
+                    case "ContractTemplates":
+                        ShowCollection<ContractTemplateComponent>(node, "ContractTemplates", "Contract Templates");
+                        break;
+                    case "MailMergeTemplates":
+                        ShowCollection<MailMergeTemplateComponent>(node, "MailMergeTemplates", "Mail Merge Templates");
+                        break;
+                    case "KbArticleTemplates":
+                        ShowCollection<KbArticleTemplateComponent>(node, "KbArticleTemplates", "Kb Article Templates");
+                        break;
 
-                var optionSetComponent = (OptionSetComponent)optionSetNode.Component;
-
-
-                //propertiesForm.SetPropertGrid(optionSetComponent);
-                //propertiesForm.Show();
+                }
             }
+
         }
 
+        public void ShowCollection<T>(TreeNode node, string name, string text)
+        {
+            var optionSetsNode = (CrmTreeNode<T>)node;
+            var controls = pageContainer.Controls.Find("Option Sets", false);
+
+            if (controls.Length == 0)
+            {
+                var compCollectViewer = new ComponentCollectionViewer();
+                compCollectViewer.Display(optionSetsNode.Collection);
+                pageContainer.Controls.Add(GetNewPage(name, text, compCollectViewer));
+            }
+
+            pageContainer.SelectTab(name);
+        }
+
+        public TabPage GetNewPage(string name, string text, ComponentCollectionViewer compCollectViewer)
+        {
+            var _page = new TabPage();
+            _page.SuspendLayout();
+            _page.Controls.Add(compCollectViewer);
+            _page.Location = new System.Drawing.Point(4, 22);
+            _page.Padding = new Padding(3);
+            _page.Dock = DockStyle.Fill;
+            _page.Size = new System.Drawing.Size(745, 637);
+            _page.TabIndex = 0;
+            _page.Name = name;
+            _page.Text = text;
+            _page.UseVisualStyleBackColor = true;
+            _page.ImageIndex = 100;
+
+            _page.ResumeLayout();
+
+            return _page;
+
+        }
         public void Display(CrmSolution crmSol)
         {
             #region Entities
-            var root = new CrmTreeNode()
+            var root = new CrmTreeNode<EntityComponent>()
+            {
+                Component = new CrmComponent() { Text = "Entities" },
+                Tag = "Entities",
+                ImageIndex = 144
+            };
+            tree.Nodes.Add(root);
+            foreach (var entityComp in crmSol.EntityComponents.Components)
+            {
+                var entityNode = new CrmTreeNode<EntityComponent>()
                 {
-                    Component = new CrmComponent() { Text = "Entities" },
-                    Tag = "Entities",
-                    ImageIndex = 144
+                    Component = entityComp,
+                    Tag = "Entity",
+                    ImageIndex = 144,
+                    Name = entityComp.Name
                 };
-                tree.Nodes.Add(root);
-                foreach (var entityComp in crmSol.EntityComponents)
-                {
-                    var entityNode = new CrmTreeNode()
-                    {
-                        Component = entityComp,
-                        Tag = "Entity",
-                        ImageIndex = 144,
-                        Name = entityComp.Name
-                    };
-                    root.Nodes.Add(entityNode);
-                }
+                root.Nodes.Add(entityNode);
+            }
 
             #endregion
 
             #region Option Sets
 
-            root = new CrmTreeNode()
+            var optionSetRoot = new CrmTreeNode<OptionSetComponent>()
             {
                 Component = new CrmComponent() { Text = "Option Sets" },
-                Tag = "Option Sets",
-                ImageIndex = 144
+                Tag = "OptionSets",
+                ImageIndex = 144,
+                Collection = crmSol.OptionSetComponents
             };
-            tree.Nodes.Add(root);
-            foreach (var c in crmSol.OptionSetComponents)
+            tree.Nodes.Add(optionSetRoot);
+            foreach (var c in crmSol.OptionSetComponents.Components)
             {
-                var n = new CrmTreeNode()
+                var n = new CrmTreeNode<OptionSetComponent>()
                 {
                     Component = c,
                     Tag = "OptionSet",
                     ImageIndex = 144,
                     Name = c.Name
                 };
-                root.Nodes.Add(n);
+                optionSetRoot.Nodes.Add(n);
             }
 
             #endregion
 
             #region Web Resources
 
-            root = new CrmTreeNode()
+            var webResourceRoot = new CrmTreeNode<WebResourceComponent>()
             {
                 Component = new CrmComponent() { Text = "Web Resources" },
-                Tag = "Web Resources",
-                ImageIndex = 123
+                Tag = "WebResource",
+                ImageIndex = 123,
+                Collection = crmSol.WebResourceComponents
+
             };
-            tree.Nodes.Add(root);
-            foreach (var c in crmSol.WebResourceComponents)
+            tree.Nodes.Add(webResourceRoot);
+            foreach (var c in crmSol.WebResourceComponents.Components)
             {
-                var n = new CrmTreeNode()
+                var n = new CrmTreeNode<WebResourceComponent>()
                 {
                     Component = c,
                     Tag = "WebResource",
                     ImageIndex = 123,
                     Name = c.Name
                 };
-                root.Nodes.Add(n);
+                webResourceRoot.Nodes.Add(n);
             }
 
             #endregion
 
             #region Plugin Assemblies
 
-            root = new CrmTreeNode()
+            var pluginAssemblyComponent = new CrmTreeNode<PluginAssemblyComponent>()
+            {
+                Component = new CrmComponent() { Text = "Plugin Assemblies" },
+                Tag = "PluginAssemblies",
+                ImageIndex = 113,
+
+            };
+            tree.Nodes.Add(pluginAssemblyComponent);
+            foreach (var pa in crmSol.PluginAssemblyComponents.Components)
+            {
+                var paNode = new CrmTreeNode<PluginAssemblyComponent>()
                 {
-                    Component = new CrmComponent() { Text = "Plugin Assemblies" },
-                    Tag = "Plugin Assemblies",
+                    Component = pa,
                     ImageIndex = 113,
-                    
+                    Name = pa.Name,
+                    Collection = crmSol.PluginAssemblyComponents
+
                 };
-                tree.Nodes.Add(root);
-                foreach (var pa in crmSol.PluginAssemblyComponents)
+                pluginAssemblyComponent.Nodes.Add(paNode);
+                foreach (var p in pa.PluginTypeComponents)
                 {
-                    var paNode = new CrmTreeNode()
-                    {
-                        Component = pa,
-                        ImageIndex = 113,
-                        Name = pa.Name
-                    };
-                    root.Nodes.Add(paNode);
-                    foreach (var p in pa.PluginTypeComponents)
-                    {
-                        var ptNode = new CrmTreeNode() { Component = p };
-                        if (!paNode.Nodes.Contains(ptNode))
-                            paNode.Nodes.Add(ptNode);
-                    }
+                    var ptNode = new CrmTreeNode<PluginTypeComponent>() { Component = p };
+                    if (!paNode.Nodes.Contains(ptNode))
+                        paNode.Nodes.Add(ptNode);
                 }
+            }
 
             #endregion
 
             #region Workflows
 
-            root = new CrmTreeNode()
+            var workflowRoot = new CrmTreeNode<WorkflowComponent>()
+            {
+                Component = new CrmComponent() { Text = "Workflows" },
+                Tag = "Workflows",
+                ImageIndex = 116,
+                Collection = crmSol.WorkflowComponents
+            };
+            tree.Nodes.Add(workflowRoot);
+            foreach (var c in crmSol.WorkflowComponents.Components)
+            {
+                var n = new CrmTreeNode<WorkflowComponent>()
                 {
-                    Component = new CrmComponent() { Text = "Workflows" },
-                    Tag = "Workflows",
-                    ImageIndex = 116
+                    Component = c,
+                    Tag = "Workflow",
+                    ImageIndex = 116,
+                    Name = c.Name
                 };
-                tree.Nodes.Add(root);
-                foreach (var c in crmSol.WorkflowComponents)
-                {
-                    var n = new CrmTreeNode()
-                    {
-                        Component = c,
-                        Tag = "Workflow",
-                        ImageIndex = 116,
-                        Name = c.Name
-                    };
-                    root.Nodes.Add(n);
-                }
+                workflowRoot.Nodes.Add(n);
+            }
 
             #endregion
 
             #region Security Roles
 
-            root = new CrmTreeNode()
+            var roleRoot = new CrmTreeNode<RoleComponent>()
             {
                 Component = new CrmComponent() { Text = "Security Roles" },
-                Tag = "Security Roles",
-                ImageIndex = 43
+                Tag = "SecurityRoles",
+                ImageIndex = 43,
+                Collection = crmSol.RoleComponents
             };
-            tree.Nodes.Add(root);
-            foreach (var c in crmSol.Roles)
+            tree.Nodes.Add(roleRoot);
+            foreach (var c in crmSol.RoleComponents.Components)
             {
-                var n = new CrmTreeNode()
+                var n = new CrmTreeNode<RoleComponent>()
                 {
                     Component = c,
                     Tag = "Security Roles",
                     ImageIndex = 43,
                     Name = c.Name
                 };
-                root.Nodes.Add(n);
+                roleRoot.Nodes.Add(n);
             }
 
             #endregion
 
             #region Routing Rule Sets
 
-            root = new CrmTreeNode()
+            var routingRuleRoot = new CrmTreeNode<RoutingRuleComponent>()
             {
                 Component = new CrmComponent() { Text = "Routing Rule Sets" },
-                Tag = "Routing Rule Sets",
-                ImageIndex = 120
+                Tag = "RoutingRuleSets",
+                ImageIndex = 120,
+                Collection = crmSol.RoutingRuleComponents
             };
-            tree.Nodes.Add(root);
-            foreach (var c in crmSol.RoutingRuleComponents)
+            tree.Nodes.Add(routingRuleRoot);
+            foreach (var c in crmSol.RoutingRuleComponents.Components)
             {
-                var n = new CrmTreeNode()
+                var n = new CrmTreeNode<RoutingRuleComponent>()
                 {
                     Component = c,
                     Tag = "RoutingRuleSet",
                     ImageIndex = 120,
                     Name = c.Name
                 };
-                root.Nodes.Add(n);
+                routingRuleRoot.Nodes.Add(n);
             }
 
             #endregion
 
             #region Article Templates
 
-            root = new CrmTreeNode()
+            var articleTemplateRoot = new CrmTreeNode<KbArticleTemplateComponent>()
             {
-                Component = new CrmComponent() { Text = "Article Templates" },
-                Tag = "ArticleTemplates",
-                ImageIndex = 34
+                Component = new CrmComponent() { Text = "Kb Article Templates" },
+                Tag = "KbArticleTemplates",
+                ImageIndex = 34,
+                Collection = crmSol.KbArticleTemplateComponents
             };
-            tree.Nodes.Add(root);
-            foreach (var c in crmSol.KbArticleTemplateComponents)
+            tree.Nodes.Add(articleTemplateRoot);
+            foreach (var c in crmSol.KbArticleTemplateComponents.Components)
             {
-                var n = new CrmTreeNode()
+                var n = new CrmTreeNode<KbArticleTemplateComponent>()
                 {
                     Component = c,
-                    Tag = "ArticleTemplate",
+                    Tag = "KbArticleTemplate",
                     ImageIndex = 34,
                     Name = c.Name
                 };
-                root.Nodes.Add(n);
+                articleTemplateRoot.Nodes.Add(n);
             }
 
             #endregion
 
             #region Contract Templates
 
-            root = new CrmTreeNode()
+            var contractTemplateRoot = new CrmTreeNode<ContractTemplateComponent>()
             {
                 Component = new CrmComponent() { Text = "Contract Templates" },
-                Tag = "Contract Templates",
-                ImageIndex = 78
+                Tag = "ContractTemplates",
+                ImageIndex = 78,
+                Collection = crmSol.ContractTemplateComponents
             };
-            tree.Nodes.Add(root);
-            foreach (var c in crmSol.ContractTemplateComponents)
+            tree.Nodes.Add(contractTemplateRoot);
+            foreach (var c in crmSol.ContractTemplateComponents.Components)
             {
-                var n = new CrmTreeNode()
+                var n = new CrmTreeNode<ContractTemplateComponent>()
                 {
                     Component = c,
                     Tag = "ContractTemplate",
                     ImageIndex = 78,
                     Name = c.Name
                 };
-                root.Nodes.Add(n);
+                contractTemplateRoot.Nodes.Add(n);
             }
 
             #endregion
 
             #region Email Templates
 
-            root = new CrmTreeNode()
+            var emailTemplateRoot = new CrmTreeNode<EmailTemplateComponent>()
             {
                 Component = new CrmComponent() { Text = "Email Templates" },
                 Tag = "EmailTemplates",
-                ImageIndex = 77
+                ImageIndex = 77,
+                Collection = crmSol.EmailTemplateComponents
             };
-            tree.Nodes.Add(root);
-            foreach (var c in crmSol.EmailTemplateComponents)
+            tree.Nodes.Add(emailTemplateRoot);
+            foreach (var c in crmSol.EmailTemplateComponents.Components)
             {
-                var n = new CrmTreeNode()
+                var n = new CrmTreeNode<EmailTemplateComponent>()
                 {
                     Component = c,
-                    Tag = "EmailTemplate",
+                    Tag = "Email Templates",
                     ImageIndex = 77,
                     Name = c.Name
                 };
-                root.Nodes.Add(n);
+                emailTemplateRoot.Nodes.Add(n);
             }
 
             #endregion
 
             #region Mail Merge Templates
 
-            root = new CrmTreeNode()
+            var mailMergeRoot = new CrmTreeNode<MailMergeTemplateComponent>()
             {
                 Component = new CrmComponent() { Text = "Mail Merge Templates" },
-                Tag = "MailMergeTemplate",
-                ImageIndex = 125
+                Tag = "MailMergeTemplates",
+                ImageIndex = 125,
+                Collection = crmSol.MailMergeTemplateComponents
             };
-            tree.Nodes.Add(root);
-            foreach (var c in crmSol.MailMergeTemplateComponents)
+            tree.Nodes.Add(mailMergeRoot);
+            foreach (var c in crmSol.MailMergeTemplateComponents.Components)
             {
-                var n = new CrmTreeNode()
+                var n = new CrmTreeNode<MailMergeTemplateComponent>()
                 {
                     Component = c,
                     Tag = "MailMergeTemplate",
                     ImageIndex = 125,
                     Name = c.Name
                 };
-                root.Nodes.Add(n);
+                mailMergeRoot.Nodes.Add(n);
             }
 
             #endregion
 
-
             container.Name = crmSol.UniqueName;
-
         }
 
 

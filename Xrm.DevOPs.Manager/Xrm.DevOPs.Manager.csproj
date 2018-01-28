@@ -126,7 +126,6 @@
     <Compile Include="UI\Forms\SolutionTransferDlg.Designer.cs">
       <DependentUpon>SolutionTransferDlg.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\CrmTreeNode.cs" />
     <Compile Include="UI\EntityViewer.cs" />
     <Compile Include="UI\SolutionExplorer.cs" />
     <Compile Include="Util\Log.cs" />

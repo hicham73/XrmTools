@@ -7,8 +7,9 @@ namespace Xrm.DevOPs.ComponentModel
     {
         Entity e;
 
-        public ContractTemplateComponent(Entity e)
+        public ContractTemplateComponent(CrmComponent c, Entity e)
         {
+            ComponentType = c.ComponentType;
             this.e = e;
         }
 

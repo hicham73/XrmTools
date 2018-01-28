@@ -7,9 +7,9 @@ using System.Windows.Forms;
 using Xrm.DevOPs.ComponentModel;
 
 
-namespace Xrm.DevOPs.Manager.UI
+namespace Xrm.DevOPs.Manager.ComponentModel
 {
-    public class CrmTreeNode : TreeNode
+     public class CrmTreeNode<T> : TreeNode
     {
         CrmComponent component;
         public CrmComponent Component {
@@ -20,7 +20,13 @@ namespace Xrm.DevOPs.Manager.UI
                 Text = component.Text;
             }
         }
+        public CrmComponentCollection<T> Collection { get; set; }
+    }
 
+    public class ComponentCollection<T>
+    {
+        public string Type { get; set; }
+        public List<T> Collection { get; set; }
     }
 
     public enum NodeType

@@ -7,8 +7,10 @@ namespace Xrm.DevOPs.ComponentModel
     {
         Entity e;
 
-        public EmailTemplateComponent(Entity e)
+        public EmailTemplateComponent(CrmComponent c, Entity e)
         {
+            ComponentType = c.ComponentType;
+
             this.e = e;
         }
 

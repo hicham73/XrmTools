@@ -13,8 +13,9 @@ namespace Xrm.DevOPs.ComponentModel
         public List<PluginTypeComponent> PluginTypeComponents = new List<PluginTypeComponent>();
 
 
-        public PluginAssemblyComponent(Entity e)
+        public PluginAssemblyComponent(CrmComponent c, Entity e)
         {
+            ComponentType = c.ComponentType;
             this.e = e;
         }
         #region Public Properties

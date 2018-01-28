@@ -11,8 +11,9 @@ namespace Xrm.DevOPs.ComponentModel
     {
         Entity e;
 
-        public WorkflowComponent(Entity e)
+        public WorkflowComponent(CrmComponent c, Entity e)
         {
+            ComponentType = c.ComponentType;
             this.e = e;
         }
 

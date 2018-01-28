@@ -20,7 +20,6 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
         public void SetPropertGrid(Object obj)
         {
-            propertyGrid1.SelectedObject = obj;
         }
 
 

@@ -13,6 +13,7 @@ using Xrm.DevOPs.Manager.Util;
 using Xrm.DevOPs.Manager.Wrappers;
 using System.Linq;
 using Xrm.DevOPs.ComponentModel;
+using Xrm.DevOPs.Manager.ComponentModel;
 
 namespace Xrm.DevOPs.Manager.UI.Forms
 {
@@ -55,7 +56,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
             if (node.Tag?.ToString() == "Solution")
             {
-                var solNode = (CrmTreeNode)node;
+                var solNode = (CrmTreeNode<CrmSolution>)node;
                 var crmSol = (CrmSolution)solNode.Component;
                 var org = crmSol.Organization;
                 var service = org.Service;
@@ -114,7 +115,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                         cbLeftOrg.Items.Add(crmOrg);
                         cbRightOrg.Items.Add(crmOrg);
 
-                        var crmOrgNode = new CrmTreeNode()
+                        var crmOrgNode = new CrmTreeNode<CrmOrganization>()
                         {
                             Component = crmOrg,
                             Text = name,
@@ -124,7 +125,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
                         tvOrgs.Nodes.Add(crmOrgNode);
 
-                        LoadOrganizationNode(name, crmOrg, crmOrgNode);
+                        LoadOrganizationNode<CrmOrganization>(name, crmOrg, crmOrgNode);
 
                     }
                 }
@@ -225,7 +226,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
         public void RefreshOrganizations()
         {
-            foreach (CrmTreeNode orgNode in tvOrgs.Nodes)
+            foreach (CrmTreeNode<CrmOrganization> orgNode in tvOrgs.Nodes)
             {
                 LoadOrganizationNode(orgNode.Name, (CrmOrganization)orgNode.Component, orgNode);
             }
@@ -483,7 +484,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
         }
 
-        public void LoadOrganizationNode(string name, CrmOrganization crmOrg, CrmTreeNode crmOrgNode)
+        public void LoadOrganizationNode<T>(string name, CrmOrganization crmOrg, CrmTreeNode<T> crmOrgNode)
         {
             crmOrgNode.Nodes.Clear();
             var solutions = SolutionHelper.GetSolutions(crmOrg.Service);
@@ -491,7 +492,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             foreach (var sol in solutions)
             {
                 sol.Organization = (CrmOrganization)crmOrgNode.Component;
-                var crmSolNode = new CrmTreeNode()
+                var crmSolNode = new CrmTreeNode<CrmSolution>()
                 {
                     Component = sol,
                     Text = sol.NameVersion,
@@ -500,10 +501,10 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
                 crmOrgNode.Nodes.Add(crmSolNode);
 
-                foreach (var childSol in sol.ChildSolutions)
+                foreach (var childSol in sol.ChildSolutions.Components)
                 {
                     childSol.Organization = (CrmOrganization)crmOrgNode.Component;
-                    var crmChildSolNode = new CrmTreeNode()
+                    var crmChildSolNode = new CrmTreeNode<CrmSolution>()
                     {
                         Component = childSol,
                         Text = childSol.NameVersion,

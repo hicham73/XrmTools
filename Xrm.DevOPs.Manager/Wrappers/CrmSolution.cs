@@ -17,18 +17,18 @@ namespace Xrm.DevOPs.Manager.Wrappers
         #region Properties
 
         public List<CrmComponent> Components { get; set; }
-        public List<CrmSolution> ChildSolutions { get; set; } = new List<CrmSolution>();
-        public List<EntityComponent> EntityComponents { get; set; } = new List<EntityComponent>();
-        public List<PluginAssemblyComponent> PluginAssemblyComponents { get; set; } = new List<PluginAssemblyComponent>();
-        public List<WorkflowComponent> WorkflowComponents { get; set; } = new List<WorkflowComponent>();
-        public List<WebResourceComponent> WebResourceComponents { get; set; } = new List<WebResourceComponent>();
-        public List<RoleComponent> Roles { get; set; } = new List<RoleComponent>();
-        public List<RoutingRuleComponent> RoutingRuleComponents { get; set; } = new List<RoutingRuleComponent>();
-        public List<EmailTemplateComponent> EmailTemplateComponents { get; set; } = new List<EmailTemplateComponent>();
-        public List<KbArticleTemplateComponent> KbArticleTemplateComponents { get; set; } = new List<KbArticleTemplateComponent>();
-        public List<MailMergeTemplateComponent> MailMergeTemplateComponents { get; set; } = new List<MailMergeTemplateComponent>();
-        public List<ContractTemplateComponent> ContractTemplateComponents { get; set; } = new List<ContractTemplateComponent>();
-        public List<OptionSetComponent> OptionSetComponents { get; set; } = new List<OptionSetComponent>();
+        public CrmComponentCollection<CrmSolution> ChildSolutions { get; set; } = new CrmComponentCollection<CrmSolution>();
+        public CrmComponentCollection<EntityComponent> EntityComponents { get; set; } = new CrmComponentCollection<EntityComponent>();
+        public CrmComponentCollection<PluginAssemblyComponent> PluginAssemblyComponents { get; set; } = new CrmComponentCollection<PluginAssemblyComponent>();
+        public CrmComponentCollection<WorkflowComponent> WorkflowComponents { get; set; } = new CrmComponentCollection<WorkflowComponent>();
+        public CrmComponentCollection<WebResourceComponent> WebResourceComponents { get; set; } = new CrmComponentCollection<WebResourceComponent>();
+        public CrmComponentCollection<RoleComponent> RoleComponents { get; set; } = new CrmComponentCollection<RoleComponent>();
+        public CrmComponentCollection<RoutingRuleComponent> RoutingRuleComponents { get; set; } = new CrmComponentCollection<RoutingRuleComponent>();
+        public CrmComponentCollection<EmailTemplateComponent> EmailTemplateComponents { get; set; } = new CrmComponentCollection<EmailTemplateComponent>();
+        public CrmComponentCollection<KbArticleTemplateComponent> KbArticleTemplateComponents { get; set; } = new CrmComponentCollection<KbArticleTemplateComponent>();
+        public CrmComponentCollection<MailMergeTemplateComponent> MailMergeTemplateComponents { get; set; } = new CrmComponentCollection<MailMergeTemplateComponent>();
+        public CrmComponentCollection<ContractTemplateComponent> ContractTemplateComponents { get; set; } = new CrmComponentCollection<ContractTemplateComponent>();
+        public CrmComponentCollection<OptionSetComponent> OptionSetComponents { get; set; } = new CrmComponentCollection<OptionSetComponent>();
 
 
         public string UniqueName { get; set; }
@@ -65,14 +65,14 @@ namespace Xrm.DevOPs.Manager.Wrappers
         }
         internal void AddEntity(EntityComponent entityComp)
         {
-            EntityComponents.Add(entityComp);
+            EntityComponents.Components.Add(entityComp);
         }
 
         public void AddAttribute(CrmComponent component, CrmComponent rootComponent)
         {
             if (rootComponent != null)
             {
-                var entityComp = EntityComponents.Where(x => x.MetadataId.Contains(rootComponent.ObjectId.ToString())).FirstOrDefault<EntityComponent>();
+                var entityComp = EntityComponents.Components.Where(x => x.MetadataId.Contains(rootComponent.ObjectId.ToString())).FirstOrDefault<EntityComponent>();
                 if (entityComp != null)
                 {
                     var amd = entityComp.Meta.Attributes.Where(x => x.MetadataId == component.ObjectId).FirstOrDefault<AttributeMetadata>();
@@ -89,7 +89,7 @@ namespace Xrm.DevOPs.Manager.Wrappers
         {
             if (rootComponent != null)
             {
-                var entityComp = EntityComponents.Where(x => x.MetadataId.Contains(rootComponent.ObjectId.ToString())).FirstOrDefault<EntityComponent>();
+                var entityComp = EntityComponents.Components.Where(x => x.MetadataId.Contains(rootComponent.ObjectId.ToString())).FirstOrDefault<EntityComponent>();
 
                 if (entityComp != null)
                 {
@@ -99,7 +99,7 @@ namespace Xrm.DevOPs.Manager.Wrappers
                     {
                         entityComp.ManyToOneRelashionships.Add(new OneToManyRelationshipComponent(otmr));
 
-                        var primaryEntity = EntityComponents.Where(x => x.LogicalName == otmr.ReferencedEntity).FirstOrDefault<EntityComponent>();
+                        var primaryEntity = EntityComponents.Components.Where(x => x.LogicalName == otmr.ReferencedEntity).FirstOrDefault<EntityComponent>();
 
                         if (primaryEntity != null)
                             primaryEntity.OneToManyRelashionships.Add(new OneToManyRelationshipComponent(otmr));
@@ -113,7 +113,7 @@ namespace Xrm.DevOPs.Manager.Wrappers
         {
             if (rootComponent != null)
             {
-                var entityComp = EntityComponents.Where(x => x.MetadataId.Contains(rootComponent.ObjectId.ToString())).FirstOrDefault<EntityComponent>();
+                var entityComp = EntityComponents.Components.Where(x => x.MetadataId.Contains(rootComponent.ObjectId.ToString())).FirstOrDefault<EntityComponent>();
 
                 if (entityComp != null)
                 {
@@ -130,7 +130,7 @@ namespace Xrm.DevOPs.Manager.Wrappers
         {
             foreach (var component in components)
             {
-                if (component.ComponentType == EnumTypes.ComponentType.Entity)
+                if (component.ComponentType == ComponentType.Entity)
                 {
                     RetrieveEntityRequest request = new RetrieveEntityRequest
                     {
@@ -141,13 +141,13 @@ namespace Xrm.DevOPs.Manager.Wrappers
                     RetrieveEntityResponse response = (RetrieveEntityResponse)service.Execute(request);
                     AddEntity(new EntityComponent(component, response.EntityMetadata));
                 }
-                else if (component.ComponentType == EnumTypes.ComponentType.PluginAssembly)
+                else if (component.ComponentType == ComponentType.PluginAssembly)
                 {
                     var e = service.Retrieve("pluginassembly", component.ObjectId, new ColumnSet(true));
 
                     var name = e.GetAttributeValue<string>("name");
 
-                    var paComp = new PluginAssemblyComponent(e);
+                    var paComp = new PluginAssemblyComponent(component, e);
 
                     var qe = new QueryByAttribute("plugintype");
                     qe.ColumnSet = new ColumnSet(true);
@@ -160,80 +160,80 @@ namespace Xrm.DevOPs.Manager.Wrappers
                     {
                         var typeName = pt.GetAttributeValue<string>("typename")?.Replace(ns, "");
 
-                        paComp.PluginTypeComponents.Add(new PluginTypeComponent(pt));
+                        paComp.PluginTypeComponents.Add(new PluginTypeComponent(component, pt));
                     }
 
                     AddAssembly(paComp);
 
                 }
-                else if (component.ComponentType == EnumTypes.ComponentType.SDKMessageProcessingStep)
+                else if (component.ComponentType == ComponentType.SDKMessageProcessingStep)
                 {
                     var e = service.Retrieve("sdkmessageprocessingstep", component.ObjectId, new ColumnSet(true));
                     var name = e.GetAttributeValue<string>("name");
                 }
-                else if (component.ComponentType == EnumTypes.ComponentType.Workflow)
+                else if (component.ComponentType == ComponentType.Workflow)
                 {
                     var e = service.Retrieve("workflow", component.ObjectId, new ColumnSet(true));
                     var name = e.GetAttributeValue<string>("name");
-                    WorkflowComponents.Add(new WorkflowComponent(e));
+                    WorkflowComponents.Components.Add(new WorkflowComponent(component, e));
                 }
-                else if (component.ComponentType == EnumTypes.ComponentType.WebResource)
+                else if (component.ComponentType == ComponentType.WebResource)
                 {
                     var e = service.Retrieve("webresource", component.ObjectId, new ColumnSet(true));
                     var name = e.GetAttributeValue<string>("name");
-                    WebResourceComponents.Add(new WebResourceComponent(e));
+                    WebResourceComponents.Components.Add(new WebResourceComponent(component, e));
                 }
-                else if (component.ComponentType == EnumTypes.ComponentType.Role)
+                else if (component.ComponentType == ComponentType.Role)
                 {
                     var e = service.Retrieve("role", component.ObjectId, new ColumnSet(true));
                     var name = e.GetAttributeValue<string>("name");
-                    Roles.Add(new RoleComponent(e));
+                    RoleComponents.Components.Add(new RoleComponent(component, e));
                 }
-                else if (component.ComponentType == EnumTypes.ComponentType.RoutingRule)
+                else if (component.ComponentType == ComponentType.RoutingRule)
                 {
                     var e = service.Retrieve("routingrule", component.ObjectId, new ColumnSet(true));
-                    RoutingRuleComponents.Add(new RoutingRuleComponent(e));
+                    RoutingRuleComponents.Components.Add(new RoutingRuleComponent(component, e));
                 }
-                else if (component.ComponentType == EnumTypes.ComponentType.EmailTemplate)
+                else if (component.ComponentType == ComponentType.EmailTemplate)
                 {
                     var e = service.Retrieve("template", component.ObjectId, new ColumnSet("title","description"));
-                    EmailTemplateComponents.Add(new EmailTemplateComponent(e));
+                    EmailTemplateComponents.Components.Add(new EmailTemplateComponent(component, e));
                 }
-                else if (component.ComponentType == EnumTypes.ComponentType.MailMergeTemplate)
+                else if (component.ComponentType == ComponentType.MailMergeTemplate)
                 {
                     var e = service.Retrieve("mailmergetemplate", component.ObjectId, new ColumnSet("name", "description"));
-                    MailMergeTemplateComponents.Add(new MailMergeTemplateComponent(e));
+                    MailMergeTemplateComponents.Components.Add(new MailMergeTemplateComponent(component, e));
                 }
-                else if (component.ComponentType == EnumTypes.ComponentType.KBArticleTemplate)
+                else if (component.ComponentType == ComponentType.KBArticleTemplate)
                 {
                     var e = service.Retrieve("kbarticletemplate", component.ObjectId, new ColumnSet("title", "description"));
-                    KbArticleTemplateComponents.Add(new KbArticleTemplateComponent(e));
+                    KbArticleTemplateComponents.Components.Add(new KbArticleTemplateComponent(component, e));
                 }
-                else if (component.ComponentType == EnumTypes.ComponentType.ContractTemplate)
+                else if (component.ComponentType == ComponentType.ContractTemplate)
                 {
                     var e = service.Retrieve("contracttemplate", component.ObjectId, new ColumnSet("name", "description"));
-                    ContractTemplateComponents.Add(new ContractTemplateComponent(e));
+                    ContractTemplateComponents.Components.Add(new ContractTemplateComponent(component, e));
                 }
-                else if (component.ComponentType == EnumTypes.ComponentType.OptionSet)
+                else if (component.ComponentType == ComponentType.OptionSet)
                 {
 
                     var optionSetMetabase = Organization.OptionSets.Where(x => x.MetadataId == component.ObjectId).FirstOrDefault<OptionSetMetadataBase>();
 
                     if(optionSetMetabase != null)
-                        OptionSetComponents.Add(new OptionSetComponent(optionSetMetabase));
+                        OptionSetComponents.Components.Add(new OptionSetComponent(component, optionSetMetabase));
                 }
             }
 
             foreach (var component in components)
             {
 
-                if (component.ComponentType == ComponentModel.EnumTypes.ComponentType.Attribute)
+                if (component.ComponentType == ComponentType.Attribute)
                 {
                     var rootComponent = components.Where(x => x.Id == component.RootSolutionComponentId).FirstOrDefault<CrmComponent>();
                     AddAttribute(component, rootComponent);
 
                 }
-                else if (component.ComponentType == EnumTypes.ComponentType.EntityRelationship)
+                else if (component.ComponentType == ComponentType.EntityRelationship)
                 {
                     var rootComponent = components.Where(x => x.Id == component.RootSolutionComponentId).FirstOrDefault<CrmComponent>();
                     AddManyToOneRelationship(component, rootComponent);
@@ -247,7 +247,7 @@ namespace Xrm.DevOPs.Manager.Wrappers
 
         private void AddAssembly(PluginAssemblyComponent comp)
         {
-            PluginAssemblyComponents.Add(comp);
+            PluginAssemblyComponents.Components.Add(comp);
         }
 
         #endregion

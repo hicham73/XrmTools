@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Xrm.DevOPs.Manager.ComponentModel;
 using Xrm.DevOPs.Manager.Helpers;
 using Xrm.DevOPs.Manager.UI;
 using Xrm.DevOPs.Manager.Wrappers;
@@ -36,7 +37,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
         {
              sourceOrg = (CrmOrganization)((ToolStripComboBox)sender).SelectedItem;
 
-            var crmOrgNode = new CrmTreeNode()
+            var crmOrgNode = new CrmTreeNode<CrmOrganization>()
             {
                 Component = sourceOrg,
                 Text = sourceOrg.Name,
@@ -55,7 +56,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
         private void CBTargetOrg_SelectedIndexChanged(object sender, EventArgs e)
         {
             targetOrg = (CrmOrganization)((ToolStripComboBox)sender).SelectedItem;
-            var crmOrgNode = new CrmTreeNode()
+            var crmOrgNode = new CrmTreeNode<CrmOrganization>()
             {
                 Component = targetOrg,
                 Text = targetOrg.Name,
@@ -68,14 +69,14 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             LoadOrganizationNode(targetOrg.Name, targetOrg, crmOrgNode);
         }
 
-        public void LoadOrganizationNode(string name, CrmOrganization crmOrg, CrmTreeNode crmOrgNode)
+        public void LoadOrganizationNode<T>(string name, CrmOrganization crmOrg, CrmTreeNode<T> crmOrgNode)
         {
             var solutions = SolutionHelper.GetSolutions(crmOrg.Service);
 
             foreach (var sol in solutions)
             {
                 sol.Organization = (CrmOrganization)crmOrgNode.Component;
-                var crmSolNode = new CrmTreeNode()
+                var crmSolNode = new CrmTreeNode<CrmSolution>()
                 {
                     Component = sol,
                     Text = sol.NameVersion,
@@ -84,10 +85,10 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
                 crmOrgNode.Nodes.Add(crmSolNode);
 
-                foreach (var childSol in sol.ChildSolutions)
+                foreach (var childSol in sol.ChildSolutions.Components)
                 {
                     childSol.Organization = (CrmOrganization)crmOrgNode.Component;
-                    var crmChildSolNode = new CrmTreeNode()
+                    var crmChildSolNode = new CrmTreeNode<CrmSolution>()
                     {
                         Component = childSol,
                         Text = childSol.NameVersion,
@@ -106,7 +107,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
             if (node.Tag?.ToString() == "Solution")
             {
-                var solNode = (CrmTreeNode)node;
+                var solNode = (CrmTreeNode<CrmSolution>)node;
                 var crmSol = (CrmSolution)solNode.Component;
 
                 SolutionHelper.TransferSolution(sourceOrg, targetOrg, crmSol.UniqueName);

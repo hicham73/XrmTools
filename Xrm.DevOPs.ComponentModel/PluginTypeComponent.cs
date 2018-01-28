@@ -10,8 +10,9 @@ namespace Xrm.DevOPs.ComponentModel
         Entity e;
         Entity PluginType { get { return e; } set { e = value; } }
 
-        public PluginTypeComponent(Entity e)
+        public PluginTypeComponent(CrmComponent c, Entity e)
         {
+            ComponentType = c.ComponentType;
             this.e = e;
         }
         #region Public Properties

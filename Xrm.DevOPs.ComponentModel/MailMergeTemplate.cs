@@ -7,8 +7,9 @@ namespace Xrm.DevOPs.ComponentModel
     {
         Entity e;
 
-        public MailMergeTemplateComponent(Entity e)
+        public MailMergeTemplateComponent(CrmComponent c, Entity e)
         {
+            ComponentType = c.ComponentType;
             this.e = e;
         }
 

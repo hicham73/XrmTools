@@ -7,8 +7,9 @@ namespace Xrm.DevOPs.ComponentModel
     {
         Entity e;
 
-        public WebResourceComponent(Entity e)
+        public WebResourceComponent(CrmComponent c, Entity e)
         {
+            ComponentType = c.ComponentType;
             this.e = e;
         }
 

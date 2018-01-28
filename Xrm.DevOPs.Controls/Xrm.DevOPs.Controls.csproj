@@ -53,6 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComponentCollectionViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ComponentCollectionViewer.Designer.cs">
+      <DependentUpon>ComponentCollectionViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="EntityDetailControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -69,12 +75,21 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ComponentCollectionViewer.resx">
+      <DependentUpon>ComponentCollectionViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EntityDetailControl.resx">
       <DependentUpon>EntityDetailControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EntityDiffControl.resx">
       <DependentUpon>EntityDiffControl.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Xrm.DevOPs.ComponentModel\Xrm.DevOPs.ComponentModel.csproj">
+      <Project>{99BB5B1F-73C7-4EE8-ACB1-094A5C41209B}</Project>
+      <Name>Xrm.DevOPs.ComponentModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

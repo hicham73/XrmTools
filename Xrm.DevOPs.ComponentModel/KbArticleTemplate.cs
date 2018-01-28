@@ -7,9 +7,11 @@ namespace Xrm.DevOPs.ComponentModel
     {
         Entity e;
 
-        public KbArticleTemplateComponent(Entity e)
+        public KbArticleTemplateComponent(CrmComponent c, Entity e)
         {
             this.e = e;
+            ComponentType = c.ComponentType;
+
         }
 
         new public string Name

@@ -9,8 +9,9 @@ namespace Xrm.DevOPs.ComponentModel
         OptionSetMetadataBase osmdb;
 
         [Browsable(false)]
-        public OptionSetComponent(OptionSetMetadataBase osmdb)
+        public OptionSetComponent(CrmComponent c, OptionSetMetadataBase osmdb)
         {
+            ComponentType = c.ComponentType;
             this.osmdb = osmdb;
         }
 
@@ -30,5 +31,7 @@ namespace Xrm.DevOPs.ComponentModel
         {
             get { return Name; }
         }
+
+        
     }
 }
