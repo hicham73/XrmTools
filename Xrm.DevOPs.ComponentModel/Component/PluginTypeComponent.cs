@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
-
+using System.ComponentModel;
 
 namespace Xrm.DevOPs.ComponentModel
 {
@@ -12,8 +12,11 @@ namespace Xrm.DevOPs.ComponentModel
 
         public PluginTypeComponent(CrmComponent c, Entity e)
         {
-            ComponentType = c.ComponentType;
             this.e = e;
+            Id = e.Id;
+            Name = e.GetAttributeValue<string>("name");
+            DisplayName = e.GetAttributeValue<string>("friendlyname");
+            ComponentType = c.ComponentType;
         }
         #region Public Properties
 
@@ -35,6 +38,7 @@ namespace Xrm.DevOPs.ComponentModel
         }
 
 
+        [TypeConverter(typeof(ExpandableObjectConverter))]
         public EntityReference CreatedBy
         {
             get
@@ -52,6 +56,7 @@ namespace Xrm.DevOPs.ComponentModel
         }
 
 
+        [TypeConverter(typeof(ExpandableObjectConverter))]
         public EntityReference CreatedOnBehalfBy
         {
             get
@@ -141,6 +146,7 @@ namespace Xrm.DevOPs.ComponentModel
         }
 
 
+        [TypeConverter(typeof(ExpandableObjectConverter))]
         public EntityReference ModifiedBy
         {
             get
@@ -159,6 +165,7 @@ namespace Xrm.DevOPs.ComponentModel
         }
 
 
+        [TypeConverter(typeof(ExpandableObjectConverter))]
         public EntityReference ModifiedOnBehalfBy
         {
             get
@@ -181,6 +188,7 @@ namespace Xrm.DevOPs.ComponentModel
         }
 
 
+        [TypeConverter(typeof(ExpandableObjectConverter))]
         public EntityReference OrganizationId
         {
             get
@@ -198,6 +206,7 @@ namespace Xrm.DevOPs.ComponentModel
         }
 
 
+        [TypeConverter(typeof(ExpandableObjectConverter))]
         public EntityReference PluginAssemblyId
         {
             get
@@ -292,6 +301,12 @@ namespace Xrm.DevOPs.ComponentModel
         private void SetAttributeValue(string name, Object value)
         {
             e[name] = value;
+        }
+
+
+        public bool? IsCustomizable
+        {
+            get { return e.GetAttributeValue<ManagedProperty<bool>>("iscustomizable")?.Value; }
         }
 
         #endregion Public Properties

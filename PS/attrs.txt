@@ -1,0 +1,1 @@
+﻿workflow: asyncautodelete, categoryname, uniquename, subprocess, primaryentityname, description, typename, inputparameters, name, businessprocesstype, category

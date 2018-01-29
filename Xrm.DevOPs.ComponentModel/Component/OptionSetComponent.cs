@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Metadata;
+using System;
 using System.ComponentModel;
 
 namespace Xrm.DevOPs.ComponentModel
@@ -8,30 +9,40 @@ namespace Xrm.DevOPs.ComponentModel
     {
         OptionSetMetadataBase osmdb;
 
+        public static string[] Properties { get; } = new string[] { "Name", "Description" }; 
+
         [Browsable(false)]
         public OptionSetComponent(CrmComponent c, OptionSetMetadataBase osmdb)
         {
-            ComponentType = c.ComponentType;
             this.osmdb = osmdb;
+            Id = osmdb.MetadataId;
+            ComponentType = c.ComponentType;
+            Name = osmdb.Name;
+            DisplayName = osmdb.DisplayName?.UserLocalizedLabel?.Label;
         }
 
-        [Browsable(false)]
+        [TypeConverter(typeof(ExpandableObjectConverter))]
         public MetadataBase Metadata { get { return osmdb;  } }
-
-        new public string Name
-        {
-            get { return osmdb.Name; }
-        }
 
         public string Description
         {
             get { return osmdb.Description?.UserLocalizedLabel?.Label;  }
         }
+        [Browsable(false)]
         override public string Text
         {
             get { return Name; }
         }
 
-        
+        public bool? IsCustomizable
+        {
+            get { return osmdb.IsCustomizable?.Value; }
+        }
+        public bool? IsManaged
+        {
+            get { return osmdb.IsManaged; }
+        }
+
+
     }
 }

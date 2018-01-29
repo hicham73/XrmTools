@@ -21,10 +21,12 @@ namespace Xrm.DevOPs.ComponentModel
         public EntityComponent(CrmComponent component, EntityMetadata emd)
         {
             this.emd = emd;
+            Id = emd.MetadataId;
             RootComponentBehavior = component.RootComponentBehavior;
             RootSolutionComponentId = component.RootSolutionComponentId;
             ComponentType = component.ComponentType;
             Name = emd.LogicalName;
+            DisplayName = emd.DisplayName?.UserLocalizedLabel?.Label;
            
             if (RootComponentBehavior == 0)
             {
@@ -49,10 +51,6 @@ namespace Xrm.DevOPs.ComponentModel
             get { return emd.Description?.UserLocalizedLabel?.Label; }
         }
 
-        public string DisplayName
-        {
-            get { return emd.DisplayName?.UserLocalizedLabel?.Label; }
-        }
 
         public string LogicalName
         {

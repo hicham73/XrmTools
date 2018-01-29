@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
-
+using System.ComponentModel;
 
 namespace Xrm.DevOPs.ComponentModel
 {
@@ -15,8 +15,11 @@ namespace Xrm.DevOPs.ComponentModel
 
         public PluginAssemblyComponent(CrmComponent c, Entity e)
         {
-            ComponentType = c.ComponentType;
             this.e = e;
+            Id = e.Id;
+            ComponentType = c.ComponentType;
+            Name = e.GetAttributeValue<string>("name");
+            DisplayName = e.GetAttributeValue<string>("friendlyname");
         }
         #region Public Properties
 
@@ -81,6 +84,28 @@ namespace Xrm.DevOPs.ComponentModel
         public string Version { get; set; }
 
         public string Content { get; set; }
+
+        public bool? IsCustomizable
+        {
+            get { return e.GetAttributeValue<ManagedProperty<bool>>("iscustomizable")?.Value; }
+        }
+        public bool IsManaged
+        {
+            get { return e.GetAttributeValue<bool>("ismanaged"); }
+        }
+
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public EntityReference CreatedBy
+        {
+            get { return e.GetAttributeValue<EntityReference>("createdby"); }
+        }
+       
+
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public EntityReference ModifiedBy
+        {
+            get { return e.GetAttributeValue<EntityReference>("modifiedby"); }
+        }
 
         #endregion Public Properties
 

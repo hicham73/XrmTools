@@ -10,6 +10,10 @@ namespace Xrm.DevOPs.ComponentModel
         public OneToManyRelationshipComponent(OneToManyRelationshipMetadata otmmd)
         {
             this.otmmd = otmmd;
+            Id = otmmd.MetadataId;
+            ComponentType = EnumTypes.ComponentType.Relationship;
+            Name = otmmd.SchemaName;
+            DisplayName = Name;
         }
 
         public string ExtensionData
@@ -82,6 +86,11 @@ namespace Xrm.DevOPs.ComponentModel
         public override string ToString()
         {
             return otmmd.SchemaName;
+        }
+
+        public bool? IsCustomizable
+        {
+            get { return otmmd.IsCustomizable?.Value; }
         }
     }
 }

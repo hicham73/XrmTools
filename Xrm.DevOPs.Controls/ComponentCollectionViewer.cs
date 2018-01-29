@@ -57,22 +57,43 @@ namespace Xrm.DevOPs.Controls
                         pgComponent.SelectedObject = (RoutingRuleComponent)comp;
                         break;
                     case EnumTypes.ComponentType.Role:
-                        pgComponent.SelectedObject = (RoleComponent)comp;
+                        pgComponent.SelectedObject = (SecurityRoleComponent)comp;
                         break;
                 }
             }
         }
 
-        public void Display<T>(CrmComponentCollection<T> compCollection)
+        public void Display<T>(CrmComponentCollection<T> compCollection) where T: CrmComponent
         {
-            lvComponents.Columns.Add(new ColumnHeader("Name"));
-             
+            
+            foreach (var kv in compCollection.Properties)
+            {
+                lvComponents.Columns.Add(new ColumnHeader() { Text = kv.Value });
+            }
             foreach (var comp in compCollection.Components)
             {
-                var item = new ListViewItem(comp.GetPropertyValue("Name").ToString());
-                item.Tag = comp;
-                lvComponents.Items.Add(item);
+                ListViewItem item = null;
+                int i = 0;
+                foreach (var kv in compCollection.Properties)
+                {
+                    if (i == 0)
+                    {
+                        item = new ListViewItem(comp.GetPropertyValue(kv.Key)?.ToString());
+                        item.Tag = comp;
+                        lvComponents.Items.Add(item);
+                    }
+                    else
+                        item.SubItems.Add(comp.GetPropertyValue(kv.Key)?.ToString());
+                    i++;
+                }
             }
+            lvComponents.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            for (int j = 0; j < lvComponents.Columns.Count; j++)
+            {
+                var col = lvComponents.Columns[j];
+                col.Width = col.Width < 150 ? 150 : col.Width;
+            }
+
         }
 
 

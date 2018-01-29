@@ -1,4 +1,6 @@
-﻿namespace Xrm.DevOPs.Controls
+﻿using System.Windows.Forms;
+
+namespace Xrm.DevOPs.Controls
 {
     partial class ComponentCollectionViewer
     {
@@ -58,9 +60,9 @@
             // 
             this.lvComponents.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvComponents.GridLines = true;
-            this.lvComponents.Location = new System.Drawing.Point(0, 0);
+            //this.lvComponents.Location = new System.Drawing.Point(0, 0);
             this.lvComponents.Name = "lvComponents";
-            this.lvComponents.Size = new System.Drawing.Size(629, 581);
+            //this.lvComponents.Size = new System.Drawing.Size(629, 581);
             this.lvComponents.TabIndex = 0;
             this.lvComponents.UseCompatibleStateImageBehavior = false;
             this.lvComponents.View = System.Windows.Forms.View.Details;

@@ -1,6 +1,7 @@
-﻿using Microsoft.Xrm.Sdk.Metadata;
+﻿using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Metadata;
 using System;
-
+using System.ComponentModel;
 
 namespace Xrm.DevOPs.ComponentModel
 {
@@ -11,6 +12,10 @@ namespace Xrm.DevOPs.ComponentModel
         public ManyToManyRelationshipComponent(ManyToManyRelationshipMetadata mtmmd)
         {
             this.mtmmd = mtmmd;
+            Id = mtmmd.MetadataId;
+            ComponentType = EnumTypes.ComponentType.Relationship;
+            Name = mtmmd.SchemaName;
+            DisplayName = Name;
         }
 
         
@@ -47,5 +52,16 @@ namespace Xrm.DevOPs.ComponentModel
         {
             return mtmmd.SchemaName;
         }
+
+        override public string Text
+        {
+            get { return Name; }
+        }
+
+        public bool? IsCustomizable
+        {
+            get { return mtmmd.IsCustomizable?.Value; }
+        }
+
     }
 }
