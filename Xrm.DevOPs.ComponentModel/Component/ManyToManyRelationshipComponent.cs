@@ -17,8 +17,9 @@ namespace Xrm.DevOPs.ComponentModel
             Name = mtmmd.SchemaName;
             DisplayName = Name;
         }
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public ManyToManyRelationshipMetadata Meta { get { return mtmmd; } }
 
-        
         public string Entity1IntersectAttribute => mtmmd.Entity1IntersectAttribute;
 
         public string Entity1LogicalName => mtmmd.Entity1LogicalName;

@@ -20,6 +20,9 @@ namespace Xrm.DevOPs.ComponentModel
         }
         #region Public Properties
 
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public Entity Entity { get { return e; } }
+
         public string AssemblyName
         {
             get

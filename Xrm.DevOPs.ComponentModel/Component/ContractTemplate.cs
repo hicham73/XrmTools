@@ -18,6 +18,8 @@ namespace Xrm.DevOPs.ComponentModel
             this.e = e;
         }
 
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public Entity Entity { get { return e; } }
 
         public string Description
         {

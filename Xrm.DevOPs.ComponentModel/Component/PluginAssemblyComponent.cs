@@ -21,9 +21,12 @@ namespace Xrm.DevOPs.ComponentModel
             Name = e.GetAttributeValue<string>("name");
             DisplayName = e.GetAttributeValue<string>("friendlyname");
         }
-        #region Public Properties
 
-        
+        #region Public Properties
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public Entity Entity { get { return e; } }
+
+
         public Guid AssemblyId
         {
             get { return e.GetAttributeValue<Guid>("assemblyid"); }

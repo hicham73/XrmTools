@@ -83,9 +83,14 @@
     <Compile Include="Component\RoutingRuleComponent.cs" />
     <Compile Include="Component\WebResourceComponent.cs" />
     <Compile Include="Component\WorkflowComponent.cs" />
+    <Compile Include="TypeConverter\OptionSetMetadataInfo.cs" />
+    <Compile Include="TypeConverter\OptionSetMetaTypeConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Property\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -18,6 +18,8 @@ namespace Xrm.DevOPs.ComponentModel
             this.e = e;
         }
 
+        public Entity Entity { get { return e; } }
+
         override public string Text
         {
             get { return Name; }

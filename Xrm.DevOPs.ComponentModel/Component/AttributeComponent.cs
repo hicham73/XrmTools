@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xrm.Sdk.Metadata;
+using System.ComponentModel;
 
 namespace Xrm.DevOPs.ComponentModel
 {
@@ -14,6 +15,9 @@ namespace Xrm.DevOPs.ComponentModel
             Name = amd.LogicalName;
             DisplayName = amd.DisplayName?.UserLocalizedLabel?.Label;
         }
+
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        AttributeMetadata Meta { get { return amd; } }
 
         public string AttributeOf
         {

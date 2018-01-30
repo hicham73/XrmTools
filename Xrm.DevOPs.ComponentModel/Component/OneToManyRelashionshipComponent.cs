@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk.Metadata;
 using System;
+using System.ComponentModel;
 
 namespace Xrm.DevOPs.ComponentModel
 {
@@ -15,6 +16,8 @@ namespace Xrm.DevOPs.ComponentModel
             Name = otmmd.SchemaName;
             DisplayName = Name;
         }
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public OneToManyRelationshipMetadata Meta { get { return otmmd; } }
 
         public string ExtensionData
         {

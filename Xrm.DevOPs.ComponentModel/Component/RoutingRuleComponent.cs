@@ -18,6 +18,9 @@ namespace Xrm.DevOPs.ComponentModel
             DisplayName = Name;
         }
 
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public Entity Entity { get { return e; } }
+
         override public string Text
         {
             get { return Name; }
