@@ -87,24 +87,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Component\AttributeComponent.cs" />
-    <Compile Include="Component\ContractTemplate.cs" />
-    <Compile Include="Component\CrmComponent.cs" />
-    <Compile Include="Component\CrmComponentCollection.cs" />
-    <Compile Include="Component\EmailTemplateComponent.cs" />
-    <Compile Include="Component\EntityComponent.cs" />
-    <Compile Include="Component\KbArticleTemplateComponent.cs" />
-    <Compile Include="Component\MailMergeTemplateComponent.cs" />
-    <Compile Include="Component\ManyToManyRelationshipComponent.cs" />
-    <Compile Include="Component\OneToManyRelashionshipComponent.cs" />
-    <Compile Include="Component\OptionSetComponent.cs" />
-    <Compile Include="Component\OrganizationComponent.cs" />
-    <Compile Include="Component\PluginAssemblyComponent.cs" />
-    <Compile Include="Component\PluginTypeComponent.cs" />
-    <Compile Include="Component\RoutingRuleComponent.cs" />
-    <Compile Include="Component\SecurityRoleComponent.cs" />
-    <Compile Include="Component\WebResourceComponent.cs" />
-    <Compile Include="Component\WorkflowComponent.cs" />
+    <Compile Include="Components\AttributeComponent.cs" />
+    <Compile Include="Components\ContractTemplate.cs" />
+    <Compile Include="Components\CrmComponent.cs" />
+    <Compile Include="Components\CrmComponentCollection.cs" />
+    <Compile Include="Components\EmailTemplateComponent.cs" />
+    <Compile Include="Components\EntityComponent.cs" />
+    <Compile Include="Components\KbArticleTemplateComponent.cs" />
+    <Compile Include="Components\MailMergeTemplateComponent.cs" />
+    <Compile Include="Components\ManyToManyRelationshipComponent.cs" />
+    <Compile Include="Components\OneToManyRelashionshipComponent.cs" />
+    <Compile Include="Components\OptionSetComponent.cs" />
+    <Compile Include="Components\OrganizationComponent.cs" />
+    <Compile Include="Components\PluginAssemblyComponent.cs" />
+    <Compile Include="Components\PluginTypeComponent.cs" />
+    <Compile Include="Components\RoutingRuleComponent.cs" />
+    <Compile Include="Components\SecurityRoleComponent.cs" />
+    <Compile Include="Components\WebResourceComponent.cs" />
+    <Compile Include="Components\WorkflowComponent.cs" />
     <Compile Include="Controls\ComponentCollectionViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -160,23 +160,23 @@
     <Compile Include="Helpers\MetadataHelper.cs" />
     <Compile Include="Helpers\OrganizationHelper.cs" />
     <Compile Include="Helpers\SolutionHelper.cs" />
-    <Compile Include="Property\AttributeMetadataCollection.cs" />
-    <Compile Include="Property\AttributeMetadataInfo.cs" />
-    <Compile Include="Property\AttributeMetadataPropertyDescriptor.cs" />
-    <Compile Include="Property\BooleanManagedPropertyInfo.cs" />
-    <Compile Include="Property\LabelCollection.cs" />
-    <Compile Include="Property\LabelInfo.cs" />
-    <Compile Include="Property\LabelPropertyDescriptor.cs" />
-    <Compile Include="Property\LocalizedLabelCollection.cs" />
-    <Compile Include="Property\LocalizedLabelInfo.cs" />
-    <Compile Include="Property\LocalizedLabelPropertyDescriptor.cs" />
-    <Compile Include="Property\OptionMetadataCollection.cs" />
-    <Compile Include="Property\OptionMetadataInfo.cs" />
-    <Compile Include="Property\OptionMetadataPropertyDescriptor.cs" />
-    <Compile Include="Property\OptionSetMetadataCollection.cs" />
-    <Compile Include="Property\OptionSetMetadataCollectionPropertyDescriptor.cs" />
-    <Compile Include="Property\OptionSetMetadataInfo.cs" />
-    <Compile Include="Property\TypeConverter.cs" />
+    <Compile Include="Components\Properties\AttributeMetadataCollection.cs" />
+    <Compile Include="Components\Properties\AttributeMetadataInfo.cs" />
+    <Compile Include="Components\Properties\AttributeMetadataPropertyDescriptor.cs" />
+    <Compile Include="Components\Properties\BooleanManagedPropertyInfo.cs" />
+    <Compile Include="Components\Properties\LabelCollection.cs" />
+    <Compile Include="Components\Properties\LabelInfo.cs" />
+    <Compile Include="Components\Properties\LabelPropertyDescriptor.cs" />
+    <Compile Include="Components\Properties\LocalizedLabelCollection.cs" />
+    <Compile Include="Components\Properties\LocalizedLabelInfo.cs" />
+    <Compile Include="Components\Properties\LocalizedLabelPropertyDescriptor.cs" />
+    <Compile Include="Components\Properties\OptionMetadataCollection.cs" />
+    <Compile Include="Components\Properties\OptionMetadataInfo.cs" />
+    <Compile Include="Components\Properties\OptionMetadataPropertyDescriptor.cs" />
+    <Compile Include="Components\Properties\OptionSetMetadataCollection.cs" />
+    <Compile Include="Components\Properties\OptionSetMetadataCollectionPropertyDescriptor.cs" />
+    <Compile Include="Components\Properties\OptionSetMetadataInfo.cs" />
+    <Compile Include="Components\Properties\TypeConverter.cs" />
     <Compile Include="UI\Forms\PropertiesForm.cs">
       <SubType>Form</SubType>
     </Compile>
