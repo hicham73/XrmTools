@@ -15,8 +15,9 @@ namespace Xrm.DevOPs.Manager.Helpers
         {
             RetrieveAllOptionSetsRequest req = new RetrieveAllOptionSetsRequest();
             RetrieveAllOptionSetsResponse res = (RetrieveAllOptionSetsResponse)service.Execute(req);
-            
             return res.OptionSetMetadata.ToList();
         }
+
+        
     }
 }

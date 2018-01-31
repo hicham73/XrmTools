@@ -1,20 +1,15 @@
 ﻿using Microsoft.Xrm.Sdk.Metadata;
-using MsCrmTools.MetadataBrowser.AppCode.LabelMd;
-using MsCrmTools.MetadataBrowser.AppCode.OptionMd;
 using System;
 using System.ComponentModel;
-using System.Drawing.Design;
-using System.Linq;
-using OptionMetadataCollection = MsCrmTools.MetadataBrowser.AppCode.OptionMd.OptionMetadataCollection;
 
-namespace MsCrmTools.MetadataBrowser.AppCode.OptionSetMd
+namespace Xrm.DevOPs.Manager.ComponentModel.Property
 {
     [TypeConverter(typeof(ExpandableObjectConverter))]
     public class OptionSetMetadataInfo
     {
-        private readonly OptionSetMetadata amd;
+        private readonly OptionSetMetadataBase amd;
 
-        public OptionSetMetadataInfo(OptionSetMetadata amd)
+        public OptionSetMetadataInfo(OptionSetMetadataBase amd)
         {
             this.amd = amd;
         }
@@ -29,8 +24,8 @@ namespace MsCrmTools.MetadataBrowser.AppCode.OptionSetMd
 
         public string IntroducedVersion => amd.IntroducedVersion;
 
-        [TypeConverter(typeof(ExpandableObjectConverter))]
-        public BooleanManagedPropertyInfo IsCustomizable => new BooleanManagedPropertyInfo(amd.IsCustomizable);
+        //[TypeConverter(typeof(ExpandableObjectConverter))]
+        //public BooleanManagedPropertyInfo IsCustomizable => new BooleanManagedPropertyInfo(amd.IsCustomizable);
 
         public bool IsCustomOptionSet => amd.IsCustomOptionSet.HasValue && amd.IsCustomOptionSet.Value;
 
@@ -42,18 +37,27 @@ namespace MsCrmTools.MetadataBrowser.AppCode.OptionSetMd
 
         public string Name => amd.Name;
 
-        [Editor(typeof(CustomCollectionEditor), typeof(UITypeEditor))]
+        //[Editor(typeof(CustomCollectionEditor), typeof(UITypeEditor))]
         [TypeConverter(typeof(OptionMetadataCollectionConverter))]
         public OptionMetadataCollection Options
         {
             get
             {
                 var collec = new OptionMetadataCollection();
-                foreach (OptionMetadata omd in amd.Options)
-                {
-                    collec.Add(new OptionMetadataInfo(omd));
+                if (amd.OptionSetType != null)
+                    {
+                        if ((OptionSetType)amd.OptionSetType == OptionSetType.Picklist)
+                        {
+                            OptionSetMetadata omd = (OptionSetMetadata)amd;
+                            
+                            foreach (OptionMetadata option in omd.Options)
+                            {
+                            collec.Add(new OptionMetadataInfo(option));
+                        }
+                        
+                    }
                 }
-
+                
                 return collec;
             }
         }

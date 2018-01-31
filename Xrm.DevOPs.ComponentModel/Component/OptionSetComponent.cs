@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk.Metadata;
 using System;
 using System.ComponentModel;
+using Xrm.DevOPs.Manager.ComponentModel.Property;
 
 namespace Xrm.DevOPs.ComponentModel
 {
@@ -22,7 +23,7 @@ namespace Xrm.DevOPs.ComponentModel
         }
 
         [TypeConverter(typeof(ExpandableObjectConverter))]
-        public MetadataBase Metadata { get { return osmdb;  } }
+        public OptionSetMetadataInfo Metadata { get { return new OptionSetMetadataInfo(osmdb);  } }
 
         public string Description
         {

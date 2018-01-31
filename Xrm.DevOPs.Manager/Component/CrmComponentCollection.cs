@@ -4,15 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xrm.DevOPs.Manager.Component
+namespace Xrm.DevOPs.ComponentModel
 {
     public class CrmComponentCollection<T>
     {
+        public List<KeyValuePair<string, string>> Properties { get; }
 
-        public CrmComponentCollection(List<T> components)
+        public CrmComponentCollection(List<KeyValuePair<string, string>> properties)
         {
-            Components = components;
+            Properties = properties;
         }
-        public List<T> Components;
+
+        public CrmComponentCollection()
+        {
+        }
+
+        public List<T> Components = new List<T>();
     }
 }

@@ -1,15 +1,23 @@
 ﻿using Microsoft.Xrm.Sdk.Metadata;
+using System.ComponentModel;
 
-namespace Xrm.DevOPs.Manager.Component
+namespace Xrm.DevOPs.ComponentModel
 {
     public class AttributeComponent : CrmComponent
     {
         private readonly AttributeMetadata amd;
+        public static string[] Properties { get; } = new string[] { "Name"};
 
         public AttributeComponent(AttributeMetadata amd)
         {
             this.amd = amd;
+            Id = amd.MetadataId;
+            Name = amd.LogicalName;
+            DisplayName = amd.DisplayName?.UserLocalizedLabel?.Label;
         }
+
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        AttributeMetadata Meta { get { return amd; } }
 
         public string AttributeOf
         {
@@ -54,11 +62,6 @@ namespace Xrm.DevOPs.Manager.Component
         public string Description
         {
             get { return amd.Description?.UserLocalizedLabel?.Label; }
-        }
-
-        public string DisplayName
-        {
-            get { return amd.DisplayName?.UserLocalizedLabel?.Label; }
         }
 
         public string EntityLogicalName

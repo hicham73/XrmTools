@@ -1,7 +1,8 @@
 ﻿using Microsoft.Xrm.Sdk.Metadata;
 using System;
+using System.ComponentModel;
 
-namespace Xrm.DevOPs.Manager.Component
+namespace Xrm.DevOPs.ComponentModel
 {
     public class OneToManyRelationshipComponent : CrmComponent
     {
@@ -10,7 +11,13 @@ namespace Xrm.DevOPs.Manager.Component
         public OneToManyRelationshipComponent(OneToManyRelationshipMetadata otmmd)
         {
             this.otmmd = otmmd;
+            Id = otmmd.MetadataId;
+            ComponentType = EnumTypes.ComponentType.Relationship;
+            Name = otmmd.SchemaName;
+            DisplayName = Name;
         }
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public OneToManyRelationshipMetadata Meta { get { return otmmd; } }
 
         public string ExtensionData
         {
@@ -82,6 +89,11 @@ namespace Xrm.DevOPs.Manager.Component
         public override string ToString()
         {
             return otmmd.SchemaName;
+        }
+
+        public bool? IsCustomizable
+        {
+            get { return otmmd.IsCustomizable?.Value; }
         }
     }
 }

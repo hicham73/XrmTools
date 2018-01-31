@@ -86,7 +86,78 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
         }
 
-        private void MILoadOrganizations_Click(object sender, EventArgs e)
+ 
+        private void MIOptions_Click(object sender, EventArgs e)
+        {
+            clbDiffOptions.Visible = !clbDiffOptions.Visible;
+        }
+
+        private void MIDiff_Click(object sender, EventArgs e)
+        {
+
+            List<string> options = new List<string>();
+
+            options.Clear();
+
+            foreach (var comp in clbDiffOptions.CheckedItems)
+            {
+                options.Add(comp.ToString());
+            }
+            
+            _diffGenerator.Compare(options);
+            DisplayDiffResult();
+        }
+
+        private void MILoadEntities_Click(object sender, EventArgs e)
+        {
+            LoadEntities();
+        }
+
+        private void CBLeftOrg_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var crmOrg = (CrmOrganization)((ToolStripComboBox)sender).SelectedItem;
+            _diffGenerator.LeftService = crmOrg.Service;
+        }
+
+        private void CBRightOrg_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var crmOrg = (CrmOrganization)((ToolStripComboBox)sender).SelectedItem;
+            _diffGenerator.RightService = crmOrg.Service;
+        }
+
+
+        private void customToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lvEntities.Items.Clear();
+
+            foreach (var item in _diffGenerator.Entities)
+            {
+                if (item.IsCustomEntity)
+                    lvEntities.Items.Add(new ListViewItem()
+                    {
+                        Text = item.DisplayName,
+                        Tag = item
+                    });
+
+            }
+        }
+
+        private void allToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lvEntities.Items.Clear();
+
+            foreach (var item in _diffGenerator.Entities)
+            {
+                lvEntities.Items.Add(new ListViewItem()
+                {
+                    Text = item.DisplayName,
+                    Tag = item
+                });
+
+            }
+        }
+
+        private void MIOrgLoad_Click(object sender, EventArgs e)
         {
             int count = ConfigurationManager.ConnectionStrings.Count;
             List<KeyValuePair<String, String>> filteredConnectionStrings = new List<KeyValuePair<String, String>>();
@@ -138,45 +209,18 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             }
         }
 
-        private void MIOptions_Click(object sender, EventArgs e)
+        private void MIOrgCompare_Click(object sender, EventArgs e)
         {
-            clbDiffOptions.Visible = !clbDiffOptions.Visible;
+            tabCtrlMain.SelectTab(1);
         }
 
-        private void MIDiff_Click(object sender, EventArgs e)
+        private void MISolCompare_Click(object sender, EventArgs e)
         {
+            tabCtrlMain.SelectTab(2);
 
-            List<string> options = new List<string>();
-
-            options.Clear();
-
-            foreach (var comp in clbDiffOptions.CheckedItems)
-            {
-                options.Add(comp.ToString());
-            }
-            
-            _diffGenerator.Compare(options);
-            DisplayDiffResult();
         }
 
-        private void MILoadEntities_Click(object sender, EventArgs e)
-        {
-            LoadEntities();
-        }
-
-        private void CBLeftOrg_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var crmOrg = (CrmOrganization)((ToolStripComboBox)sender).SelectedItem;
-            _diffGenerator.LeftService = crmOrg.Service;
-        }
-
-        private void CBRightOrg_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var crmOrg = (CrmOrganization)((ToolStripComboBox)sender).SelectedItem;
-            _diffGenerator.RightService = crmOrg.Service;
-        }
-
-        private void MITransferSolution_Click(object sender, EventArgs e)
+        private void MISolTransfer_Click(object sender, EventArgs e)
         {
             var frm = new SolutionTransferDlg();
 
@@ -185,41 +229,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             frm.Show();
         }
 
-        private void customToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            lvEntities.Items.Clear();
-
-            foreach (var item in _diffGenerator.Entities)
-            {
-                if (item.IsCustomEntity)
-                    lvEntities.Items.Add(new ListViewItem()
-                    {
-                        Text = item.DisplayName,
-                        Tag = item
-                    });
-
-            }
-        }
-
-        private void allToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            lvEntities.Items.Clear();
-
-            foreach (var item in _diffGenerator.Entities)
-            {
-                lvEntities.Items.Add(new ListViewItem()
-                {
-                    Text = item.DisplayName,
-                    Tag = item
-                });
-
-            }
-        }
-        private void MIOrganizationDiff_Click(object sender, EventArgs e)
-        {
-            tabCtrlMain.SelectTab(1);
-        }
-
+        
         #endregion
 
         #region Display
@@ -515,7 +525,9 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             }
         }
 
+
         #endregion
+
 
     }
 

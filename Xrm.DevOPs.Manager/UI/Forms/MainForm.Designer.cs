@@ -31,16 +31,19 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.miLoadOrganizations = new System.Windows.Forms.ToolStripMenuItem();
-            this.MIOrganizationDiff = new System.Windows.Forms.ToolStripMenuItem();
-            this.MISolutionTransfer = new System.Windows.Forms.ToolStripMenuItem();
+            this.organizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MIOrgLoad = new System.Windows.Forms.ToolStripMenuItem();
+            this.MIOrgCompare = new System.Windows.Forms.ToolStripMenuItem();
+            this.solutionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MISolCompare = new System.Windows.Forms.ToolStripMenuItem();
+            this.MISolTransfer = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tvOrgs = new System.Windows.Forms.TreeView();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabCtrlMain = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabDeploymentExplorer = new System.Windows.Forms.TabPage();
+            this.tabOrgDiff = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.lvEntities = new System.Windows.Forms.ListView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -56,58 +59,82 @@
             this.menuItemDiff = new System.Windows.Forms.ToolStripMenuItem();
             this.cbRightOrg = new System.Windows.Forms.ToolStripComboBox();
             this.MIOptions = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabSolCompare = new System.Windows.Forms.TabPage();
+            this.solutionCompareControl1 = new Xrm.DevOPs.Controls.SolutionCompareControl();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabCtrlMain.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.tabDeploymentExplorer.SuspendLayout();
+            this.tabOrgDiff.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
+            this.tabSolCompare.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.SteelBlue;
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miLoadOrganizations,
-            this.MIOrganizationDiff,
-            this.MISolutionTransfer});
+            this.organizationToolStripMenuItem,
+            this.solutionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1184, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // miLoadOrganizations
+            // organizationToolStripMenuItem
             // 
-            this.miLoadOrganizations.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.miLoadOrganizations.Name = "miLoadOrganizations";
-            this.miLoadOrganizations.Size = new System.Drawing.Size(121, 20);
-            this.miLoadOrganizations.Text = "Load Organizations";
-            this.miLoadOrganizations.Click += new System.EventHandler(this.MILoadOrganizations_Click);
+            this.organizationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MIOrgLoad,
+            this.MIOrgCompare});
+            this.organizationToolStripMenuItem.Name = "organizationToolStripMenuItem";
+            this.organizationToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
+            this.organizationToolStripMenuItem.Text = "Organization";
             // 
-            // MIOrganizationDiff
+            // MIOrgLoad
             // 
-            this.MIOrganizationDiff.BackColor = System.Drawing.SystemColors.Menu;
-            this.MIOrganizationDiff.Name = "MIOrganizationDiff";
-            this.MIOrganizationDiff.Size = new System.Drawing.Size(109, 20);
-            this.MIOrganizationDiff.Text = "Organization Diff";
-            this.MIOrganizationDiff.Click += new System.EventHandler(this.MIOrganizationDiff_Click);
+            this.MIOrgLoad.Name = "MIOrgLoad";
+            this.MIOrgLoad.Size = new System.Drawing.Size(152, 22);
+            this.MIOrgLoad.Text = "Load";
+            this.MIOrgLoad.Click += new System.EventHandler(this.MIOrgLoad_Click);
             // 
-            // MISolutionTransfer
+            // MIOrgCompare
             // 
-            this.MISolutionTransfer.BackColor = System.Drawing.Color.Azure;
-            this.MISolutionTransfer.Name = "MISolutionTransfer";
-            this.MISolutionTransfer.Size = new System.Drawing.Size(108, 20);
-            this.MISolutionTransfer.Text = "Solution Transfer";
-            this.MISolutionTransfer.Click += new System.EventHandler(this.MITransferSolution_Click);
+            this.MIOrgCompare.Name = "MIOrgCompare";
+            this.MIOrgCompare.Size = new System.Drawing.Size(152, 22);
+            this.MIOrgCompare.Text = "Compare";
+            this.MIOrgCompare.Click += new System.EventHandler(this.MIOrgCompare_Click);
+            // 
+            // solutionToolStripMenuItem
+            // 
+            this.solutionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MISolCompare,
+            this.MISolTransfer});
+            this.solutionToolStripMenuItem.Name = "solutionToolStripMenuItem";
+            this.solutionToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.solutionToolStripMenuItem.Text = "Solution";
+            // 
+            // MISolCompare
+            // 
+            this.MISolCompare.Name = "MISolCompare";
+            this.MISolCompare.Size = new System.Drawing.Size(152, 22);
+            this.MISolCompare.Text = "Compare";
+            this.MISolCompare.Click += new System.EventHandler(this.MISolCompare_Click);
+            // 
+            // MISolTransfer
+            // 
+            this.MISolTransfer.Name = "MISolTransfer";
+            this.MISolTransfer.Size = new System.Drawing.Size(152, 22);
+            this.MISolTransfer.Text = "Transfer";
+            this.MISolTransfer.Click += new System.EventHandler(this.MISolTransfer_Click);
             // 
             // splitContainer1
             // 
@@ -338,8 +365,9 @@
             // 
             // tabCtrlMain
             // 
-            this.tabCtrlMain.Controls.Add(this.tabPage1);
-            this.tabCtrlMain.Controls.Add(this.tabPage3);
+            this.tabCtrlMain.Controls.Add(this.tabDeploymentExplorer);
+            this.tabCtrlMain.Controls.Add(this.tabOrgDiff);
+            this.tabCtrlMain.Controls.Add(this.tabSolCompare);
             this.tabCtrlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabCtrlMain.Location = new System.Drawing.Point(0, 24);
             this.tabCtrlMain.Name = "tabCtrlMain";
@@ -347,29 +375,29 @@
             this.tabCtrlMain.Size = new System.Drawing.Size(1184, 730);
             this.tabCtrlMain.TabIndex = 2;
             // 
-            // tabPage1
+            // tabDeploymentExplorer
             // 
-            this.tabPage1.BackColor = System.Drawing.Color.SteelBlue;
-            this.tabPage1.Controls.Add(this.splitContainer1);
-            this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1176, 704);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Deployment Explorer";
+            this.tabDeploymentExplorer.BackColor = System.Drawing.Color.SteelBlue;
+            this.tabDeploymentExplorer.Controls.Add(this.splitContainer1);
+            this.tabDeploymentExplorer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabDeploymentExplorer.Location = new System.Drawing.Point(4, 22);
+            this.tabDeploymentExplorer.Name = "tabDeploymentExplorer";
+            this.tabDeploymentExplorer.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDeploymentExplorer.Size = new System.Drawing.Size(1176, 704);
+            this.tabDeploymentExplorer.TabIndex = 0;
+            this.tabDeploymentExplorer.Text = "Deployment Explorer";
             // 
-            // tabPage3
+            // tabOrgDiff
             // 
-            this.tabPage3.BackColor = System.Drawing.Color.SlateGray;
-            this.tabPage3.Controls.Add(this.splitContainer3);
-            this.tabPage3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1176, 704);
-            this.tabPage3.TabIndex = 1;
-            this.tabPage3.Text = "Organization Diff.";
+            this.tabOrgDiff.BackColor = System.Drawing.Color.SlateGray;
+            this.tabOrgDiff.Controls.Add(this.splitContainer3);
+            this.tabOrgDiff.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabOrgDiff.Location = new System.Drawing.Point(4, 22);
+            this.tabOrgDiff.Name = "tabOrgDiff";
+            this.tabOrgDiff.Padding = new System.Windows.Forms.Padding(3);
+            this.tabOrgDiff.Size = new System.Drawing.Size(1176, 704);
+            this.tabOrgDiff.TabIndex = 1;
+            this.tabOrgDiff.Text = "Organization Diff.";
             // 
             // splitContainer3
             // 
@@ -429,14 +457,14 @@
             // allToolStripMenuItem
             // 
             this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.allToolStripMenuItem.Text = "All";
             this.allToolStripMenuItem.Click += new System.EventHandler(this.allToolStripMenuItem_Click);
             // 
             // customToolStripMenuItem
             // 
             this.customToolStripMenuItem.Name = "customToolStripMenuItem";
-            this.customToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.customToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.customToolStripMenuItem.Text = "Custom";
             this.customToolStripMenuItem.Click += new System.EventHandler(this.customToolStripMenuItem_Click);
             // 
@@ -538,6 +566,24 @@
             this.MIOptions.Text = "Options";
             this.MIOptions.Click += new System.EventHandler(this.MIOptions_Click);
             // 
+            // tabSolCompare
+            // 
+            this.tabSolCompare.Controls.Add(this.solutionCompareControl1);
+            this.tabSolCompare.Location = new System.Drawing.Point(4, 22);
+            this.tabSolCompare.Name = "tabSolCompare";
+            this.tabSolCompare.Size = new System.Drawing.Size(1176, 704);
+            this.tabSolCompare.TabIndex = 2;
+            this.tabSolCompare.Text = "Solution Compare";
+            this.tabSolCompare.UseVisualStyleBackColor = true;
+            // 
+            // solutionCompareControl1
+            // 
+            this.solutionCompareControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.solutionCompareControl1.Location = new System.Drawing.Point(0, 0);
+            this.solutionCompareControl1.Name = "solutionCompareControl1";
+            this.solutionCompareControl1.Size = new System.Drawing.Size(1176, 704);
+            this.solutionCompareControl1.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -555,8 +601,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tabCtrlMain.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
+            this.tabDeploymentExplorer.ResumeLayout(false);
+            this.tabOrgDiff.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel1.PerformLayout();
             this.splitContainer3.Panel2.ResumeLayout(false);
@@ -567,6 +613,7 @@
             this.toolStrip1.PerformLayout();
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
+            this.tabSolCompare.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -578,10 +625,9 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TreeView tvOrgs;
         private System.Windows.Forms.TabControl tabControlMain;
-        private System.Windows.Forms.ToolStripMenuItem miLoadOrganizations;
         private System.Windows.Forms.TabControl tabCtrlMain;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabDeploymentExplorer;
+        private System.Windows.Forms.TabPage tabOrgDiff;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.ListView lvEntities;
         private System.Windows.Forms.MenuStrip menuStrip2;
@@ -591,15 +637,21 @@
         private System.Windows.Forms.CheckedListBox clbDiffOptions;
         private System.Windows.Forms.ToolStripComboBox cbLeftOrg;
         private System.Windows.Forms.ToolStripComboBox cbRightOrg;
-        private System.Windows.Forms.ToolStripMenuItem MISolutionTransfer;
         private System.Windows.Forms.ToolStripMenuItem MIOptions;
-        private System.Windows.Forms.ToolStripMenuItem MIOrganizationDiff;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem customToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.TabPage tabSolCompare;
+        private Controls.SolutionCompareControl solutionCompareControl1;
+        private System.Windows.Forms.ToolStripMenuItem organizationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MIOrgLoad;
+        private System.Windows.Forms.ToolStripMenuItem MIOrgCompare;
+        private System.Windows.Forms.ToolStripMenuItem solutionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MISolCompare;
+        private System.Windows.Forms.ToolStripMenuItem MISolTransfer;
     }
 }
 

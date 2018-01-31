@@ -1,12 +1,8 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xrm.DevOPs.Manager.Wrappers;
+using System.ComponentModel;
 
-namespace Xrm.DevOPs.Manager.Component
+namespace Xrm.DevOPs.ComponentModel
 {
     public class PluginTypeComponent : CrmComponent
     {
@@ -14,11 +10,18 @@ namespace Xrm.DevOPs.Manager.Component
         Entity e;
         Entity PluginType { get { return e; } set { e = value; } }
 
-        public PluginTypeComponent(Entity e)
+        public PluginTypeComponent(CrmComponent c, Entity e)
         {
             this.e = e;
+            Id = e.Id;
+            Name = e.GetAttributeValue<string>("name");
+            DisplayName = e.GetAttributeValue<string>("friendlyname");
+            ComponentType = c.ComponentType;
         }
         #region Public Properties
+
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public Entity Entity { get { return e; } }
 
         public string AssemblyName
         {
@@ -38,6 +41,7 @@ namespace Xrm.DevOPs.Manager.Component
         }
 
 
+        [TypeConverter(typeof(ExpandableObjectConverter))]
         public EntityReference CreatedBy
         {
             get
@@ -55,6 +59,7 @@ namespace Xrm.DevOPs.Manager.Component
         }
 
 
+        [TypeConverter(typeof(ExpandableObjectConverter))]
         public EntityReference CreatedOnBehalfBy
         {
             get
@@ -144,6 +149,7 @@ namespace Xrm.DevOPs.Manager.Component
         }
 
 
+        [TypeConverter(typeof(ExpandableObjectConverter))]
         public EntityReference ModifiedBy
         {
             get
@@ -162,6 +168,7 @@ namespace Xrm.DevOPs.Manager.Component
         }
 
 
+        [TypeConverter(typeof(ExpandableObjectConverter))]
         public EntityReference ModifiedOnBehalfBy
         {
             get
@@ -184,6 +191,7 @@ namespace Xrm.DevOPs.Manager.Component
         }
 
 
+        [TypeConverter(typeof(ExpandableObjectConverter))]
         public EntityReference OrganizationId
         {
             get
@@ -201,6 +209,7 @@ namespace Xrm.DevOPs.Manager.Component
         }
 
 
+        [TypeConverter(typeof(ExpandableObjectConverter))]
         public EntityReference PluginAssemblyId
         {
             get
@@ -295,6 +304,12 @@ namespace Xrm.DevOPs.Manager.Component
         private void SetAttributeValue(string name, Object value)
         {
             e[name] = value;
+        }
+
+
+        public bool? IsCustomizable
+        {
+            get { return e.GetAttributeValue<ManagedProperty<bool>>("iscustomizable")?.Value; }
         }
 
         #endregion Public Properties

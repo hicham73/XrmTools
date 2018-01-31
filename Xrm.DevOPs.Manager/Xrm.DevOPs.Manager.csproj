@@ -85,11 +85,62 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Xrm.DevOPs.Deployment">
-      <HintPath>..\Xrm.DevOPs.Deployment\bin\Debug\Xrm.DevOPs.Deployment.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Component\AttributeComponent.cs" />
+    <Compile Include="Component\ContractTemplate.cs" />
+    <Compile Include="Component\CrmComponent.cs" />
+    <Compile Include="Component\CrmComponentCollection.cs" />
+    <Compile Include="Component\EmailTemplateComponent.cs" />
+    <Compile Include="Component\EntityComponent.cs" />
+    <Compile Include="Component\KbArticleTemplateComponent.cs" />
+    <Compile Include="Component\MailMergeTemplateComponent.cs" />
+    <Compile Include="Component\ManyToManyRelationshipComponent.cs" />
+    <Compile Include="Component\OneToManyRelashionshipComponent.cs" />
+    <Compile Include="Component\OptionSetComponent.cs" />
+    <Compile Include="Component\OrganizationComponent.cs" />
+    <Compile Include="Component\PluginAssemblyComponent.cs" />
+    <Compile Include="Component\PluginTypeComponent.cs" />
+    <Compile Include="Component\RoutingRuleComponent.cs" />
+    <Compile Include="Component\SecurityRoleComponent.cs" />
+    <Compile Include="Component\WebResourceComponent.cs" />
+    <Compile Include="Component\WorkflowComponent.cs" />
+    <Compile Include="Controls\ComponentCollectionViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ComponentCollectionViewer.Designer.cs">
+      <DependentUpon>ComponentCollectionViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EntityDetailControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EntityDetailControl.Designer.cs">
+      <DependentUpon>EntityDetailControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EntityDiffControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EntityDiffControl.Designer.cs">
+      <DependentUpon>EntityDiffControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SolCompareResultControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SolCompareResultControl.Designer.cs">
+      <DependentUpon>SolCompareResultControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SolutionCompareControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SolutionCompareControl.Designer.cs">
+      <DependentUpon>SolutionCompareControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SolutionSelecterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SolutionSelecterControl.Designer.cs">
+      <DependentUpon>SolutionSelecterControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Diff\DiffGenerator.cs" />
     <Compile Include="Entities\PluginAssembly.cs" />
     <Compile Include="Entities\PluginType.cs" />
@@ -101,9 +152,31 @@
     <Compile Include="Entities\SdkMessageProcessingStepState.cs" />
     <Compile Include="Entities\ServiceEndpoint.cs" />
     <Compile Include="Entities\SystemUser.cs" />
+    <Compile Include="Helpers\CrmTreeNode.cs" />
+    <Compile Include="Helpers\EntityReferenceProperty.cs" />
+    <Compile Include="Helpers\EntityReferenceTypeConverter.cs" />
+    <Compile Include="Helpers\EnumTypes.cs" />
+    <Compile Include="Helpers\Helper.cs" />
     <Compile Include="Helpers\MetadataHelper.cs" />
     <Compile Include="Helpers\OrganizationHelper.cs" />
     <Compile Include="Helpers\SolutionHelper.cs" />
+    <Compile Include="Property\AttributeMetadataCollection.cs" />
+    <Compile Include="Property\AttributeMetadataInfo.cs" />
+    <Compile Include="Property\AttributeMetadataPropertyDescriptor.cs" />
+    <Compile Include="Property\BooleanManagedPropertyInfo.cs" />
+    <Compile Include="Property\LabelCollection.cs" />
+    <Compile Include="Property\LabelInfo.cs" />
+    <Compile Include="Property\LabelPropertyDescriptor.cs" />
+    <Compile Include="Property\LocalizedLabelCollection.cs" />
+    <Compile Include="Property\LocalizedLabelInfo.cs" />
+    <Compile Include="Property\LocalizedLabelPropertyDescriptor.cs" />
+    <Compile Include="Property\OptionMetadataCollection.cs" />
+    <Compile Include="Property\OptionMetadataInfo.cs" />
+    <Compile Include="Property\OptionMetadataPropertyDescriptor.cs" />
+    <Compile Include="Property\OptionSetMetadataCollection.cs" />
+    <Compile Include="Property\OptionSetMetadataCollectionPropertyDescriptor.cs" />
+    <Compile Include="Property\OptionSetMetadataInfo.cs" />
+    <Compile Include="Property\TypeConverter.cs" />
     <Compile Include="UI\Forms\PropertiesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +205,24 @@
     <Compile Include="Util\Mapping.cs" />
     <Compile Include="Wrappers\CrmOrganization.cs" />
     <Compile Include="Wrappers\CrmSolution.cs" />
+    <EmbeddedResource Include="Controls\ComponentCollectionViewer.resx">
+      <DependentUpon>ComponentCollectionViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\EntityDetailControl.resx">
+      <DependentUpon>EntityDetailControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\EntityDiffControl.resx">
+      <DependentUpon>EntityDiffControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SolCompareResultControl.resx">
+      <DependentUpon>SolCompareResultControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SolutionCompareControl.resx">
+      <DependentUpon>SolutionCompareControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SolutionSelecterControl.resx">
+      <DependentUpon>SolutionSelecterControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\PropertiesForm.resx">
       <DependentUpon>PropertiesForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -404,20 +495,6 @@
     <Content Include="images\other\RightClickMenuChannel.png" />
     <Content Include="images\other\TabFlat.gif" />
     <Content Include="images\other\tablet_masthead_images.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Xrm.DevOPs.ComponentModel\Xrm.DevOPs.ComponentModel.csproj">
-      <Project>{99bb5b1f-73c7-4ee8-acb1-094a5c41209b}</Project>
-      <Name>Xrm.DevOPs.ComponentModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Xrm.DevOPs.Controls\Xrm.DevOPs.Controls.csproj">
-      <Project>{5c239913-1379-421a-8a9c-33e4f3b66a37}</Project>
-      <Name>Xrm.DevOPs.Controls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Xrm.DevOPs.PowerShell\Xrm.DevOPs.PowerShell.csproj">
-      <Project>{2BD66E2A-9B1B-4E48-8D83-DAA48D40316D}</Project>
-      <Name>Xrm.DevOPs.PowerShell</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

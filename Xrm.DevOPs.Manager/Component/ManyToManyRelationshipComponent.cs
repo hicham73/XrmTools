@@ -1,9 +1,9 @@
-﻿using Microsoft.Xrm.Sdk.Metadata;
+﻿using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Metadata;
 using System;
 using System.ComponentModel;
-using Xrm.DevOPs.Manager.Wrappers;
 
-namespace Xrm.DevOPs.Manager.Component
+namespace Xrm.DevOPs.ComponentModel
 {
     public class ManyToManyRelationshipComponent : CrmComponent
     {
@@ -12,9 +12,14 @@ namespace Xrm.DevOPs.Manager.Component
         public ManyToManyRelationshipComponent(ManyToManyRelationshipMetadata mtmmd)
         {
             this.mtmmd = mtmmd;
+            Id = mtmmd.MetadataId;
+            ComponentType = EnumTypes.ComponentType.Relationship;
+            Name = mtmmd.SchemaName;
+            DisplayName = Name;
         }
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public ManyToManyRelationshipMetadata Meta { get { return mtmmd; } }
 
-        
         public string Entity1IntersectAttribute => mtmmd.Entity1IntersectAttribute;
 
         public string Entity1LogicalName => mtmmd.Entity1LogicalName;
@@ -48,5 +53,16 @@ namespace Xrm.DevOPs.Manager.Component
         {
             return mtmmd.SchemaName;
         }
+
+        override public string Text
+        {
+            get { return Name; }
+        }
+
+        public bool? IsCustomizable
+        {
+            get { return mtmmd.IsCustomizable?.Value; }
+        }
+
     }
 }

@@ -1,12 +1,9 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xrm.DevOPs.Manager.Wrappers;
+using System.ComponentModel;
 
-namespace Xrm.DevOPs.Manager.Component
+namespace Xrm.DevOPs.ComponentModel
 {
     public class PluginAssemblyComponent : CrmComponent
     {
@@ -16,13 +13,20 @@ namespace Xrm.DevOPs.Manager.Component
         public List<PluginTypeComponent> PluginTypeComponents = new List<PluginTypeComponent>();
 
 
-        public PluginAssemblyComponent(Entity e)
+        public PluginAssemblyComponent(CrmComponent c, Entity e)
         {
             this.e = e;
+            Id = e.Id;
+            ComponentType = c.ComponentType;
+            Name = e.GetAttributeValue<string>("name");
+            DisplayName = e.GetAttributeValue<string>("friendlyname");
         }
-        #region Public Properties
 
-        
+        #region Public Properties
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public Entity Entity { get { return e; } }
+
+
         public Guid AssemblyId
         {
             get { return e.GetAttributeValue<Guid>("assemblyid"); }
@@ -83,6 +87,28 @@ namespace Xrm.DevOPs.Manager.Component
         public string Version { get; set; }
 
         public string Content { get; set; }
+
+        public bool? IsCustomizable
+        {
+            get { return e.GetAttributeValue<ManagedProperty<bool>>("iscustomizable")?.Value; }
+        }
+        public bool IsManaged
+        {
+            get { return e.GetAttributeValue<bool>("ismanaged"); }
+        }
+
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public EntityReference CreatedBy
+        {
+            get { return e.GetAttributeValue<EntityReference>("createdby"); }
+        }
+       
+
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public EntityReference ModifiedBy
+        {
+            get { return e.GetAttributeValue<EntityReference>("modifiedby"); }
+        }
 
         #endregion Public Properties
 

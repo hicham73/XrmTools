@@ -84,34 +84,37 @@ namespace Xrm.DevOPs.Manager.UI
                 switch (node.Tag?.ToString())
                 {
                     case "OptionSets":
-                        ShowCollection<OptionSetComponent>(node, "OptionSets", "Option Sets");
+                        ShowCollection<OptionSetComponent>(node, null, "OptionSets", "Option Sets");
+                        break;
+                    case "OptionSet":
+                        ShowCollection<OptionSetComponent>(node.Parent, (CrmTreeNode<OptionSetComponent>)node, "OptionSets", "Option Sets");
                         break;
                     case "WebResources":
-                        ShowCollection<WebResourceComponent>(node, "WebResources", "Web Resources");
+                        ShowCollection<WebResourceComponent>(node, null, "WebResources", "Web Resources");
                         break;
                     case "Workflows":
-                        ShowCollection<WorkflowComponent>(node, "Workflows", "Workflows");
+                        ShowCollection<WorkflowComponent>(node, null, "Workflows", "Workflows");
                         break;
                     case "PluginAssemblies":
-                        ShowCollection<PluginAssemblyComponent>(node, "PluginAssemblies", "Plugin Assemblies");
+                        ShowCollection<PluginAssemblyComponent>(node, null, "PluginAssemblies", "Plugin Assemblies");
                         break;
                     case "SecurityRoles":
-                        ShowCollection<SecurityRoleComponent>(node, "SecurityRoles", "Security Roles");
+                        ShowCollection<SecurityRoleComponent>(node, null, "SecurityRoles", "Security Roles");
                         break;
                     case "RoutingRuleSets":
-                        ShowCollection<RoutingRuleComponent>(node, "RoutingRuleSets", "Routing Rule Sets");
+                        ShowCollection<RoutingRuleComponent>(node, null, "RoutingRuleSets", "Routing Rule Sets");
                         break;
                     case "EmailTemplates":
-                        ShowCollection<EmailTemplateComponent>(node, "EmailTemplates", "Email Templates");
+                        ShowCollection<EmailTemplateComponent>(node, null, "EmailTemplates", "Email Templates");
                         break;
                     case "ContractTemplates":
-                        ShowCollection<ContractTemplateComponent>(node, "ContractTemplates", "Contract Templates");
+                        ShowCollection<ContractTemplateComponent>(node, null, "ContractTemplates", "Contract Templates");
                         break;
                     case "MailMergeTemplates":
-                        ShowCollection<MailMergeTemplateComponent>(node, "MailMergeTemplates", "Mail Merge Templates");
+                        ShowCollection<MailMergeTemplateComponent>(node, null, "MailMergeTemplates", "Mail Merge Templates");
                         break;
                     case "KbArticleTemplates":
-                        ShowCollection<KbArticleTemplateComponent>(node, "KbArticleTemplates", "Kb Article Templates");
+                        ShowCollection<KbArticleTemplateComponent>(node, null, "KbArticleTemplates", "Kb Article Templates");
                         break;
 
                 }
@@ -119,7 +122,7 @@ namespace Xrm.DevOPs.Manager.UI
 
         }
 
-        public void ShowCollection<T>(TreeNode node, string name, string text) where T: CrmComponent
+        public void ShowCollection<T>(TreeNode node, CrmTreeNode<T> childNode, string name, string text) where T: CrmComponent
         {
             var componentNode = (CrmTreeNode<T>)node;
             var controls = pageContainer.Controls.Find(name, false);
@@ -127,7 +130,7 @@ namespace Xrm.DevOPs.Manager.UI
             if (controls.Length == 0)
             {
                 var compCollectViewer = new ComponentCollectionViewer();
-                compCollectViewer.Display(componentNode.Collection);
+                compCollectViewer.Display(componentNode.Collection, childNode);
                 pageContainer.Controls.Add(GetNewPage(name, text, compCollectViewer));
             }
 
