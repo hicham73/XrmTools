@@ -12,7 +12,7 @@ using Xrm.DevOPs.Manager.Util;
 
 namespace Xrm.DevOPs.Manager.Diff
 {
-    internal class DiffGenerator
+    public class DiffGenerator
     {
         private List<string> _compared = new List<string>();
         private DiffResult _diffResult = new DiffResult(); 

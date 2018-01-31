@@ -60,7 +60,7 @@
             this.cbRightOrg = new System.Windows.Forms.ToolStripComboBox();
             this.MIOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.tabSolCompare = new System.Windows.Forms.TabPage();
-            this.solutionCompareControl1 = new Xrm.DevOPs.Controls.SolutionCompareControl();
+            this.ctrlSolutionCompare = new Xrm.DevOPs.Controls.SolutionCompareControl();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -102,14 +102,14 @@
             // MIOrgLoad
             // 
             this.MIOrgLoad.Name = "MIOrgLoad";
-            this.MIOrgLoad.Size = new System.Drawing.Size(152, 22);
+            this.MIOrgLoad.Size = new System.Drawing.Size(123, 22);
             this.MIOrgLoad.Text = "Load";
             this.MIOrgLoad.Click += new System.EventHandler(this.MIOrgLoad_Click);
             // 
             // MIOrgCompare
             // 
             this.MIOrgCompare.Name = "MIOrgCompare";
-            this.MIOrgCompare.Size = new System.Drawing.Size(152, 22);
+            this.MIOrgCompare.Size = new System.Drawing.Size(123, 22);
             this.MIOrgCompare.Text = "Compare";
             this.MIOrgCompare.Click += new System.EventHandler(this.MIOrgCompare_Click);
             // 
@@ -125,14 +125,14 @@
             // MISolCompare
             // 
             this.MISolCompare.Name = "MISolCompare";
-            this.MISolCompare.Size = new System.Drawing.Size(152, 22);
+            this.MISolCompare.Size = new System.Drawing.Size(123, 22);
             this.MISolCompare.Text = "Compare";
             this.MISolCompare.Click += new System.EventHandler(this.MISolCompare_Click);
             // 
             // MISolTransfer
             // 
             this.MISolTransfer.Name = "MISolTransfer";
-            this.MISolTransfer.Size = new System.Drawing.Size(152, 22);
+            this.MISolTransfer.Size = new System.Drawing.Size(123, 22);
             this.MISolTransfer.Text = "Transfer";
             this.MISolTransfer.Click += new System.EventHandler(this.MISolTransfer_Click);
             // 
@@ -568,7 +568,7 @@
             // 
             // tabSolCompare
             // 
-            this.tabSolCompare.Controls.Add(this.solutionCompareControl1);
+            this.tabSolCompare.Controls.Add(this.ctrlSolutionCompare);
             this.tabSolCompare.Location = new System.Drawing.Point(4, 22);
             this.tabSolCompare.Name = "tabSolCompare";
             this.tabSolCompare.Size = new System.Drawing.Size(1176, 704);
@@ -576,13 +576,13 @@
             this.tabSolCompare.Text = "Solution Compare";
             this.tabSolCompare.UseVisualStyleBackColor = true;
             // 
-            // solutionCompareControl1
+            // ctrlSolutionCompare
             // 
-            this.solutionCompareControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.solutionCompareControl1.Location = new System.Drawing.Point(0, 0);
-            this.solutionCompareControl1.Name = "solutionCompareControl1";
-            this.solutionCompareControl1.Size = new System.Drawing.Size(1176, 704);
-            this.solutionCompareControl1.TabIndex = 0;
+            this.ctrlSolutionCompare.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrlSolutionCompare.Location = new System.Drawing.Point(0, 0);
+            this.ctrlSolutionCompare.Name = "ctrlSolutionCompare";
+            this.ctrlSolutionCompare.Size = new System.Drawing.Size(1176, 704);
+            this.ctrlSolutionCompare.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -645,7 +645,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.TabPage tabSolCompare;
-        private Controls.SolutionCompareControl solutionCompareControl1;
+        private Controls.SolutionCompareControl ctrlSolutionCompare;
         private System.Windows.Forms.ToolStripMenuItem organizationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MIOrgLoad;
         private System.Windows.Forms.ToolStripMenuItem MIOrgCompare;

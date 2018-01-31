@@ -40,6 +40,7 @@
             this.cbOrgs.Name = "cbOrgs";
             this.cbOrgs.Size = new System.Drawing.Size(308, 21);
             this.cbOrgs.TabIndex = 0;
+            this.cbOrgs.SelectedIndexChanged += new System.EventHandler(this.CBOrgs_SelectedIndexChanged);
             // 
             // tvSolutions
             // 

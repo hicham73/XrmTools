@@ -24,9 +24,9 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             InitializeComponent();
         }
 
-        internal void LoadForm(List<CrmOrganization> crmOrganizations)
+        internal void LoadForm()
         {
-            foreach (var crmOrg in crmOrganizations)
+            foreach (var crmOrg in GlobalContext.CrmOrganizations)
             {
                 cbFromOrg.Items.Add(crmOrg);
                 cbToOrg.Items.Add(crmOrg);

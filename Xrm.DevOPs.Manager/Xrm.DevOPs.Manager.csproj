@@ -87,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlobalContext.cs" />
     <Compile Include="Components\AttributeComponent.cs" />
     <Compile Include="Components\ContractTemplate.cs" />
     <Compile Include="Components\CrmComponent.cs" />

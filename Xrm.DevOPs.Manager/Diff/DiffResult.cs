@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Xrm.DevOPs.Manager.Diff
 {
-    class DiffResult
+    public class DiffResult
     {
         public List<EntityDiffResult> Entities = new List<EntityDiffResult>();
         public List<ComponentDiff<Entity>> Workflows = new List<ComponentDiff<Entity>>();
