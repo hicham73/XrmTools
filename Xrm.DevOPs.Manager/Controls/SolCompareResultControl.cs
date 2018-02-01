@@ -22,5 +22,42 @@ namespace Xrm.DevOPs.Controls
             get { return lblHeader.Text;  }
             set { lblHeader.Text = value;  }
         }
+
+        public TreeView Tree
+        {
+            get { return tvResult;  }
+        }
+
+        internal void DisplaySolution(TreeView tree)
+        {
+            if (tree != null)
+            {
+                foreach (TreeNode r in tree.Nodes)
+                {
+                    var root = (TreeNode)r.Clone();
+                    tvResult.Nodes.Add(root);
+                    foreach (TreeNode n in r.Nodes)
+                        AddNode(root, n);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Solution is not loaded yet");
+            }
+
+        }
+
+        
+
+        private void AddNode(TreeNode root, TreeNode node)
+        {
+            TreeNode n = (TreeNode)node.Clone();
+            root.Nodes.Add(n);
+            foreach (TreeNode cn in node.Nodes)
+            {
+                AddNode(n, cn);
+            }
+
+        }
     }
 }

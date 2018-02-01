@@ -15,6 +15,10 @@ namespace Xrm.DevOPs.Controls
 {
     public partial class SolutionSelecterControl : UserControl
     {
+
+        public TreeView OrganizationTree { get; set; }
+
+        public SolutionCompareControl ParentControl { get; set; }
         public SolutionSelecterControl()
         {
             InitializeComponent();
@@ -78,6 +82,7 @@ namespace Xrm.DevOPs.Controls
                 }
             }
         }
+
 
     }
 }

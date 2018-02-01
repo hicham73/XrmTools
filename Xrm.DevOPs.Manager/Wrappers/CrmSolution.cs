@@ -4,6 +4,7 @@ using Microsoft.Xrm.Sdk.Metadata;
 using Microsoft.Xrm.Sdk.Query;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using Xrm.DevOPs.ComponentModel;
 using Xrm.DevOPs.Manager.Helpers;
 using Xrm.DevOPs.Manager.Util;
@@ -116,6 +117,7 @@ namespace Xrm.DevOPs.Manager.Wrappers
         public TreeNodeType Type { get; set; }
 
         public bool IsLoaded { get; internal set; } = false;
+        public TreeView Tree { get; internal set; }
 
         #endregion
 

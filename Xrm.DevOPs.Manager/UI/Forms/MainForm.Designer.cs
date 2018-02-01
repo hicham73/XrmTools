@@ -466,7 +466,7 @@
             this.customToolStripMenuItem.Name = "customToolStripMenuItem";
             this.customToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.customToolStripMenuItem.Text = "Custom";
-            this.customToolStripMenuItem.Click += new System.EventHandler(this.customToolStripMenuItem_Click);
+            this.customToolStripMenuItem.Click += new System.EventHandler(this.MIEntitiesLoad_Click);
             // 
             // toolStripButton1
             // 

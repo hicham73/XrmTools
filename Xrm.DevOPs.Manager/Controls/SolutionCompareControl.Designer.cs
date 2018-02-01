@@ -28,15 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SolutionCompareControl));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.BtnCompare = new System.Windows.Forms.ToolStripButton();
             this.ctrlLeftSolSelecter = new Xrm.DevOPs.Controls.SolutionSelecterControl();
             this.ctrlRightSolSelecter = new Xrm.DevOPs.Controls.SolutionSelecterControl();
-            this.solCompareResultControl1 = new Xrm.DevOPs.Controls.SolCompareResultControl();
-            this.solCompareResultControl2 = new Xrm.DevOPs.Controls.SolCompareResultControl();
-            this.solCompareResultControl3 = new Xrm.DevOPs.Controls.SolCompareResultControl();
+            this.ctrlLeftCompareResult = new Xrm.DevOPs.Controls.SolCompareResultControl();
+            this.ctrlInterCompareResult = new Xrm.DevOPs.Controls.SolCompareResultControl();
+            this.ctrlRightCompareResult = new Xrm.DevOPs.Controls.SolCompareResultControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -53,6 +56,7 @@
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -86,6 +90,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.ctrlRightSolSelecter);
+            this.splitContainer2.Panel2.Controls.Add(this.toolStrip1);
             this.splitContainer2.Size = new System.Drawing.Size(310, 704);
             this.splitContainer2.SplitterDistance = 327;
             this.splitContainer2.TabIndex = 0;
@@ -98,7 +103,7 @@
             // 
             // splitContainer3.Panel1
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.solCompareResultControl1);
+            this.splitContainer3.Panel1.Controls.Add(this.ctrlLeftCompareResult);
             // 
             // splitContainer3.Panel2
             // 
@@ -115,57 +120,81 @@
             // 
             // splitContainer4.Panel1
             // 
-            this.splitContainer4.Panel1.Controls.Add(this.solCompareResultControl2);
+            this.splitContainer4.Panel1.Controls.Add(this.ctrlInterCompareResult);
             // 
             // splitContainer4.Panel2
             // 
-            this.splitContainer4.Panel2.Controls.Add(this.solCompareResultControl3);
+            this.splitContainer4.Panel2.Controls.Add(this.ctrlRightCompareResult);
             this.splitContainer4.Size = new System.Drawing.Size(549, 704);
             this.splitContainer4.SplitterDistance = 286;
             this.splitContainer4.TabIndex = 0;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BtnCompare});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(310, 25);
+            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // BtnCompare
+            // 
+            this.BtnCompare.Image = ((System.Drawing.Image)(resources.GetObject("BtnCompare.Image")));
+            this.BtnCompare.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BtnCompare.Name = "BtnCompare";
+            this.BtnCompare.Size = new System.Drawing.Size(76, 22);
+            this.BtnCompare.Text = "Compare";
+            this.BtnCompare.Click += new System.EventHandler(this.BtnCompare_Click);
             // 
             // ctrlLeftSolSelecter
             // 
             this.ctrlLeftSolSelecter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctrlLeftSolSelecter.Location = new System.Drawing.Point(0, 0);
             this.ctrlLeftSolSelecter.Name = "ctrlLeftSolSelecter";
+            this.ctrlLeftSolSelecter.OrganizationTree = null;
+            this.ctrlLeftSolSelecter.ParentControl = null;
             this.ctrlLeftSolSelecter.Size = new System.Drawing.Size(310, 327);
             this.ctrlLeftSolSelecter.TabIndex = 0;
             // 
             // ctrlRightSolSelecter
             // 
-            this.ctrlRightSolSelecter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctrlRightSolSelecter.Location = new System.Drawing.Point(0, 0);
+            this.ctrlRightSolSelecter.CausesValidation = false;
+            this.ctrlRightSolSelecter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ctrlRightSolSelecter.Location = new System.Drawing.Point(0, 25);
             this.ctrlRightSolSelecter.Name = "ctrlRightSolSelecter";
-            this.ctrlRightSolSelecter.Size = new System.Drawing.Size(310, 373);
+            this.ctrlRightSolSelecter.OrganizationTree = null;
+            this.ctrlRightSolSelecter.ParentControl = null;
+            this.ctrlRightSolSelecter.Size = new System.Drawing.Size(310, 348);
             this.ctrlRightSolSelecter.TabIndex = 0;
             // 
-            // solCompareResultControl1
+            // ctrlLeftCompareResult
             // 
-            this.solCompareResultControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.solCompareResultControl1.Header = "Difference";
-            this.solCompareResultControl1.Location = new System.Drawing.Point(0, 0);
-            this.solCompareResultControl1.Name = "solCompareResultControl1";
-            this.solCompareResultControl1.Size = new System.Drawing.Size(276, 704);
-            this.solCompareResultControl1.TabIndex = 0;
+            this.ctrlLeftCompareResult.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrlLeftCompareResult.Header = "Difference";
+            this.ctrlLeftCompareResult.Location = new System.Drawing.Point(0, 0);
+            this.ctrlLeftCompareResult.Name = "ctrlLeftCompareResult";
+            this.ctrlLeftCompareResult.Size = new System.Drawing.Size(276, 704);
+            this.ctrlLeftCompareResult.TabIndex = 0;
             // 
-            // solCompareResultControl2
+            // ctrlInterCompareResult
             // 
-            this.solCompareResultControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.solCompareResultControl2.Header = "Intersection";
-            this.solCompareResultControl2.Location = new System.Drawing.Point(0, 0);
-            this.solCompareResultControl2.Name = "solCompareResultControl2";
-            this.solCompareResultControl2.Size = new System.Drawing.Size(286, 704);
-            this.solCompareResultControl2.TabIndex = 0;
+            this.ctrlInterCompareResult.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrlInterCompareResult.Header = "Intersection";
+            this.ctrlInterCompareResult.Location = new System.Drawing.Point(0, 0);
+            this.ctrlInterCompareResult.Name = "ctrlInterCompareResult";
+            this.ctrlInterCompareResult.Size = new System.Drawing.Size(286, 704);
+            this.ctrlInterCompareResult.TabIndex = 0;
             // 
-            // solCompareResultControl3
+            // ctrlRightCompareResult
             // 
-            this.solCompareResultControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.solCompareResultControl3.Header = "Reverse Difference";
-            this.solCompareResultControl3.Location = new System.Drawing.Point(0, 0);
-            this.solCompareResultControl3.Name = "solCompareResultControl3";
-            this.solCompareResultControl3.Size = new System.Drawing.Size(259, 704);
-            this.solCompareResultControl3.TabIndex = 0;
+            this.ctrlRightCompareResult.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrlRightCompareResult.Header = "Reverse Difference";
+            this.ctrlRightCompareResult.Location = new System.Drawing.Point(0, 0);
+            this.ctrlRightCompareResult.Name = "ctrlRightCompareResult";
+            this.ctrlRightCompareResult.Size = new System.Drawing.Size(259, 704);
+            this.ctrlRightCompareResult.TabIndex = 0;
             // 
             // SolutionCompareControl
             // 
@@ -180,6 +209,7 @@
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
+            this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
@@ -190,6 +220,8 @@
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -202,8 +234,10 @@
         private System.Windows.Forms.SplitContainer splitContainer4;
         private SolutionSelecterControl ctrlLeftSolSelecter;
         private SolutionSelecterControl ctrlRightSolSelecter;
-        private SolCompareResultControl solCompareResultControl1;
-        private SolCompareResultControl solCompareResultControl2;
-        private SolCompareResultControl solCompareResultControl3;
+        private SolCompareResultControl ctrlLeftCompareResult;
+        private SolCompareResultControl ctrlInterCompareResult;
+        private SolCompareResultControl ctrlRightCompareResult;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton BtnCompare;
     }
 }

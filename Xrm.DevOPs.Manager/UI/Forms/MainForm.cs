@@ -27,6 +27,8 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
             Setting.DiffComponentsFilter = clbDiffOptions;
             Setting.DiffEntityFilter = lvEntities;
+
+            GlobalContext.OrganizationTree = tvOrgs;
         }
 
         private static Boolean isValidConnectionString(String connectionString)
@@ -55,18 +57,19 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
                 crmSol.LoadMeta(service);
 
-                var path = solNode.Text;
-
+                crmSol.Path = solNode.Text;
                 if (solNode.Parent != null)
                 {
-                    path = $"{solNode.Parent.Text}::{path}";
+                    crmSol.Path = $"{solNode.Parent.Text}::{crmSol.Path}";
                     if (solNode.Parent.Parent != null)
-                        path = $"{solNode.Parent.Parent.Text}::{path}";
+                    {
+                        crmSol.Path = $"{solNode.Parent.Parent.Text}::{crmSol.Path}";
+                        if (solNode.Parent.Parent.Parent != null)
+                            crmSol.Path = $"{solNode.Parent.Parent.Parent.Text}::{crmSol.Path}";
+                    }
                 }
-
-                crmSol.Path = path;
-
                 var solExplorer = new SolutionExplorer(crmSol.Path, imageList1);
+                crmSol.Tree = solExplorer.Tree;
                 var controls = tabControlMain.Controls.Find(crmSol.UniqueName, false);
                 if (controls.Length == 0)
                 {
@@ -74,6 +77,8 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                     tabControlMain.Controls.Add(solExplorer.Container);
                 }
                 tabControlMain.SelectTab(crmSol.UniqueName);
+
+                
             }
 
         }
@@ -96,7 +101,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                 options.Add(comp.ToString());
             }
 
-            GlobalContext._diffGenerator.Compare(options);
+            GlobalContext.DiffGenerator.Compare(options);
             DisplayDiffResult();
         }
 
@@ -108,21 +113,21 @@ namespace Xrm.DevOPs.Manager.UI.Forms
         private void CBLeftOrg_SelectedIndexChanged(object sender, EventArgs e)
         {
             var crmOrg = (CrmOrganization)((ToolStripComboBox)sender).SelectedItem;
-            GlobalContext._diffGenerator.LeftService = crmOrg.Service;
+            GlobalContext.DiffGenerator.LeftService = crmOrg.Service;
         }
 
         private void CBRightOrg_SelectedIndexChanged(object sender, EventArgs e)
         {
             var crmOrg = (CrmOrganization)((ToolStripComboBox)sender).SelectedItem;
-            GlobalContext._diffGenerator.RightService = crmOrg.Service;
+            GlobalContext.DiffGenerator.RightService = crmOrg.Service;
         }
 
 
-        private void customToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MIEntitiesLoad_Click(object sender, EventArgs e)
         {
             lvEntities.Items.Clear();
 
-            foreach (var item in GlobalContext._diffGenerator.Entities)
+            foreach (var item in GlobalContext.DiffGenerator.Entities)
             {
                 if (item.IsCustomEntity)
                     lvEntities.Items.Add(new ListViewItem()
@@ -138,7 +143,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
         {
             lvEntities.Items.Clear();
 
-            foreach (var item in GlobalContext._diffGenerator.Entities)
+            foreach (var item in GlobalContext.DiffGenerator.Entities)
             {
                 lvEntities.Items.Add(new ListViewItem()
                 {
@@ -154,7 +159,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             int count = ConfigurationManager.ConnectionStrings.Count;
             List<KeyValuePair<String, String>> filteredConnectionStrings = new List<KeyValuePair<String, String>>();
 
-            if (!GlobalContext.isOrganizationsLoaded)
+            if (!GlobalContext.IsOrganizationLoaded)
             {
                 for (int a = 0; a < count; a++)
                 {
@@ -164,7 +169,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                     {
                         CrmServiceClient conn = new CrmServiceClient(connStr);
                         var orgService = (IOrganizationService)conn.OrganizationWebProxyClient != null ? (IOrganizationService)conn.OrganizationWebProxyClient : (IOrganizationService)conn.OrganizationServiceProxy;
-                        GlobalContext._orgServices.Add(new KeyValuePair<string, IOrganizationService>(name, orgService));
+                        GlobalContext.Services.Add(new KeyValuePair<string, IOrganizationService>(name, orgService));
 
                         var crmOrg = new CrmOrganization()
                         {
@@ -193,7 +198,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                     }
                 }
 
-                GlobalContext.isOrganizationsLoaded = true;
+                GlobalContext.IsOrganizationLoaded = true;
             }
             else
             {
@@ -208,7 +213,10 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
         private void MISolCompare_Click(object sender, EventArgs e)
         {
+            ctrlSolutionCompare.OrganizationTree = GlobalContext.OrganizationTree;
+
             ctrlSolutionCompare.LoadOrgs(GlobalContext.CrmOrganizations);
+
             tabCtrlMain.SelectTab(2);
 
         }
@@ -237,12 +245,12 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
         public void LoadEntities()
         {
-            if (GlobalContext._diffGenerator.LeftService == null || GlobalContext._diffGenerator.RightService == null)
+            if (GlobalContext.DiffGenerator.LeftService == null || GlobalContext.DiffGenerator.RightService == null)
             {
                 MessageBox.Show("You need to connect to and select 2 organizations");
                 return;
             }
-            ShowEntities(GlobalContext._diffGenerator.LeftService);
+            ShowEntities(GlobalContext.DiffGenerator.LeftService);
         }
 
         public void ShowEntities(IOrganizationService organizationService)
@@ -255,7 +263,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             metaDataResponse = (RetrieveAllEntitiesResponse)organizationService.Execute(metaDataRequest);
             var entities = metaDataResponse.EntityMetadata;
 
-            GlobalContext._diffGenerator.Entities.Clear();
+            GlobalContext.DiffGenerator.Entities.Clear();
             lvEntities.Items.Clear();
 
             foreach (var e in entities)
@@ -277,7 +285,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                                 IsCustomEntity = e.IsCustomEntity.Value
 
                             };
-                            GlobalContext._diffGenerator.Entities.Add(ei);
+                            GlobalContext.DiffGenerator.Entities.Add(ei);
                             lvEntities.Items.Add(new ListViewItem()
                             {
                                 Text = dn,
@@ -299,7 +307,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
         {
             entityDiffControl1.Clear();
 
-            foreach (var entityDiff in GlobalContext._diffGenerator.DiffResult.Entities)
+            foreach (var entityDiff in GlobalContext.DiffGenerator.DiffResult.Entities)
             {
                 foreach (var attrDiff in entityDiff.Attributes)
                 {
@@ -398,7 +406,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                 }
             }
 
-            foreach (var wd in GlobalContext._diffGenerator.DiffResult.Workflows)
+            foreach (var wd in GlobalContext.DiffGenerator.DiffResult.Workflows)
             {
                 var left = wd.Left;
                 var right = wd.Right;
@@ -414,7 +422,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                 entityDiffControl1.LVWorkflows.Items.Add(item);
             }
 
-            foreach (var pd in GlobalContext._diffGenerator.DiffResult.Plugins)
+            foreach (var pd in GlobalContext.DiffGenerator.DiffResult.Plugins)
             {
                 var left = pd.Left;
                 var right = pd.Right;
@@ -430,7 +438,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             }
 
 
-            foreach (var smps in GlobalContext._diffGenerator.DiffResult.SdkMessageProcessingSteps)
+            foreach (var smps in GlobalContext.DiffGenerator.DiffResult.SdkMessageProcessingSteps)
             {
                 var left = smps.Left;
                 var right = smps.Right;
@@ -449,7 +457,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                 entityDiffControl1.LVPlugins.Items.Add(item);
             }
 
-            foreach (var temp in GlobalContext._diffGenerator.DiffResult.Templates)
+            foreach (var temp in GlobalContext.DiffGenerator.DiffResult.Templates)
             {
                 var left = temp.Left;
                 var right = temp.Right;
