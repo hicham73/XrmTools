@@ -13,12 +13,12 @@ namespace Xrm.DevOPs.Manager
 {
     public class GlobalContext
     {
-        public static List<KeyValuePair<String, IOrganizationService>> Services = new List<KeyValuePair<string, IOrganizationService>>();
-        public static List<CrmOrganization> CrmOrganizations = new List<CrmOrganization>();
-        public static bool IsOrganizationLoaded = false;
-        public static DiffGenerator DiffGenerator = new DiffGenerator();
-        public static Color LeftColor = Color.LightBlue;
-        public static Color RightColor = Color.LightGray;
-        public static TreeView OrganizationTree;
+        public List<KeyValuePair<String, IOrganizationService>> Services = new List<KeyValuePair<string, IOrganizationService>>();
+        public List<CrmOrganization> CrmOrganizations = new List<CrmOrganization>();
+        public bool IsOrganizationLoaded = false;
+        public DiffGenerator DiffGenerator = new DiffGenerator();
+        public Color LeftColor = Color.LightBlue;
+        public Color RightColor = Color.LightGray;
+        public TreeView OrganizationTree;
     }
 }

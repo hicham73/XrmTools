@@ -45,6 +45,14 @@
     <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.Platform, Version=3.17.3.35304, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.3.17.3\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.TeamFoundation.Client, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\TestTools\TeamExplorerClient\Microsoft.TeamFoundation.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Services.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Users\Admin\Downloads\nuget-bot.Microsoft.VisualStudio.Services.Common-master\nuget-bot.Microsoft.VisualStudio.Services.Common-master\net45\Microsoft.VisualStudio.Services.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xrm.Sdk, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.9.0.0.7\lib\net452\Microsoft.Xrm.Sdk.dll</HintPath>
     </Reference>
@@ -57,6 +65,9 @@
     <Reference Include="Microsoft.Xrm.Tooling.Connector, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CrmSdk.XrmTooling.CoreAssembly.9.0.0.7\lib\net452\Microsoft.Xrm.Tooling.Connector.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Activities" />
@@ -67,6 +78,9 @@
     <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
@@ -87,6 +101,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\OrganizationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OrganizationControl.Designer.cs">
+      <DependentUpon>OrganizationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OrganizationSyncControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OrganizationSyncControl.Designer.cs">
+      <DependentUpon>OrganizationSyncControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="GlobalContext.cs" />
     <Compile Include="Components\AttributeComponent.cs" />
     <Compile Include="Components\ContractTemplate.cs" />
@@ -178,12 +204,6 @@
     <Compile Include="Components\Properties\OptionSetMetadataCollectionPropertyDescriptor.cs" />
     <Compile Include="Components\Properties\OptionSetMetadataInfo.cs" />
     <Compile Include="Components\Properties\TypeConverter.cs" />
-    <Compile Include="UI\Forms\PropertiesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Forms\PropertiesForm.Designer.cs">
-      <DependentUpon>PropertiesForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -215,6 +235,12 @@
     <EmbeddedResource Include="Controls\EntityDiffControl.resx">
       <DependentUpon>EntityDiffControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OrganizationControl.resx">
+      <DependentUpon>OrganizationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OrganizationSyncControl.resx">
+      <DependentUpon>OrganizationSyncControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\SolCompareResultControl.resx">
       <DependentUpon>SolCompareResultControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -223,9 +249,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SolutionSelecterControl.resx">
       <DependentUpon>SolutionSelecterControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\PropertiesForm.resx">
-      <DependentUpon>PropertiesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

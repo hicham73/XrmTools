@@ -128,6 +128,17 @@ namespace Xrm.DevOPs.Manager.Helpers
             targetOrg.Service.Execute(impSolReq);
             Log.Text($"Solution transfered successfully.");
         }
+        public static void TransferSolutionFromFile(string filePath, CrmOrganization targetOrg)
+        {
+            byte[] exportXml = File.ReadAllBytes(filePath);
+
+            ImportSolutionRequest impSolReq = new ImportSolutionRequest()
+            {
+                CustomizationFile = exportXml
+            };
+
+            targetOrg.Service.Execute(impSolReq);
+        }
 
     }
 }

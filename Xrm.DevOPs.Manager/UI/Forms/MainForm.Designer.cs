@@ -1,4 +1,6 @@
-﻿namespace Xrm.DevOPs.Manager.UI.Forms
+﻿using Xrm.DevOPs.Controls;
+
+namespace Xrm.DevOPs.Manager.UI.Forms
 {
     partial class MainForm
     {
@@ -34,6 +36,7 @@
             this.organizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MIOrgLoad = new System.Windows.Forms.ToolStripMenuItem();
             this.MIOrgCompare = new System.Windows.Forms.ToolStripMenuItem();
+            this.MIOrgSync = new System.Windows.Forms.ToolStripMenuItem();
             this.solutionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MISolCompare = new System.Windows.Forms.ToolStripMenuItem();
             this.MISolTransfer = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,21 +49,20 @@
             this.tabOrgDiff = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.lvEntities = new System.Windows.Forms.ListView();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.customToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.entityDiffControl1 = new Xrm.DevOPs.Controls.EntityDiffControl();
             this.clbDiffOptions = new System.Windows.Forms.CheckedListBox();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
-            this.miLoadEntities = new System.Windows.Forms.ToolStripMenuItem();
             this.cbLeftOrg = new System.Windows.Forms.ToolStripComboBox();
-            this.menuItemDiff = new System.Windows.Forms.ToolStripMenuItem();
             this.cbRightOrg = new System.Windows.Forms.ToolStripComboBox();
             this.MIOptions = new System.Windows.Forms.ToolStripMenuItem();
+            this.miLoadEntities = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemDiff = new System.Windows.Forms.ToolStripMenuItem();
             this.tabSolCompare = new System.Windows.Forms.TabPage();
             this.ctrlSolutionCompare = new Xrm.DevOPs.Controls.SolutionCompareControl();
+            this.tabSyncTool = new System.Windows.Forms.TabPage();
+            this.BtnSyncOrgs = new System.Windows.Forms.Button();
+            this.BtnTransfer = new System.Windows.Forms.Button();
+            this.orgSyncControl = new Xrm.DevOPs.Manager.Controls.OrganizationSyncControl();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -73,14 +75,14 @@
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.tabSolCompare.SuspendLayout();
+            this.tabSyncTool.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.Control;
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.organizationToolStripMenuItem,
             this.solutionToolStripMenuItem});
@@ -94,45 +96,55 @@
             // 
             this.organizationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MIOrgLoad,
-            this.MIOrgCompare});
+            this.MIOrgCompare,
+            this.MIOrgSync});
+            this.organizationToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.organizationToolStripMenuItem.Name = "organizationToolStripMenuItem";
-            this.organizationToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
+            this.organizationToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
             this.organizationToolStripMenuItem.Text = "Organization";
             // 
             // MIOrgLoad
             // 
             this.MIOrgLoad.Name = "MIOrgLoad";
-            this.MIOrgLoad.Size = new System.Drawing.Size(123, 22);
+            this.MIOrgLoad.Size = new System.Drawing.Size(124, 22);
             this.MIOrgLoad.Text = "Load";
             this.MIOrgLoad.Click += new System.EventHandler(this.MIOrgLoad_Click);
             // 
             // MIOrgCompare
             // 
             this.MIOrgCompare.Name = "MIOrgCompare";
-            this.MIOrgCompare.Size = new System.Drawing.Size(123, 22);
+            this.MIOrgCompare.Size = new System.Drawing.Size(124, 22);
             this.MIOrgCompare.Text = "Compare";
             this.MIOrgCompare.Click += new System.EventHandler(this.MIOrgCompare_Click);
+            // 
+            // MIOrgSync
+            // 
+            this.MIOrgSync.Name = "MIOrgSync";
+            this.MIOrgSync.Size = new System.Drawing.Size(124, 22);
+            this.MIOrgSync.Text = "Sync";
+            this.MIOrgSync.Click += new System.EventHandler(this.MIOrgSync_Click);
             // 
             // solutionToolStripMenuItem
             // 
             this.solutionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MISolCompare,
             this.MISolTransfer});
+            this.solutionToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.solutionToolStripMenuItem.Name = "solutionToolStripMenuItem";
-            this.solutionToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.solutionToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.solutionToolStripMenuItem.Text = "Solution";
             // 
             // MISolCompare
             // 
             this.MISolCompare.Name = "MISolCompare";
-            this.MISolCompare.Size = new System.Drawing.Size(123, 22);
+            this.MISolCompare.Size = new System.Drawing.Size(124, 22);
             this.MISolCompare.Text = "Compare";
             this.MISolCompare.Click += new System.EventHandler(this.MISolCompare_Click);
             // 
             // MISolTransfer
             // 
             this.MISolTransfer.Name = "MISolTransfer";
-            this.MISolTransfer.Size = new System.Drawing.Size(123, 22);
+            this.MISolTransfer.Size = new System.Drawing.Size(124, 22);
             this.MISolTransfer.Text = "Transfer";
             this.MISolTransfer.Click += new System.EventHandler(this.MISolTransfer_Click);
             // 
@@ -368,6 +380,7 @@
             this.tabCtrlMain.Controls.Add(this.tabDeploymentExplorer);
             this.tabCtrlMain.Controls.Add(this.tabOrgDiff);
             this.tabCtrlMain.Controls.Add(this.tabSolCompare);
+            this.tabCtrlMain.Controls.Add(this.tabSyncTool);
             this.tabCtrlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabCtrlMain.Location = new System.Drawing.Point(0, 24);
             this.tabCtrlMain.Name = "tabCtrlMain";
@@ -408,7 +421,6 @@
             // splitContainer3.Panel1
             // 
             this.splitContainer3.Panel1.Controls.Add(this.lvEntities);
-            this.splitContainer3.Panel1.Controls.Add(this.toolStrip1);
             // 
             // splitContainer3.Panel2
             // 
@@ -423,59 +435,13 @@
             // 
             this.lvEntities.CheckBoxes = true;
             this.lvEntities.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvEntities.Location = new System.Drawing.Point(0, 25);
+            this.lvEntities.Location = new System.Drawing.Point(0, 0);
             this.lvEntities.Name = "lvEntities";
-            this.lvEntities.Size = new System.Drawing.Size(120, 673);
+            this.lvEntities.Size = new System.Drawing.Size(120, 698);
             this.lvEntities.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lvEntities.TabIndex = 0;
             this.lvEntities.UseCompatibleStateImageBehavior = false;
             this.lvEntities.View = System.Windows.Forms.View.SmallIcon;
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripDropDownButton1,
-            this.toolStripButton1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(120, 25);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripDropDownButton1
-            // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allToolStripMenuItem,
-            this.customToolStripMenuItem});
-            this.toolStripDropDownButton1.Image = global::Xrm.DevOPs.Manager.Properties.Resources.ico_16_9801;
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 22);
-            this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
-            // 
-            // allToolStripMenuItem
-            // 
-            this.allToolStripMenuItem.Name = "allToolStripMenuItem";
-            this.allToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.allToolStripMenuItem.Text = "All";
-            this.allToolStripMenuItem.Click += new System.EventHandler(this.allToolStripMenuItem_Click);
-            // 
-            // customToolStripMenuItem
-            // 
-            this.customToolStripMenuItem.Name = "customToolStripMenuItem";
-            this.customToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.customToolStripMenuItem.Text = "Custom";
-            this.customToolStripMenuItem.Click += new System.EventHandler(this.MIEntitiesLoad_Click);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(42, 22);
-            this.toolStripButton1.Text = "Select";
             // 
             // entityDiffControl1
             // 
@@ -489,7 +455,7 @@
             // 
             // clbDiffOptions
             // 
-            this.clbDiffOptions.BackColor = System.Drawing.Color.Azure;
+            this.clbDiffOptions.BackColor = System.Drawing.Color.WhiteSmoke;
             this.clbDiffOptions.Dock = System.Windows.Forms.DockStyle.Top;
             this.clbDiffOptions.FormattingEnabled = true;
             this.clbDiffOptions.Items.AddRange(new object[] {
@@ -517,41 +483,27 @@
             this.clbDiffOptions.Name = "clbDiffOptions";
             this.clbDiffOptions.Size = new System.Drawing.Size(1046, 49);
             this.clbDiffOptions.TabIndex = 1;
+            this.clbDiffOptions.Visible = false;
             // 
             // menuStrip2
             // 
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miLoadEntities,
             this.cbLeftOrg,
-            this.menuItemDiff,
             this.cbRightOrg,
-            this.MIOptions});
+            this.MIOptions,
+            this.miLoadEntities,
+            this.menuItemDiff});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Size = new System.Drawing.Size(1046, 27);
             this.menuStrip2.TabIndex = 0;
             this.menuStrip2.Text = "menuStrip2";
             // 
-            // miLoadEntities
-            // 
-            this.miLoadEntities.Image = global::Xrm.DevOPs.Manager.Properties.Resources.ico_16_9801;
-            this.miLoadEntities.Name = "miLoadEntities";
-            this.miLoadEntities.Size = new System.Drawing.Size(102, 23);
-            this.miLoadEntities.Text = "Load Entities";
-            this.miLoadEntities.Click += new System.EventHandler(this.MILoadEntities_Click);
-            // 
             // cbLeftOrg
             // 
             this.cbLeftOrg.Name = "cbLeftOrg";
             this.cbLeftOrg.Size = new System.Drawing.Size(250, 23);
             this.cbLeftOrg.SelectedIndexChanged += new System.EventHandler(this.CBLeftOrg_SelectedIndexChanged);
-            // 
-            // menuItemDiff
-            // 
-            this.menuItemDiff.Name = "menuItemDiff";
-            this.menuItemDiff.Size = new System.Drawing.Size(68, 23);
-            this.menuItemDiff.Text = "Compare";
-            this.menuItemDiff.Click += new System.EventHandler(this.MIDiff_Click);
             // 
             // cbRightOrg
             // 
@@ -561,10 +513,27 @@
             // 
             // MIOptions
             // 
+            this.MIOptions.Image = global::Xrm.DevOPs.Manager.Properties.Resources.ico_16_9300;
             this.MIOptions.Name = "MIOptions";
-            this.MIOptions.Size = new System.Drawing.Size(61, 23);
+            this.MIOptions.Size = new System.Drawing.Size(77, 23);
             this.MIOptions.Text = "Options";
             this.MIOptions.Click += new System.EventHandler(this.MIOptions_Click);
+            // 
+            // miLoadEntities
+            // 
+            this.miLoadEntities.Image = global::Xrm.DevOPs.Manager.Properties.Resources.ico_16_9801;
+            this.miLoadEntities.Name = "miLoadEntities";
+            this.miLoadEntities.Size = new System.Drawing.Size(102, 23);
+            this.miLoadEntities.Text = "Load Entities";
+            this.miLoadEntities.Click += new System.EventHandler(this.MILoadEntities_Click);
+            // 
+            // menuItemDiff
+            // 
+            this.menuItemDiff.Image = global::Xrm.DevOPs.Manager.Properties.Resources.ico_16_1048;
+            this.menuItemDiff.Name = "menuItemDiff";
+            this.menuItemDiff.Size = new System.Drawing.Size(84, 23);
+            this.menuItemDiff.Text = "Compare";
+            this.menuItemDiff.Click += new System.EventHandler(this.MIDiff_Click);
             // 
             // tabSolCompare
             // 
@@ -581,8 +550,47 @@
             this.ctrlSolutionCompare.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ctrlSolutionCompare.Location = new System.Drawing.Point(0, 0);
             this.ctrlSolutionCompare.Name = "ctrlSolutionCompare";
+            this.ctrlSolutionCompare.OrganizationTree = null;
             this.ctrlSolutionCompare.Size = new System.Drawing.Size(1176, 704);
             this.ctrlSolutionCompare.TabIndex = 0;
+            // 
+            // tabSyncTool
+            // 
+            this.tabSyncTool.Controls.Add(this.orgSyncControl);
+            this.tabSyncTool.Controls.Add(this.BtnSyncOrgs);
+            this.tabSyncTool.Controls.Add(this.BtnTransfer);
+            this.tabSyncTool.Location = new System.Drawing.Point(4, 22);
+            this.tabSyncTool.Name = "tabSyncTool";
+            this.tabSyncTool.Size = new System.Drawing.Size(1176, 704);
+            this.tabSyncTool.TabIndex = 3;
+            this.tabSyncTool.Text = "Sync Tool";
+            this.tabSyncTool.UseVisualStyleBackColor = true;
+            // 
+            // BtnSyncOrgs
+            // 
+            this.BtnSyncOrgs.Location = new System.Drawing.Point(552, 640);
+            this.BtnSyncOrgs.Name = "BtnSyncOrgs";
+            this.BtnSyncOrgs.Size = new System.Drawing.Size(157, 23);
+            this.BtnSyncOrgs.TabIndex = 8;
+            this.BtnSyncOrgs.Text = "Sync. Organizations";
+            this.BtnSyncOrgs.UseVisualStyleBackColor = true;
+            // 
+            // BtnTransfer
+            // 
+            this.BtnTransfer.Location = new System.Drawing.Point(445, 640);
+            this.BtnTransfer.Name = "BtnTransfer";
+            this.BtnTransfer.Size = new System.Drawing.Size(101, 23);
+            this.BtnTransfer.TabIndex = 7;
+            this.BtnTransfer.Text = "Transfer";
+            this.BtnTransfer.UseVisualStyleBackColor = true;
+            // 
+            // orgSyncControl
+            // 
+            this.orgSyncControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.orgSyncControl.Location = new System.Drawing.Point(0, 0);
+            this.orgSyncControl.Name = "orgSyncControl";
+            this.orgSyncControl.Size = new System.Drawing.Size(1176, 704);
+            this.orgSyncControl.TabIndex = 9;
             // 
             // MainForm
             // 
@@ -604,16 +612,14 @@
             this.tabDeploymentExplorer.ResumeLayout(false);
             this.tabOrgDiff.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel1.PerformLayout();
             this.splitContainer3.Panel2.ResumeLayout(false);
             this.splitContainer3.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
             this.tabSolCompare.ResumeLayout(false);
+            this.tabSyncTool.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -632,26 +638,26 @@
         private System.Windows.Forms.ListView lvEntities;
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem menuItemDiff;
-        private Controls.EntityDiffControl entityDiffControl1;
+        private EntityDiffControl entityDiffControl1;
         private System.Windows.Forms.ToolStripMenuItem miLoadEntities;
         private System.Windows.Forms.CheckedListBox clbDiffOptions;
         private System.Windows.Forms.ToolStripComboBox cbLeftOrg;
         private System.Windows.Forms.ToolStripComboBox cbRightOrg;
         private System.Windows.Forms.ToolStripMenuItem MIOptions;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
-        private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem customToolStripMenuItem;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.TabPage tabSolCompare;
-        private Controls.SolutionCompareControl ctrlSolutionCompare;
+        private SolutionCompareControl ctrlSolutionCompare;
         private System.Windows.Forms.ToolStripMenuItem organizationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MIOrgLoad;
         private System.Windows.Forms.ToolStripMenuItem MIOrgCompare;
         private System.Windows.Forms.ToolStripMenuItem solutionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MISolCompare;
         private System.Windows.Forms.ToolStripMenuItem MISolTransfer;
+        private System.Windows.Forms.TabPage tabSyncTool;
+        private System.Windows.Forms.Button BtnTransfer;
+        private System.Windows.Forms.Button BtnSyncOrgs;
+        private System.Windows.Forms.ToolStripMenuItem MIOrgSync;
+        private Controls.OrganizationSyncControl orgSyncControl;
     }
 }
 

@@ -19,6 +19,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
     {
 
         CrmOrganization sourceOrg, targetOrg;
+        public GlobalContext Context { get; set; }
         public SolutionTransferDlg()
         {
             InitializeComponent();
@@ -26,7 +27,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
         internal void LoadForm()
         {
-            foreach (var crmOrg in GlobalContext.CrmOrganizations)
+            foreach (var crmOrg in Context.CrmOrganizations)
             {
                 cbFromOrg.Items.Add(crmOrg);
                 cbToOrg.Items.Add(crmOrg);
