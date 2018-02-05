@@ -279,6 +279,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Release\Xrm.DevOPs.Manager.exe.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -489,9 +490,38 @@
     <Content Include="images\icons\tab_line.gif" />
     <Content Include="images\icons\translations.gif" />
     <Content Include="images\icons\transparent_spacer.gif" />
+    <Content Include="Release\Microsoft.Crm.Sdk.Proxy.dll" />
+    <Content Include="Release\Microsoft.Crm.Sdk.Proxy.xml" />
+    <Content Include="Release\Microsoft.IdentityModel.Clients.ActiveDirectory.dll" />
+    <Content Include="Release\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll" />
+    <Content Include="Release\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.xml" />
+    <Content Include="Release\Microsoft.IdentityModel.Clients.ActiveDirectory.xml" />
+    <Content Include="Release\Microsoft.TeamFoundation.Client.dll" />
+    <Content Include="Release\Microsoft.TeamFoundation.Common.dll" />
+    <Content Include="Release\Microsoft.TeamFoundation.Core.WebApi.dll" />
+    <Content Include="Release\Microsoft.VisualStudio.Services.Client.Interactive.dll" />
+    <Content Include="Release\Microsoft.VisualStudio.Services.Common.dll" />
+    <Content Include="Release\Microsoft.VisualStudio.Services.WebApi.dll" />
+    <Content Include="Release\Microsoft.Xrm.Sdk.Deployment.dll" />
+    <Content Include="Release\Microsoft.Xrm.Sdk.Deployment.xml" />
+    <Content Include="Release\Microsoft.Xrm.Sdk.dll" />
+    <Content Include="Release\Microsoft.Xrm.Sdk.Workflow.dll" />
+    <Content Include="Release\Microsoft.Xrm.Sdk.Workflow.xml" />
+    <Content Include="Release\Microsoft.Xrm.Sdk.xml" />
+    <Content Include="Release\Microsoft.Xrm.Tooling.Connector.dll" />
+    <Content Include="Release\Microsoft.Xrm.Tooling.Connector.xml" />
+    <Content Include="Release\Newtonsoft.Json.dll" />
+    <Content Include="Release\Newtonsoft.Json.xml" />
+    <Content Include="Release\System.Net.Http.Formatting.dll" />
+    <Content Include="Release\System.Net.Http.Formatting.xml" />
+    <Content Include="Release\Xrm.DevOPs.Manager.exe" />
+    <Content Include="Release\Xrm.DevOPs.Manager.pdb" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="images\other\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(TargetDir)*.*" "$(ProjectDir)Release\"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
