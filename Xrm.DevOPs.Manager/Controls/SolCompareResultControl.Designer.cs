@@ -53,9 +53,10 @@
             // lblHeader
             // 
             this.lblHeader.AutoSize = true;
-            this.lblHeader.BackColor = System.Drawing.Color.Black;
+            this.lblHeader.BackColor = System.Drawing.Color.LightSteelBlue;
             this.lblHeader.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblHeader.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.lblHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeader.ForeColor = System.Drawing.Color.Black;
             this.lblHeader.Location = new System.Drawing.Point(3, 0);
             this.lblHeader.Name = "lblHeader";
             this.lblHeader.Size = new System.Drawing.Size(302, 20);

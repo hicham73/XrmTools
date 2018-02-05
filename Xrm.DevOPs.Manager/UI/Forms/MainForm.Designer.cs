@@ -34,7 +34,6 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.organizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MIOrgLoad = new System.Windows.Forms.ToolStripMenuItem();
             this.MIOrgCompare = new System.Windows.Forms.ToolStripMenuItem();
             this.MIOrgSync = new System.Windows.Forms.ToolStripMenuItem();
             this.solutionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,15 +59,21 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.tabSolCompare = new System.Windows.Forms.TabPage();
             this.ctrlSolutionCompare = new Xrm.DevOPs.Controls.SolutionCompareControl();
             this.tabSyncTool = new System.Windows.Forms.TabPage();
+            this.orgSyncControl = new Xrm.DevOPs.Manager.Controls.OrganizationSyncControl();
             this.BtnSyncOrgs = new System.Windows.Forms.Button();
             this.BtnTransfer = new System.Windows.Forms.Button();
-            this.orgSyncControl = new Xrm.DevOPs.Manager.Controls.OrganizationSyncControl();
+            this.pbHome = new System.Windows.Forms.PictureBox();
+            this.MIFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.MILoadOrganizations = new System.Windows.Forms.ToolStripMenuItem();
+            this.MIExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MICloseActiveWindow = new System.Windows.Forms.ToolStripMenuItem();
+            this.MICloseAllWindows = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.tabCtrlMain.SuspendLayout();
             this.tabDeploymentExplorer.SuspendLayout();
             this.tabOrgDiff.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
@@ -78,49 +83,47 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.menuStrip2.SuspendLayout();
             this.tabSolCompare.SuspendLayout();
             this.tabSyncTool.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbHome)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MIFile,
             this.organizationToolStripMenuItem,
-            this.solutionToolStripMenuItem});
+            this.solutionToolStripMenuItem,
+            this.windowsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.menuStrip1.Size = new System.Drawing.Size(1184, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // organizationToolStripMenuItem
             // 
+            this.organizationToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
             this.organizationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MIOrgLoad,
             this.MIOrgCompare,
             this.MIOrgSync});
             this.organizationToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.organizationToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.organizationToolStripMenuItem.Name = "organizationToolStripMenuItem";
             this.organizationToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
             this.organizationToolStripMenuItem.Text = "Organization";
             // 
-            // MIOrgLoad
-            // 
-            this.MIOrgLoad.Name = "MIOrgLoad";
-            this.MIOrgLoad.Size = new System.Drawing.Size(124, 22);
-            this.MIOrgLoad.Text = "Load";
-            this.MIOrgLoad.Click += new System.EventHandler(this.MIOrgLoad_Click);
-            // 
             // MIOrgCompare
             // 
             this.MIOrgCompare.Name = "MIOrgCompare";
-            this.MIOrgCompare.Size = new System.Drawing.Size(124, 22);
+            this.MIOrgCompare.Size = new System.Drawing.Size(152, 22);
             this.MIOrgCompare.Text = "Compare";
-            this.MIOrgCompare.Click += new System.EventHandler(this.MIOrgCompare_Click);
+            this.MIOrgCompare.Click += new System.EventHandler(this.MIOrgDiff_Click);
             // 
             // MIOrgSync
             // 
             this.MIOrgSync.Name = "MIOrgSync";
-            this.MIOrgSync.Size = new System.Drawing.Size(124, 22);
+            this.MIOrgSync.Size = new System.Drawing.Size(152, 22);
             this.MIOrgSync.Text = "Sync";
             this.MIOrgSync.Click += new System.EventHandler(this.MIOrgSync_Click);
             // 
@@ -130,6 +133,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.MISolCompare,
             this.MISolTransfer});
             this.solutionToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.solutionToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.solutionToolStripMenuItem.Name = "solutionToolStripMenuItem";
             this.solutionToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.solutionToolStripMenuItem.Text = "Solution";
@@ -137,14 +141,14 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             // MISolCompare
             // 
             this.MISolCompare.Name = "MISolCompare";
-            this.MISolCompare.Size = new System.Drawing.Size(124, 22);
+            this.MISolCompare.Size = new System.Drawing.Size(152, 22);
             this.MISolCompare.Text = "Compare";
             this.MISolCompare.Click += new System.EventHandler(this.MISolCompare_Click);
             // 
             // MISolTransfer
             // 
             this.MISolTransfer.Name = "MISolTransfer";
-            this.MISolTransfer.Size = new System.Drawing.Size(124, 22);
+            this.MISolTransfer.Size = new System.Drawing.Size(152, 22);
             this.MISolTransfer.Text = "Transfer";
             this.MISolTransfer.Click += new System.EventHandler(this.MISolTransfer_Click);
             // 
@@ -161,7 +165,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControlMain);
-            this.splitContainer1.Size = new System.Drawing.Size(1170, 698);
+            this.splitContainer1.Size = new System.Drawing.Size(1170, 824);
             this.splitContainer1.SplitterDistance = 170;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -170,7 +174,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.tvOrgs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvOrgs.Location = new System.Drawing.Point(0, 0);
             this.tvOrgs.Name = "tvOrgs";
-            this.tvOrgs.Size = new System.Drawing.Size(170, 698);
+            this.tvOrgs.Size = new System.Drawing.Size(170, 824);
             this.tvOrgs.TabIndex = 0;
             this.tvOrgs.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TVOrgs_AfterSelect);
             // 
@@ -181,7 +185,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.tabControlMain.Location = new System.Drawing.Point(0, 0);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(996, 698);
+            this.tabControlMain.Size = new System.Drawing.Size(996, 824);
             this.tabControlMain.TabIndex = 0;
             // 
             // imageList1
@@ -377,38 +381,34 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             // 
             // tabCtrlMain
             // 
-            this.tabCtrlMain.Controls.Add(this.tabDeploymentExplorer);
-            this.tabCtrlMain.Controls.Add(this.tabOrgDiff);
-            this.tabCtrlMain.Controls.Add(this.tabSolCompare);
-            this.tabCtrlMain.Controls.Add(this.tabSyncTool);
             this.tabCtrlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabCtrlMain.Location = new System.Drawing.Point(0, 24);
+            this.tabCtrlMain.Location = new System.Drawing.Point(0, 0);
             this.tabCtrlMain.Name = "tabCtrlMain";
             this.tabCtrlMain.SelectedIndex = 0;
-            this.tabCtrlMain.Size = new System.Drawing.Size(1184, 730);
+            this.tabCtrlMain.Size = new System.Drawing.Size(1184, 880);
             this.tabCtrlMain.TabIndex = 2;
             // 
             // tabDeploymentExplorer
             // 
-            this.tabDeploymentExplorer.BackColor = System.Drawing.Color.SteelBlue;
+            this.tabDeploymentExplorer.BackColor = System.Drawing.Color.SlateGray;
             this.tabDeploymentExplorer.Controls.Add(this.splitContainer1);
             this.tabDeploymentExplorer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabDeploymentExplorer.Location = new System.Drawing.Point(4, 22);
             this.tabDeploymentExplorer.Name = "tabDeploymentExplorer";
             this.tabDeploymentExplorer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDeploymentExplorer.Size = new System.Drawing.Size(1176, 704);
+            this.tabDeploymentExplorer.Size = new System.Drawing.Size(1176, 830);
             this.tabDeploymentExplorer.TabIndex = 0;
             this.tabDeploymentExplorer.Text = "Deployment Explorer";
             // 
             // tabOrgDiff
             // 
-            this.tabOrgDiff.BackColor = System.Drawing.Color.SlateGray;
+            this.tabOrgDiff.BackColor = System.Drawing.Color.White;
             this.tabOrgDiff.Controls.Add(this.splitContainer3);
             this.tabOrgDiff.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabOrgDiff.Location = new System.Drawing.Point(4, 22);
             this.tabOrgDiff.Name = "tabOrgDiff";
             this.tabOrgDiff.Padding = new System.Windows.Forms.Padding(3);
-            this.tabOrgDiff.Size = new System.Drawing.Size(1176, 704);
+            this.tabOrgDiff.Size = new System.Drawing.Size(1176, 830);
             this.tabOrgDiff.TabIndex = 1;
             this.tabOrgDiff.Text = "Organization Diff.";
             // 
@@ -427,7 +427,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.splitContainer3.Panel2.Controls.Add(this.entityDiffControl1);
             this.splitContainer3.Panel2.Controls.Add(this.clbDiffOptions);
             this.splitContainer3.Panel2.Controls.Add(this.menuStrip2);
-            this.splitContainer3.Size = new System.Drawing.Size(1170, 698);
+            this.splitContainer3.Size = new System.Drawing.Size(1170, 824);
             this.splitContainer3.SplitterDistance = 120;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -437,7 +437,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.lvEntities.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvEntities.Location = new System.Drawing.Point(0, 0);
             this.lvEntities.Name = "lvEntities";
-            this.lvEntities.Size = new System.Drawing.Size(120, 698);
+            this.lvEntities.Size = new System.Drawing.Size(120, 824);
             this.lvEntities.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lvEntities.TabIndex = 0;
             this.lvEntities.UseCompatibleStateImageBehavior = false;
@@ -446,11 +446,12 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             // entityDiffControl1
             // 
             this.entityDiffControl1.AutoScroll = true;
+            this.entityDiffControl1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.entityDiffControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.entityDiffControl1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.entityDiffControl1.ForeColor = System.Drawing.Color.LightSlateGray;
             this.entityDiffControl1.Location = new System.Drawing.Point(0, 76);
             this.entityDiffControl1.Name = "entityDiffControl1";
-            this.entityDiffControl1.Size = new System.Drawing.Size(1046, 622);
+            this.entityDiffControl1.Size = new System.Drawing.Size(1046, 748);
             this.entityDiffControl1.TabIndex = 2;
             // 
             // clbDiffOptions
@@ -487,6 +488,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             // 
             // menuStrip2
             // 
+            this.menuStrip2.BackColor = System.Drawing.Color.Gainsboro;
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cbLeftOrg,
             this.cbRightOrg,
@@ -537,13 +539,13 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             // 
             // tabSolCompare
             // 
+            this.tabSolCompare.BackColor = System.Drawing.Color.White;
             this.tabSolCompare.Controls.Add(this.ctrlSolutionCompare);
             this.tabSolCompare.Location = new System.Drawing.Point(4, 22);
             this.tabSolCompare.Name = "tabSolCompare";
-            this.tabSolCompare.Size = new System.Drawing.Size(1176, 704);
+            this.tabSolCompare.Size = new System.Drawing.Size(1176, 830);
             this.tabSolCompare.TabIndex = 2;
             this.tabSolCompare.Text = "Solution Compare";
-            this.tabSolCompare.UseVisualStyleBackColor = true;
             // 
             // ctrlSolutionCompare
             // 
@@ -551,20 +553,28 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.ctrlSolutionCompare.Location = new System.Drawing.Point(0, 0);
             this.ctrlSolutionCompare.Name = "ctrlSolutionCompare";
             this.ctrlSolutionCompare.OrganizationTree = null;
-            this.ctrlSolutionCompare.Size = new System.Drawing.Size(1176, 704);
+            this.ctrlSolutionCompare.Size = new System.Drawing.Size(1176, 830);
             this.ctrlSolutionCompare.TabIndex = 0;
             // 
             // tabSyncTool
             // 
+            this.tabSyncTool.BackColor = System.Drawing.Color.White;
             this.tabSyncTool.Controls.Add(this.orgSyncControl);
             this.tabSyncTool.Controls.Add(this.BtnSyncOrgs);
             this.tabSyncTool.Controls.Add(this.BtnTransfer);
             this.tabSyncTool.Location = new System.Drawing.Point(4, 22);
             this.tabSyncTool.Name = "tabSyncTool";
-            this.tabSyncTool.Size = new System.Drawing.Size(1176, 704);
+            this.tabSyncTool.Size = new System.Drawing.Size(1176, 830);
             this.tabSyncTool.TabIndex = 3;
             this.tabSyncTool.Text = "Sync Tool";
-            this.tabSyncTool.UseVisualStyleBackColor = true;
+            // 
+            // orgSyncControl
+            // 
+            this.orgSyncControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.orgSyncControl.Location = new System.Drawing.Point(0, 0);
+            this.orgSyncControl.Name = "orgSyncControl";
+            this.orgSyncControl.Size = new System.Drawing.Size(1176, 830);
+            this.orgSyncControl.TabIndex = 9;
             // 
             // BtnSyncOrgs
             // 
@@ -584,21 +594,75 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.BtnTransfer.Text = "Transfer";
             this.BtnTransfer.UseVisualStyleBackColor = true;
             // 
-            // orgSyncControl
+            // pbHome
             // 
-            this.orgSyncControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.orgSyncControl.Location = new System.Drawing.Point(0, 0);
-            this.orgSyncControl.Name = "orgSyncControl";
-            this.orgSyncControl.Size = new System.Drawing.Size(1176, 704);
-            this.orgSyncControl.TabIndex = 9;
+            this.pbHome.BackColor = System.Drawing.Color.LightGray;
+            this.pbHome.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbHome.BackgroundImage")));
+            this.pbHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pbHome.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbHome.InitialImage = null;
+            this.pbHome.Location = new System.Drawing.Point(0, 24);
+            this.pbHome.Name = "pbHome";
+            this.pbHome.Size = new System.Drawing.Size(1184, 856);
+            this.pbHome.TabIndex = 3;
+            this.pbHome.TabStop = false;
+            // 
+            // MIFile
+            // 
+            this.MIFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MILoadOrganizations,
+            this.MIExit});
+            this.MIFile.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.MIFile.Name = "MIFile";
+            this.MIFile.Size = new System.Drawing.Size(38, 20);
+            this.MIFile.Text = "File";
+            // 
+            // MILoadOrganizations
+            // 
+            this.MILoadOrganizations.Name = "MILoadOrganizations";
+            this.MILoadOrganizations.Size = new System.Drawing.Size(179, 22);
+            this.MILoadOrganizations.Text = "Load Organizations";
+            this.MILoadOrganizations.Click += new System.EventHandler(this.MILoadOrganizations_Click);
+            // 
+            // MIExit
+            // 
+            this.MIExit.Name = "MIExit";
+            this.MIExit.Size = new System.Drawing.Size(179, 22);
+            this.MIExit.Text = "Exit";
+            this.MIExit.Click += new System.EventHandler(this.MIExit_Click);
+            // 
+            // windowsToolStripMenuItem
+            // 
+            this.windowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MICloseActiveWindow,
+            this.MICloseAllWindows});
+            this.windowsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
+            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.windowsToolStripMenuItem.Text = "Windows";
+            // 
+            // MICloseActiveWindow
+            // 
+            this.MICloseActiveWindow.Name = "MICloseActiveWindow";
+            this.MICloseActiveWindow.Size = new System.Drawing.Size(152, 22);
+            this.MICloseActiveWindow.Text = "Close Active";
+            this.MICloseActiveWindow.Click += new System.EventHandler(this.MICloseActiveWindow_Click);
+            // 
+            // MICloseAllWindows
+            // 
+            this.MICloseAllWindows.Name = "MICloseAllWindows";
+            this.MICloseAllWindows.Size = new System.Drawing.Size(152, 22);
+            this.MICloseAllWindows.Text = "Close All";
+            this.MICloseAllWindows.Click += new System.EventHandler(this.MICloseAllWindows_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1184, 754);
-            this.Controls.Add(this.tabCtrlMain);
+            this.ClientSize = new System.Drawing.Size(1184, 880);
+            this.Controls.Add(this.pbHome);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.tabCtrlMain);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "CRM DevOPs Manager";
@@ -608,7 +672,6 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.tabCtrlMain.ResumeLayout(false);
             this.tabDeploymentExplorer.ResumeLayout(false);
             this.tabOrgDiff.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
@@ -620,6 +683,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.menuStrip2.PerformLayout();
             this.tabSolCompare.ResumeLayout(false);
             this.tabSyncTool.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbHome)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -648,7 +712,6 @@ namespace Xrm.DevOPs.Manager.UI.Forms
         private System.Windows.Forms.TabPage tabSolCompare;
         private SolutionCompareControl ctrlSolutionCompare;
         private System.Windows.Forms.ToolStripMenuItem organizationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem MIOrgLoad;
         private System.Windows.Forms.ToolStripMenuItem MIOrgCompare;
         private System.Windows.Forms.ToolStripMenuItem solutionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MISolCompare;
@@ -658,6 +721,13 @@ namespace Xrm.DevOPs.Manager.UI.Forms
         private System.Windows.Forms.Button BtnSyncOrgs;
         private System.Windows.Forms.ToolStripMenuItem MIOrgSync;
         private Controls.OrganizationSyncControl orgSyncControl;
+        private System.Windows.Forms.PictureBox pbHome;
+        private System.Windows.Forms.ToolStripMenuItem MIFile;
+        private System.Windows.Forms.ToolStripMenuItem MILoadOrganizations;
+        private System.Windows.Forms.ToolStripMenuItem MIExit;
+        private System.Windows.Forms.ToolStripMenuItem windowsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MICloseActiveWindow;
+        private System.Windows.Forms.ToolStripMenuItem MICloseAllWindows;
     }
 }
 

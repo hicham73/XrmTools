@@ -31,13 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SolutionCompareControl));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.BtnCompare = new System.Windows.Forms.ToolStripButton();
             this.ctrlLeftSolSelecter = new Xrm.DevOPs.Controls.SolutionSelecterControl();
             this.ctrlRightSolSelecter = new Xrm.DevOPs.Controls.SolutionSelecterControl();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.BtnCompare = new System.Windows.Forms.ToolStripButton();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.ctrlLeftCompareResult = new Xrm.DevOPs.Controls.SolCompareResultControl();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.ctrlInterCompareResult = new Xrm.DevOPs.Controls.SolCompareResultControl();
             this.ctrlRightCompareResult = new Xrm.DevOPs.Controls.SolCompareResultControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -48,6 +48,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
@@ -56,7 +57,6 @@
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -95,39 +95,26 @@
             this.splitContainer2.SplitterDistance = 327;
             this.splitContainer2.TabIndex = 0;
             // 
-            // splitContainer3
+            // ctrlLeftSolSelecter
             // 
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Name = "splitContainer3";
+            this.ctrlLeftSolSelecter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrlLeftSolSelecter.Location = new System.Drawing.Point(0, 0);
+            this.ctrlLeftSolSelecter.Name = "ctrlLeftSolSelecter";
+            this.ctrlLeftSolSelecter.OrganizationTree = null;
+            this.ctrlLeftSolSelecter.ParentControl = null;
+            this.ctrlLeftSolSelecter.Size = new System.Drawing.Size(310, 327);
+            this.ctrlLeftSolSelecter.TabIndex = 0;
             // 
-            // splitContainer3.Panel1
+            // ctrlRightSolSelecter
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.ctrlLeftCompareResult);
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.Controls.Add(this.splitContainer4);
-            this.splitContainer3.Size = new System.Drawing.Size(829, 704);
-            this.splitContainer3.SplitterDistance = 276;
-            this.splitContainer3.TabIndex = 0;
-            // 
-            // splitContainer4
-            // 
-            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer4.Name = "splitContainer4";
-            // 
-            // splitContainer4.Panel1
-            // 
-            this.splitContainer4.Panel1.Controls.Add(this.ctrlInterCompareResult);
-            // 
-            // splitContainer4.Panel2
-            // 
-            this.splitContainer4.Panel2.Controls.Add(this.ctrlRightCompareResult);
-            this.splitContainer4.Size = new System.Drawing.Size(549, 704);
-            this.splitContainer4.SplitterDistance = 286;
-            this.splitContainer4.TabIndex = 0;
+            this.ctrlRightSolSelecter.CausesValidation = false;
+            this.ctrlRightSolSelecter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ctrlRightSolSelecter.Location = new System.Drawing.Point(0, 25);
+            this.ctrlRightSolSelecter.Name = "ctrlRightSolSelecter";
+            this.ctrlRightSolSelecter.OrganizationTree = null;
+            this.ctrlRightSolSelecter.ParentControl = null;
+            this.ctrlRightSolSelecter.Size = new System.Drawing.Size(310, 348);
+            this.ctrlRightSolSelecter.TabIndex = 0;
             // 
             // toolStrip1
             // 
@@ -148,26 +135,22 @@
             this.BtnCompare.Text = "Compare";
             this.BtnCompare.Click += new System.EventHandler(this.BtnCompare_Click);
             // 
-            // ctrlLeftSolSelecter
+            // splitContainer3
             // 
-            this.ctrlLeftSolSelecter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ctrlLeftSolSelecter.Location = new System.Drawing.Point(0, 0);
-            this.ctrlLeftSolSelecter.Name = "ctrlLeftSolSelecter";
-            this.ctrlLeftSolSelecter.OrganizationTree = null;
-            this.ctrlLeftSolSelecter.ParentControl = null;
-            this.ctrlLeftSolSelecter.Size = new System.Drawing.Size(310, 327);
-            this.ctrlLeftSolSelecter.TabIndex = 0;
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
             // 
-            // ctrlRightSolSelecter
+            // splitContainer3.Panel1
             // 
-            this.ctrlRightSolSelecter.CausesValidation = false;
-            this.ctrlRightSolSelecter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ctrlRightSolSelecter.Location = new System.Drawing.Point(0, 25);
-            this.ctrlRightSolSelecter.Name = "ctrlRightSolSelecter";
-            this.ctrlRightSolSelecter.OrganizationTree = null;
-            this.ctrlRightSolSelecter.ParentControl = null;
-            this.ctrlRightSolSelecter.Size = new System.Drawing.Size(310, 348);
-            this.ctrlRightSolSelecter.TabIndex = 0;
+            this.splitContainer3.Panel1.Controls.Add(this.ctrlLeftCompareResult);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.splitContainer4);
+            this.splitContainer3.Size = new System.Drawing.Size(829, 704);
+            this.splitContainer3.SplitterDistance = 276;
+            this.splitContainer3.TabIndex = 0;
             // 
             // ctrlLeftCompareResult
             // 
@@ -177,6 +160,23 @@
             this.ctrlLeftCompareResult.Name = "ctrlLeftCompareResult";
             this.ctrlLeftCompareResult.Size = new System.Drawing.Size(276, 704);
             this.ctrlLeftCompareResult.TabIndex = 0;
+            // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer4.Name = "splitContainer4";
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.ctrlInterCompareResult);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.ctrlRightCompareResult);
+            this.splitContainer4.Size = new System.Drawing.Size(549, 704);
+            this.splitContainer4.SplitterDistance = 286;
+            this.splitContainer4.TabIndex = 0;
             // 
             // ctrlInterCompareResult
             // 
@@ -212,6 +212,8 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
@@ -220,8 +222,6 @@
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }

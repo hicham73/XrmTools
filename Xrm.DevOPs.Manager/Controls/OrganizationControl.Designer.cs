@@ -41,7 +41,7 @@
             // 
             // toolbar
             // 
-            this.toolbar.BackColor = System.Drawing.Color.LightSlateGray;
+            this.toolbar.BackColor = System.Drawing.Color.SteelBlue;
             this.toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblOrgName,
             this.BtnSyncConfig,
@@ -67,6 +67,7 @@
             this.BtnSyncConfig.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.BtnSyncConfig.Image = ((System.Drawing.Image)(resources.GetObject("BtnSyncConfig.Image")));
             this.BtnSyncConfig.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BtnSyncConfig.Margin = new System.Windows.Forms.Padding(20, 1, 0, 2);
             this.BtnSyncConfig.Name = "BtnSyncConfig";
             this.BtnSyncConfig.Size = new System.Drawing.Size(23, 22);
             this.BtnSyncConfig.Text = "Config";
@@ -77,6 +78,7 @@
             this.BtnSyncProjects.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.BtnSyncProjects.Image = ((System.Drawing.Image)(resources.GetObject("BtnSyncProjects.Image")));
             this.BtnSyncProjects.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BtnSyncProjects.Margin = new System.Windows.Forms.Padding(0, 1, 5, 2);
             this.BtnSyncProjects.Name = "BtnSyncProjects";
             this.BtnSyncProjects.Size = new System.Drawing.Size(23, 22);
             this.BtnSyncProjects.Text = "Projects";
@@ -87,6 +89,7 @@
             this.BtnSyncAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.BtnSyncAll.Image = ((System.Drawing.Image)(resources.GetObject("BtnSyncAll.Image")));
             this.BtnSyncAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BtnSyncAll.Margin = new System.Windows.Forms.Padding(0, 1, 5, 2);
             this.BtnSyncAll.Name = "BtnSyncAll";
             this.BtnSyncAll.Size = new System.Drawing.Size(23, 22);
             this.BtnSyncAll.Text = "All";
@@ -97,6 +100,7 @@
             this.BtnRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.BtnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("BtnRefresh.Image")));
             this.BtnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BtnRefresh.Margin = new System.Windows.Forms.Padding(0, 1, 5, 2);
             this.BtnRefresh.Name = "BtnRefresh";
             this.BtnRefresh.Size = new System.Drawing.Size(23, 22);
             this.BtnRefresh.Text = "Refresh";
@@ -105,6 +109,9 @@
             // tvSolutions
             // 
             this.tvSolutions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvSolutions.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tvSolutions.ForeColor = System.Drawing.Color.CadetBlue;
+            this.tvSolutions.LineColor = System.Drawing.Color.SteelBlue;
             this.tvSolutions.Location = new System.Drawing.Point(0, 25);
             this.tvSolutions.Name = "tvSolutions";
             this.tvSolutions.Size = new System.Drawing.Size(405, 383);

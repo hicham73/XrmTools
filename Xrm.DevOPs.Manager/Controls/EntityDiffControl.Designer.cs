@@ -168,10 +168,11 @@
             // 
             // gbAttributes
             // 
-            this.gbAttributes.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.gbAttributes.BackColor = System.Drawing.SystemColors.ControlLight;
             this.gbAttributes.Controls.Add(this.lvAttributes);
             this.gbAttributes.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbAttributes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbAttributes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbAttributes.ForeColor = System.Drawing.Color.SteelBlue;
             this.gbAttributes.Location = new System.Drawing.Point(0, 0);
             this.gbAttributes.Name = "gbAttributes";
             this.gbAttributes.Size = new System.Drawing.Size(1188, 50);
@@ -181,10 +182,11 @@
             // 
             // gbOneToMany
             // 
-            this.gbOneToMany.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.gbOneToMany.BackColor = System.Drawing.SystemColors.ControlLight;
             this.gbOneToMany.Controls.Add(this.lvOneToManyRelationships);
             this.gbOneToMany.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbOneToMany.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbOneToMany.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbOneToMany.ForeColor = System.Drawing.Color.SteelBlue;
             this.gbOneToMany.Location = new System.Drawing.Point(0, 50);
             this.gbOneToMany.Name = "gbOneToMany";
             this.gbOneToMany.Size = new System.Drawing.Size(1188, 75);
@@ -255,10 +257,11 @@
             // 
             // gbManyToMany
             // 
-            this.gbManyToMany.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.gbManyToMany.BackColor = System.Drawing.SystemColors.ControlLight;
             this.gbManyToMany.Controls.Add(this.lvManyToManyRelationships);
             this.gbManyToMany.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbManyToMany.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbManyToMany.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbManyToMany.ForeColor = System.Drawing.Color.SteelBlue;
             this.gbManyToMany.Location = new System.Drawing.Point(0, 125);
             this.gbManyToMany.Name = "gbManyToMany";
             this.gbManyToMany.Size = new System.Drawing.Size(1188, 75);
@@ -317,10 +320,11 @@
             // 
             // gbManyToOne
             // 
-            this.gbManyToOne.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.gbManyToOne.BackColor = System.Drawing.SystemColors.ControlLight;
             this.gbManyToOne.Controls.Add(this.lvManyToOneRelationships);
             this.gbManyToOne.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbManyToOne.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbManyToOne.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbManyToOne.ForeColor = System.Drawing.Color.SteelBlue;
             this.gbManyToOne.Location = new System.Drawing.Point(0, 200);
             this.gbManyToOne.Name = "gbManyToOne";
             this.gbManyToOne.Size = new System.Drawing.Size(1188, 75);
@@ -391,10 +395,11 @@
             // 
             // gbForms
             // 
-            this.gbForms.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.gbForms.BackColor = System.Drawing.SystemColors.ControlLight;
             this.gbForms.Controls.Add(this.lvForms);
             this.gbForms.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbForms.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbForms.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbForms.ForeColor = System.Drawing.Color.SteelBlue;
             this.gbForms.Location = new System.Drawing.Point(0, 275);
             this.gbForms.Name = "gbForms";
             this.gbForms.Size = new System.Drawing.Size(1188, 75);
@@ -453,10 +458,11 @@
             // 
             // gbViews
             // 
-            this.gbViews.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.gbViews.BackColor = System.Drawing.SystemColors.ControlLight;
             this.gbViews.Controls.Add(this.lvViews);
             this.gbViews.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbViews.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbViews.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbViews.ForeColor = System.Drawing.Color.SteelBlue;
             this.gbViews.Location = new System.Drawing.Point(0, 350);
             this.gbViews.Name = "gbViews";
             this.gbViews.Size = new System.Drawing.Size(1188, 75);
@@ -504,10 +510,11 @@
             // 
             // gbWorkflows
             // 
-            this.gbWorkflows.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.gbWorkflows.BackColor = System.Drawing.SystemColors.ControlLight;
             this.gbWorkflows.Controls.Add(this.lvWorkflows);
             this.gbWorkflows.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbWorkflows.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbWorkflows.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbWorkflows.ForeColor = System.Drawing.Color.SteelBlue;
             this.gbWorkflows.Location = new System.Drawing.Point(0, 425);
             this.gbWorkflows.Name = "gbWorkflows";
             this.gbWorkflows.Size = new System.Drawing.Size(1188, 75);
@@ -548,10 +555,11 @@
             // 
             // gbPlugins
             // 
-            this.gbPlugins.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.gbPlugins.BackColor = System.Drawing.SystemColors.ControlLight;
             this.gbPlugins.Controls.Add(this.lvPlugins);
             this.gbPlugins.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbPlugins.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbPlugins.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbPlugins.ForeColor = System.Drawing.Color.SteelBlue;
             this.gbPlugins.Location = new System.Drawing.Point(0, 500);
             this.gbPlugins.Name = "gbPlugins";
             this.gbPlugins.Size = new System.Drawing.Size(1188, 80);
@@ -604,10 +612,11 @@
             // 
             // gbPluginSteps
             // 
-            this.gbPluginSteps.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.gbPluginSteps.BackColor = System.Drawing.SystemColors.ControlLight;
             this.gbPluginSteps.Controls.Add(this.lvPluginSteps);
             this.gbPluginSteps.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbPluginSteps.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbPluginSteps.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbPluginSteps.ForeColor = System.Drawing.Color.SteelBlue;
             this.gbPluginSteps.Location = new System.Drawing.Point(0, 580);
             this.gbPluginSteps.Name = "gbPluginSteps";
             this.gbPluginSteps.Size = new System.Drawing.Size(1188, 80);
@@ -672,10 +681,11 @@
             // 
             // gbTemplates
             // 
-            this.gbTemplates.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.gbTemplates.BackColor = System.Drawing.SystemColors.ControlLight;
             this.gbTemplates.Controls.Add(this.lvTemplates);
             this.gbTemplates.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbTemplates.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbTemplates.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbTemplates.ForeColor = System.Drawing.Color.SteelBlue;
             this.gbTemplates.Location = new System.Drawing.Point(0, 660);
             this.gbTemplates.Name = "gbTemplates";
             this.gbTemplates.Size = new System.Drawing.Size(1188, 75);
@@ -725,6 +735,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.Controls.Add(this.gbTemplates);
             this.Controls.Add(this.gbPluginSteps);
             this.Controls.Add(this.gbPlugins);

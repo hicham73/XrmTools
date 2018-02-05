@@ -47,8 +47,8 @@ namespace Xrm.DevOPs.Manager.Controls
             {
                 if (org.Name == "MasterConfig")
                 {
-                    orgControlConfig.LoadSolutions(org);
-                    orgControlConfig.LblOrgName.Text = org.Name;
+                    masterOrgControl.LoadSolutions(org);
+                    masterOrgControl.LblOrgName.Text = org.Name;
                 }
                 else
                 {
@@ -61,8 +61,9 @@ namespace Xrm.DevOPs.Manager.Controls
 
             for (i = 0; i < OrgControls.Count; i++)
             {
-                OrgControls[i].CrmMasterOrg = orgControlConfig.CrmOrg;
+                OrgControls[i].CrmMasterOrg = masterOrgControl.CrmOrg;
                 OrgControls[i].TvTfs = tvTFS;
+                OrgControls[i].TvMasterConfig = masterOrgControl.Tree;
             }
 
             ReloadSolutions();
@@ -89,10 +90,8 @@ namespace Xrm.DevOPs.Manager.Controls
                     TreeNode[] nodes = tvTFS.Nodes.Find(subPathAgg, true);
                     if (nodes.Length == 0)
                     {
-                        var n = new TreeNode();
-                        n.Tag = item;
-                        n.Name = subPathAgg;
-                        n.Text = subPath;
+                        var n = new TreeNode() { Tag = item, Name = subPathAgg, Text = subPath };
+
                         if (lastNode == null)
                             tvTFS.Nodes.Add(n);
                         else
@@ -104,13 +103,13 @@ namespace Xrm.DevOPs.Manager.Controls
                         lastNode = nodes[0];
                 }
             }
+
+            tvTFS.ExpandAll();
         }
 
         private async Task<FolderContent> GetFolderItems(string folderPath)
         {
             string credentials = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", "", "f55jctcmowqpla3rmjic64wxpho4d6pxw66kvuh2y35xuu6uisyq")));
-
-            //use the httpclient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://hwahbi.visualstudio.com/DefaultCollection/");  //url of our account
@@ -121,14 +120,10 @@ namespace Xrm.DevOPs.Manager.Controls
                 var qs = $"_apis/tfvc/items?scopePath={folderPath}&api-version=1.0&recursionLevel=Full";
                 HttpResponseMessage response = client.GetAsync(qs).Result;
 
-                //check to see if we have a succesfull respond
                 if (response.IsSuccessStatusCode)
                 {
-                    //set the viewmodel from the content in the response
                     var content = response.Content;
-
                     var c = await content.ReadAsStringAsync();
-
                     return JsonConvert.DeserializeObject<FolderContent>(c);
 
                 }
@@ -137,43 +132,10 @@ namespace Xrm.DevOPs.Manager.Controls
             return null;
         }
 
-        private async void DownloadFile(Value item)
-        {
-            string credentials = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", "", "f55jctcmowqpla3rmjic64wxpho4d6pxw66kvuh2y35xuu6uisyq")));
-
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://hwahbi.visualstudio.com/DefaultCollection/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                //client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
-
-                var qs = $"_apis/tfvc/items/{item.path}";
-                HttpResponseMessage response = client.GetAsync(qs).Result;
-
-                using (Stream streamToReadFrom = await response.Content.ReadAsStreamAsync())
-                {
-                    var fileName = Path.GetFileName(item.path);
-                    string fileToWriteTo = $"c:/temp/{fileName}";
-                    using (Stream streamToWriteTo = File.Open(fileToWriteTo, FileMode.Create))
-                    {
-                        await streamToReadFrom.CopyToAsync(streamToWriteTo);
-                    }
-
-                    response.Content = null;
-                }
-            }
-        }
 
         #endregion
 
         #region UI
-        private void TVTFS_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            var n = ((TreeView)sender).SelectedNode;
-            var item = (Value)n.Tag;
-            DownloadFile(item);
-        }
 
         #endregion
 

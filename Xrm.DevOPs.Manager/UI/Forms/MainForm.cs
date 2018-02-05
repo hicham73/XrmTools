@@ -138,76 +138,29 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             }
         }
 
-        private void allToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            lvEntities.Items.Clear();
+        //private void allToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    lvEntities.Items.Clear();
 
-            foreach (var item in Context.DiffGenerator.Entities)
-            {
-                lvEntities.Items.Add(new ListViewItem()
-                {
-                    Text = item.DisplayName,
-                    Tag = item
-                });
+        //    foreach (var item in Context.DiffGenerator.Entities)
+        //    {
+        //        lvEntities.Items.Add(new ListViewItem()
+        //        {
+        //            Text = item.DisplayName,
+        //            Tag = item
+        //        });
 
-            }
-        }
+        //    }
+        //}
 
         private void MIOrgLoad_Click(object sender, EventArgs e)
         {
-            int count = ConfigurationManager.ConnectionStrings.Count;
-            List<KeyValuePair<String, String>> filteredConnectionStrings = new List<KeyValuePair<String, String>>();
-
-            if (!Context.IsOrganizationLoaded)
-            {
-                for (int a = 0; a < count; a++)
-                {
-                    var name = ConfigurationManager.ConnectionStrings[a].Name;
-                    var connStr = ConfigurationManager.ConnectionStrings[a].ConnectionString;
-                    if (isValidConnectionString(connStr))
-                    {
-                        CrmServiceClient conn = new CrmServiceClient(connStr);
-                        var orgService = (IOrganizationService)conn.OrganizationWebProxyClient != null ? (IOrganizationService)conn.OrganizationWebProxyClient : (IOrganizationService)conn.OrganizationServiceProxy;
-                        Context.Services.Add(new KeyValuePair<string, IOrganizationService>(name, orgService));
-
-                        var crmOrg = new CrmOrganization()
-                        {
-                            Name = name,
-                            Service = orgService,
-                            Type = EnumTypes.TreeNodeType.Organization,
-                        };
-
-                        Context.CrmOrganizations.Add(crmOrg);
-
-                        cbLeftOrg.Items.Add(crmOrg);
-                        cbRightOrg.Items.Add(crmOrg);
-
-                        var crmOrgNode = new CrmTreeNode<CrmOrganization>()
-                        {
-                            Component = crmOrg,
-                            Text = name,
-                            Tag = "Organization"
-
-                        };
-
-                        tvOrgs.Nodes.Add(crmOrgNode);
-
-                        LoadOrganizationNode<CrmOrganization>(name, crmOrg, crmOrgNode);
-
-                    }
-                }
-
-                Context.IsOrganizationLoaded = true;
-            }
-            else
-            {
-                RefreshOrganizations();
-            }
+            
         }
 
-        private void MIOrgCompare_Click(object sender, EventArgs e)
+        private void MIOrgDiff_Click(object sender, EventArgs e)
         {
-            tabCtrlMain.SelectTab(1);
+            ShowTab(tabOrgDiff);
         }
 
         private void MISolCompare_Click(object sender, EventArgs e)
@@ -216,7 +169,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
             ctrlSolutionCompare.LoadOrgs(Context.CrmOrganizations);
 
-            tabCtrlMain.SelectTab(2);
+            ShowTab(tabSolCompare);
 
         }
 
@@ -235,6 +188,8 @@ namespace Xrm.DevOPs.Manager.UI.Forms
         {
             orgSyncControl.Context = Context;
             orgSyncControl.LoadSolutions();
+
+            ShowTab(tabSyncTool);
         }
         #endregion
 
@@ -531,18 +486,88 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             }
         }
 
+        public void ShowTab(TabPage tabPage)
+        {
+            tabCtrlMain.BringToFront();
+
+            if (!tabCtrlMain.Controls.Contains(tabPage))
+                tabCtrlMain.Controls.Add(tabPage);
+
+            tabCtrlMain.SelectTab(tabPage);
+        }
 
 
 
         #endregion
 
-        #region TFS
+        private void MILoadOrganizations_Click(object sender, EventArgs e)
+        {
+            int count = ConfigurationManager.ConnectionStrings.Count;
+            List<KeyValuePair<String, String>> filteredConnectionStrings = new List<KeyValuePair<String, String>>();
 
+            if (!Context.IsOrganizationLoaded)
+            {
+                for (int a = 0; a < count; a++)
+                {
+                    var name = ConfigurationManager.ConnectionStrings[a].Name;
+                    var connStr = ConfigurationManager.ConnectionStrings[a].ConnectionString;
+                    if (isValidConnectionString(connStr))
+                    {
+                        CrmServiceClient conn = new CrmServiceClient(connStr);
+                        var orgService = (IOrganizationService)conn.OrganizationWebProxyClient != null ? (IOrganizationService)conn.OrganizationWebProxyClient : (IOrganizationService)conn.OrganizationServiceProxy;
+                        Context.Services.Add(new KeyValuePair<string, IOrganizationService>(name, orgService));
 
+                        var crmOrg = new CrmOrganization()
+                        {
+                            Name = name,
+                            Service = orgService,
+                            Type = EnumTypes.TreeNodeType.Organization,
+                        };
 
-        #endregion
+                        Context.CrmOrganizations.Add(crmOrg);
 
+                        cbLeftOrg.Items.Add(crmOrg);
+                        cbRightOrg.Items.Add(crmOrg);
 
+                        var crmOrgNode = new CrmTreeNode<CrmOrganization>()
+                        {
+                            Component = crmOrg,
+                            Text = name,
+                            Tag = "Organization"
+
+                        };
+
+                        tvOrgs.Nodes.Add(crmOrgNode);
+
+                        LoadOrganizationNode<CrmOrganization>(name, crmOrg, crmOrgNode);
+
+                    }
+                }
+
+                Context.IsOrganizationLoaded = true;
+            }
+            else
+                RefreshOrganizations();
+
+            tvOrgs.ExpandAll();
+
+            ShowTab(tabDeploymentExplorer);
+        }
+
+        private void MIExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void MICloseActiveWindow_Click(object sender, EventArgs e)
+        {
+            tabCtrlMain.Controls.Remove(tabCtrlMain.SelectedTab);
+        }
+
+        private void MICloseAllWindows_Click(object sender, EventArgs e)
+        {
+            tabCtrlMain.Controls.Clear();
+        }
     }
 
 
