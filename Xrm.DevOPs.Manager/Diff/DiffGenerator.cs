@@ -8,12 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Xrm.DevOPs.Manager.UI.Forms;
 using Xrm.DevOPs.Manager.Util;
 
 namespace Xrm.DevOPs.Manager.Diff
 {
     public class DiffGenerator
     {
+        private MainForm mainForm;
         private List<string> _compared = new List<string>();
         private DiffResult _diffResult = new DiffResult(); 
         public IOrganizationService LeftService { get; set; }
@@ -22,119 +24,77 @@ namespace Xrm.DevOPs.Manager.Diff
         public DiffResult DiffResult { get { return _diffResult; } }
         public DiffResult Compare(List<string> options)
         {
+            mainForm = ((MainForm)Application.OpenForms[0]);
+            
+
             if (LeftService == null || RightService == null)
             {
                 MessageBox.Show("You need to connect to and select 2 organizations");
                 return null;
             }
-            var includeEntities = false;
-            var includeWorkflows = false;
-            var includePlugins = false;
-            var includePluginSteps = false;
-            var includeEmailTemplates = false;
-            var includeMailMergeTemplates = false;
-            var includeContractTemplates = false;
-            var includeArticleTemplates = false;
 
-            foreach (var comp in options)
-            {
-                switch (comp.ToString())
-                {
-                    case "Entities":
-                    case "Attributes":
-                    case "Forms":
-                    case "Views":
-                    case "Relationships":
-                        includeEntities = true;
-                        break;
-                    case "Processes":
-                        includeWorkflows = true;
-                        break;
-                    case "Plugins":
-                        includePlugins = true;
-                        break;
-                    case "Plugins Steps":
-                        includePluginSteps = true;
-                        break;
-                    case "Email Templates":
-                        includeEmailTemplates = true;
-                        break;
-                    case "Mail Merge Templates":
-                        includeMailMergeTemplates = true;
-                        break;
-                    case "Contract Templates":
-                        includeContractTemplates = true;
-                        break;
-                    case "Article Templates":
-                        includeArticleTemplates = true;
-                        break;
-                }
-            }
-
-            if (includeEntities)
-                DiffEntities();
-
-            if (includeWorkflows && !IsCompared("workflows"))
-                DiffWorkflows();
-
-            if (includePlugins && !IsCompared("plugins"))
-                DiffPlugins();
-
-            if (includePluginSteps && !IsCompared("pluginsteps"))
-                DiffSdkMessageProcessingSteps();
-
-            if (includeEmailTemplates && !IsCompared("emailtemplates"))
-                DiffTemapltes("template", _diffResult.Templates, new string[] { "title", "description" }, "title");
-            if (includeMailMergeTemplates && !IsCompared("mailmergetemplates"))
-                DiffTemapltes("mailmergetemplate", _diffResult.Templates, new string[] { "name", "description" }, "name");
-            if (includeContractTemplates && !IsCompared("articletemplates"))
-                DiffTemapltes("kbarticletemplate", _diffResult.Templates, new string[] { "title", "description" }, "title");
-            if (includeArticleTemplates && !IsCompared("contracttemplates"))
-                DiffTemapltes("contracttemplate", _diffResult.Templates, new string[] { "name", "description" }, "name");
+            DiffEntities();
+            DiffForms();
+            DiffViews();
+            DiffWorkflows();
+            DiffPlugins();
+            DiffSdkMessageProcessingSteps();
+            DiffTemapltes("template", _diffResult.Templates, new string[] { "title", "description" }, "title");
+            DiffTemapltes("mailmergetemplate", _diffResult.Templates, new string[] { "name", "description" }, "name");
+            DiffTemapltes("kbarticletemplate", _diffResult.Templates, new string[] { "title", "description" }, "title");
+            DiffTemapltes("contracttemplate", _diffResult.Templates, new string[] { "name", "description" }, "name");
+            DiffRoles();
 
 
             return _diffResult;
 
         }
+
         public void DiffEntities()
         {
-            EntityDiffResult entityDiffRes = null;
-            foreach (var item in Setting.DiffEntityFilter.CheckedItems)
+            Dictionary<string, string> attributesData = new Dictionary<string, string>();
+            RetrieveAllEntitiesRequest metaDataRequest = new RetrieveAllEntitiesRequest();
+            metaDataRequest.EntityFilters = EntityFilters.All;
+            
+            // Execute the request.
+
+            var entities1 = ((RetrieveAllEntitiesResponse)LeftService.Execute(metaDataRequest)).EntityMetadata;
+            var entities2 = ((RetrieveAllEntitiesResponse)RightService.Execute(metaDataRequest)).EntityMetadata;
+
+            mainForm.ProgressStart("Entities", 1, entities1.Length);
+
+            foreach (var emd1 in entities1)
             {
-                var ei = (EntityInfo)((ListViewItem)item).Tag;
-                if (entityDiffRes == null || !entityDiffRes.IsEmpty())
-                    entityDiffRes = new EntityDiffResult(ei);
 
-                DiffEntity(entityDiffRes);
+                var emd2 = entities2.Where(x => x.LogicalName == emd1.LogicalName).FirstOrDefault();
 
-                if (!entityDiffRes.IsEmpty())
-                    _diffResult.Entities.Add(entityDiffRes);
-                
+                if(emd2 != null && emd1.IsCustomizable.Value)
+                    DiffEntity(emd1, emd2);
+
+
+                mainForm.ProgressPerformStep();
             }
+
         }
-        public void DiffEntity(EntityDiffResult edr)
+
+        public void DiffEntity(EntityMetadata emd1, EntityMetadata emd2)
         {
-            if (IsCompared(edr.EntityInfo.LogicalName))
-                return;
+            var edr = new EntityDiffResult(new EntityInfo() {
+               LogicalName = emd1.LogicalName,
+                ObjectTypeCode = emd1.ObjectTypeCode.Value,
+                IsCustom = emd1.IsCustomEntity.Value,
+                DisplayName = emd1.DisplayName?.UserLocalizedLabel?.Label
 
-            var req = new RetrieveEntityRequest()
-            {
-                EntityFilters = EntityFilters.All,
-                LogicalName = edr.EntityInfo.LogicalName,
-                
-            };
-
-            var response1 = (RetrieveEntityResponse)LeftService.Execute(req);
-            var response2 = (RetrieveEntityResponse)RightService.Execute(req);
-
-            var emd1 = response1.EntityMetadata;
-            var emd2 = response2.EntityMetadata;
+            });
 
             #region Attributes 
 
             
             foreach (var attr1 in emd1.Attributes)
             {
+                //if (attr1.LogicalName != "new_field11")
+                //    continue;
+
                 var attr2 = emd2.Attributes.Where(x => x.LogicalName == attr1.LogicalName).FirstOrDefault<AttributeMetadata>();
 
                 if (attr2 != null)
@@ -262,83 +222,110 @@ namespace Xrm.DevOPs.Manager.Diff
 
             #endregion
 
+            
+            if(!edr.IsEmpty())
+                _diffResult.Entities.Add(edr);
+
+        }
+
+        public void DiffForms()
+        {
             #region Forms
 
             var qe = new QueryExpression("systemform");
-            qe.Criteria.AddCondition(new ConditionExpression("objecttypecode", ConditionOperator.Equal, edr.EntityInfo.ObjectTypeCode));
+            qe.Criteria.AddCondition(new ConditionExpression("ismanaged", ConditionOperator.Equal, false));
             qe.ColumnSet = new ColumnSet("name", "publishedon", "type", "objecttypecode");
 
             var forms1 = LeftService.RetrieveMultiple(qe).Entities;
             var forms2 = RightService.RetrieveMultiple(qe).Entities;
 
             List<ComponentDiff<Entity>> formsDiff = new List<ComponentDiff<Entity>>();
+
+            mainForm.ProgressStart("Forms", 1, forms1.Count + forms2.Count);
             foreach (var f1 in forms1)
             {
                 var f2 = forms2.Where(x => x.Id == f1.Id).FirstOrDefault();
                 if (f2 == null)
                 {
-                    edr.Forms.Add(new ComponentDiff<Entity>()
+                    _diffResult.Forms.Add(new ComponentDiff<Entity>()
                     {
+                        EntityName = f1.GetAttributeValue<string>("objecttypecode"),
                         Name = f1.GetAttributeValue<string>("name"),
                         Left = f1,
                     });
                 }
+                mainForm.ProgressPerformStep();
+
             }
             foreach (var f2 in forms2)
             {
                 var f1 = forms1.Where(x => x.Id == f2.Id).FirstOrDefault();
                 if (f1 == null)
                 {
-                    edr.Forms.Add(new ComponentDiff<Entity>()
+                    _diffResult.Forms.Add(new ComponentDiff<Entity>()
                     {
+                        EntityName = f2.GetAttributeValue<string>("objecttypecode"),
                         Name = f2.GetAttributeValue<string>("name"),
                         Right = f2,
                     });
                 }
+                mainForm.ProgressPerformStep();
             }
 
 
 
             #endregion
 
+        }
+
+        public void DiffViews()
+        {
+
             #region Views
             // Instantiate QueryExpression QEsavedquery
-            qe = new QueryExpression("savedquery");
-            qe.Criteria.AddCondition(new ConditionExpression("returnedtypecode", ConditionOperator.Equal, edr.EntityInfo.ObjectTypeCode));
+            var qe = new QueryExpression("savedquery");
+            qe.Criteria.AddCondition(new ConditionExpression("iscustom", ConditionOperator.Equal, true));
             qe.ColumnSet.AddColumns("name", "querytype", "returnedtypecode", "iscustom");
 
             var views1 = LeftService.RetrieveMultiple(qe).Entities;
             var views2 = RightService.RetrieveMultiple(qe).Entities;
 
             List<ComponentDiff<Entity>> viewsDiff = new List<ComponentDiff<Entity>>();
+            mainForm.ProgressStart("Views", 1, views1.Count + views2.Count);
             foreach (var v1 in views1)
             {
                 var v2 = views2.Where(x => x.GetAttributeValue<string>("name") == v1.GetAttributeValue<string>("name")).FirstOrDefault();
                 if (v2 == null)
                 {
-                    edr.Views.Add(new ComponentDiff<Entity>()
+                    _diffResult.Views.Add(new ComponentDiff<Entity>()
                     {
+                        EntityName = v1.GetAttributeValue<string>("returnedtypecode"),
                         Name = v1.GetAttributeValue<string>("name"),
                         Left = v1,
                     });
                 }
+                mainForm.ProgressPerformStep();
+
             }
             foreach (var v2 in views2)
             {
                 var v1 = views1.Where(x => x.GetAttributeValue<string>("name") == v2.GetAttributeValue<string>("name")).FirstOrDefault();
                 if (v1 == null)
                 {
-                    edr.Views.Add(new ComponentDiff<Entity>()
+                    _diffResult.Views.Add(new ComponentDiff<Entity>()
                     {
+                        EntityName = v2.GetAttributeValue<string>("returnedtypecode"),
                         Name = v2.GetAttributeValue<string>("name"),
                         Right = v2,
                     });
                 }
+                mainForm.ProgressPerformStep();
+
             }
 
             #endregion
-
         }
+
         public void DiffWorkflows()
         {
             var qe = new QueryExpression("workflow");
@@ -349,6 +336,7 @@ namespace Xrm.DevOPs.Manager.Diff
 
             var wfls1 = LeftService.RetrieveMultiple(qe).Entities;
             var wfls2 = RightService.RetrieveMultiple(qe).Entities;
+            mainForm.ProgressStart("Workflows", 1, wfls1.Count + wfls2.Count);
 
             foreach (var w1 in wfls1)
             {
@@ -361,6 +349,7 @@ namespace Xrm.DevOPs.Manager.Diff
                         Left = w1,
                     });
                 }
+                mainForm.ProgressPerformStep();
             }
             foreach (var w2 in wfls2)
             {
@@ -373,8 +362,8 @@ namespace Xrm.DevOPs.Manager.Diff
                         Right = w2,
                     });
                 }
+                mainForm.ProgressPerformStep();
             }
-            
         }
         public void DiffPlugins()
         {
@@ -385,6 +374,7 @@ namespace Xrm.DevOPs.Manager.Diff
             var pls1 = LeftService.RetrieveMultiple(qe).Entities;
             var pls2 = RightService.RetrieveMultiple(qe).Entities;
 
+            mainForm.ProgressStart("Plugins", 1, pls1.Count + pls2.Count);
             foreach (var p1 in pls1)
             {
                 var p2 = pls2.Where(x => x.GetAttributeValue<string>("name") == p1.GetAttributeValue<string>("name")).FirstOrDefault();
@@ -396,6 +386,7 @@ namespace Xrm.DevOPs.Manager.Diff
                         Left = p1,
                     });
                 }
+                mainForm.ProgressPerformStep();
             }
             foreach (var p2 in pls2)
             {
@@ -408,6 +399,7 @@ namespace Xrm.DevOPs.Manager.Diff
                         Right = p2,
                     });
                 }
+                mainForm.ProgressPerformStep();
             }
 
         }
@@ -426,6 +418,7 @@ namespace Xrm.DevOPs.Manager.Diff
             var smpss1 = LeftService.RetrieveMultiple(qe).Entities;
             var smpss2 = RightService.RetrieveMultiple(qe).Entities;
 
+            mainForm.ProgressStart("Messages Processing Steps", 1, smpss1.Count + smpss2.Count);
             foreach (var smps1 in smpss1)
             {
                 var s2 = smpss2.Where(x => x.GetAttributeValue<string>("name") == smps1.GetAttributeValue<string>("name")).FirstOrDefault();
@@ -437,6 +430,7 @@ namespace Xrm.DevOPs.Manager.Diff
                         Left = smps1,
                     });
                 }
+                mainForm.ProgressPerformStep();
             }
             foreach (var smps2 in smpss2)
             {
@@ -449,6 +443,7 @@ namespace Xrm.DevOPs.Manager.Diff
                         Right = smps2,
                     });
                 }
+                mainForm.ProgressPerformStep();
             }
         }
         public void DiffTemapltes(string entityName, List<ComponentDiff<Entity>> diffList, string[] columns, string key)
@@ -487,6 +482,44 @@ namespace Xrm.DevOPs.Manager.Diff
                     });
                 }
             }
+        }
+        public void DiffRoles()
+        {
+            // Instantiate QueryExpression QEplugintype
+            var qe = new QueryExpression("role");
+            qe.ColumnSet.AddColumns("name");
+
+            var roles1 = LeftService.RetrieveMultiple(qe).Entities;
+            var roles2 = RightService.RetrieveMultiple(qe).Entities;
+
+            mainForm.ProgressStart("Security Roles", 1, roles1.Count + roles2.Count);
+            foreach (var r1 in roles1)
+            {
+                var r2 = roles2.Where(x => x.Id == r1.Id).FirstOrDefault();
+                if (r2 == null)
+                {
+                    _diffResult.Roles.Add(new ComponentDiff<Entity>()
+                    {
+                        Name = r1.GetAttributeValue<string>("name"),
+                        Left = r1,
+                    });
+                }
+                mainForm.ProgressPerformStep();
+            }
+            foreach (var r2 in roles2)
+            {
+                var r1 = roles1.Where(x => x.Id == r2.Id).FirstOrDefault();
+                if (r1 == null)
+                {
+                    _diffResult.Roles.Add(new ComponentDiff<Entity>()
+                    {
+                        Name = r2.GetAttributeValue<string>("name"),
+                        Right = r2,
+                    });
+                }
+                mainForm.ProgressPerformStep();
+            }
+
         }
         public bool IsCompared(string name)
         {

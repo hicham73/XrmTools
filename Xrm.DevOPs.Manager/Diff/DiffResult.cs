@@ -15,6 +15,9 @@ namespace Xrm.DevOPs.Manager.Diff
         public List<ComponentDiff<Entity>> Plugins = new List<ComponentDiff<Entity>>();
         public List<ComponentDiff<Entity>> SdkMessageProcessingSteps = new List<ComponentDiff<Entity>>();
         public List<ComponentDiff<Entity>> Templates = new List<ComponentDiff<Entity>>();
+        public List<ComponentDiff<Entity>> Forms = new List<ComponentDiff<Entity>>();
+        public List<ComponentDiff<Entity>> Views = new List<ComponentDiff<Entity>>();
+        public List<ComponentDiff<Entity>> Roles = new List<ComponentDiff<Entity>>();
     }
 
     public class EntityDiffResult
@@ -23,16 +26,17 @@ namespace Xrm.DevOPs.Manager.Diff
         {
             EntityInfo = ei;
         }
+        public EntityDiffResult()
+        {
+        }
         public EntityInfo EntityInfo { get; set; }
         public List<ComponentDiff<AttributeMetadata>> Attributes { get; set; } = new List<ComponentDiff<AttributeMetadata>>();
         public List<ComponentDiff<OneToManyRelationshipMetadata>> OneToManyRelationships = new List<ComponentDiff<OneToManyRelationshipMetadata>>();
         public List<ComponentDiff<ManyToManyRelationshipMetadata>> ManyToManyRelationships = new List<ComponentDiff<ManyToManyRelationshipMetadata>>();
-        public List<ComponentDiff<Entity>> Forms = new List<ComponentDiff<Entity>>();
-        public List<ComponentDiff<Entity>> Views = new List<ComponentDiff<Entity>>();
 
         internal bool IsEmpty()
         {
-            return Attributes.Count == 0 && OneToManyRelationships.Count == 0 && ManyToManyRelationships.Count == 0 && Forms.Count == 0;
+            return Attributes.Count == 0 && OneToManyRelationships.Count == 0 && ManyToManyRelationships.Count == 0;
         }
     }
 

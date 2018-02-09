@@ -18,7 +18,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
     public partial class MainForm : Form
     {
 
-        GlobalContext Context;
+        public GlobalContext Context;
         public MainForm()
         {
             InitializeComponent();
@@ -137,21 +137,6 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
             }
         }
-
-        //private void allToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    lvEntities.Items.Clear();
-
-        //    foreach (var item in Context.DiffGenerator.Entities)
-        //    {
-        //        lvEntities.Items.Add(new ListViewItem()
-        //        {
-        //            Text = item.DisplayName,
-        //            Tag = item
-        //        });
-
-        //    }
-        //}
 
         private void MIOrgLoad_Click(object sender, EventArgs e)
         {
@@ -282,7 +267,6 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                     right?.DisplayName?.UserLocalizedLabel?.Label,
                     right?.AttributeTypeName.Value});
 
-                    ColorColumns(item, 2, 6);
 
                     entityDiffControl1.LVAttributes.Items.Add(item);
                 }
@@ -303,7 +287,6 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                         right?.ReferencedAttribute,
 
                     });
-                    ColorColumns(item, 2, 8);
 
                     entityDiffControl1.LVOneToManyRelationships.Items.Add(item);
 
@@ -323,20 +306,22 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                         right?.Entity1LogicalName,
                         right?.Entity2LogicalName,
                     });
-                    ColorColumns(item, 2, 6);
 
                     entityDiffControl1.LVManyToManyRelationships.Items.Add(item);
 
                 }
 
 
-                foreach (var fd in entityDiff.Forms)
-                {
-                    var left = fd.Left;
-                    var right = fd.Right;
+                
+            }
 
-                    var item = new ListViewItem(new string[] {
-                        entityDiff.EntityInfo.LogicalName,
+            foreach (var fd in Context.DiffGenerator.DiffResult.Forms)
+            {
+                var left = fd.Left;
+                var right = fd.Right;
+
+                var item = new ListViewItem(new string[] {
+                        fd.EntityName,
                         fd.Name,
                         left?.GetAttributeValue<string>("name"),
                         left?.GetAttributeValue<OptionSetValue>("type")?.Value.ToString(),
@@ -344,26 +329,23 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                         right?.GetAttributeValue<OptionSetValue>("type")?.Value.ToString(),
                     });
 
-                    ColorColumns(item, 2, 6);
-                    entityDiffControl1.LVForms.Items.Add(item);
+                entityDiffControl1.LVForms.Items.Add(item);
 
-                }
-                foreach (var vd in entityDiff.Views)
-                {
-                    var left = vd.Left;
-                    var right = vd.Right;
+            }
+            foreach (var vd in Context.DiffGenerator.DiffResult.Views)
+            {
+                var left = vd.Left;
+                var right = vd.Right;
 
-                    var item = new ListViewItem(new string[] {
-                        entityDiff.EntityInfo.LogicalName,
+                var item = new ListViewItem(new string[] {
+                        vd.EntityName,
                         vd.Name,
                         left?.GetAttributeValue<OptionSetValue>("type")?.Value.ToString(),
                         right?.GetAttributeValue<OptionSetValue>("type")?.Value.ToString(),
                     });
 
-                    ColorColumns(item, 2, 4);
-                    entityDiffControl1.LVViews.Items.Add(item);
+                entityDiffControl1.LVViews.Items.Add(item);
 
-                }
             }
 
             foreach (var wd in Context.DiffGenerator.DiffResult.Workflows)
@@ -377,7 +359,6 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                     right?.GetAttributeValue<OptionSetValue>("category").Value.ToString(),
                 });
 
-                ColorColumns(item, 1, 5);
 
                 entityDiffControl1.LVWorkflows.Items.Add(item);
             }
@@ -392,7 +373,6 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                     left?.GetAttributeValue<bool>("iswokflowactivity").ToString(),
                     right?.GetAttributeValue<bool>("iswokflowactivity").ToString(),
                 });
-                ColorColumns(item, 1, 3);
 
                 entityDiffControl1.LVPlugins.Items.Add(item);
             }
@@ -412,7 +392,6 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                     right?.GetAttributeValue<OptionSetValue>("stage")?.Value.ToString(),
                     right?.GetAttributeValue<OptionSetValue>("statecode")?.Value.ToString(),
                 });
-                ColorColumns(item, 1, 7);
 
                 entityDiffControl1.LVPlugins.Items.Add(item);
             }
@@ -428,30 +407,24 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                     left?.GetAttributeValue<string>("description"),
                     right?.GetAttributeValue<string>("description"),
                 });
-                ColorColumns(item, 2, 4);
 
-                entityDiffControl1.LVPlugins.Items.Add(item);
+                entityDiffControl1.LVTemplates.Items.Add(item);
+            }
+            foreach (var role in Context.DiffGenerator.DiffResult.Roles)
+            {
+                var left = role.Left;
+                var right = role.Right;
+
+                var item = new ListViewItem(new string[] {
+                    role.Name,
+                    left?.Id.ToString(),
+                    right?.Id.ToString(),
+                });
+
+                entityDiffControl1.LVRoles.Items.Add(item);
             }
 
             entityDiffControl1.OptimizeDisplay();
-
-        }
-
-        private void ColorColumns(ListViewItem item, int rn, int n)
-        {
-
-            int j = (n - rn) / 2;
-
-            for (var i = 0; i < j; i++)
-            {
-                item.SubItems[i + rn].BackColor = Context.LeftColor;
-            }
-            for (var i = j; i < n - rn; i++)
-            {
-                item.SubItems[i + rn].BackColor = Context.RightColor;
-            }
-
-            item.UseItemStyleForSubItems = false;
 
         }
 
@@ -567,6 +540,20 @@ namespace Xrm.DevOPs.Manager.UI.Forms
         private void MICloseAllWindows_Click(object sender, EventArgs e)
         {
             tabCtrlMain.Controls.Clear();
+        }
+
+        public void ProgressStart(string title, int min, int max)
+        {
+            statusMessage.Text = title;
+            statusProgressBar.Minimum = 1;
+            statusProgressBar.Maximum = max == 0 ? 1 : max;
+            statusProgressBar.Step = 1;
+            statusProgressBar.Value = 1;
+        }
+
+        public void ProgressPerformStep()
+        {
+            statusProgressBar.PerformStep();
         }
     }
 

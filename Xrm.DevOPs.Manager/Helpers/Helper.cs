@@ -12,5 +12,7 @@ namespace Xrm.DevOPs.ComponentModel
         {
             return T.GetType().GetProperty(PropName) == null ? null : T.GetType().GetProperty(PropName).GetValue(T, null);
         }
+
+
     }
 }

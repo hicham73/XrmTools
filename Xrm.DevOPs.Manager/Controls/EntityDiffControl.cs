@@ -23,6 +23,7 @@ namespace Xrm.DevOPs.Controls
                 new ResultView(gbPlugins, lvPlugins),
                 new ResultView(gbPluginSteps, lvPluginSteps),
                 new ResultView(gbTemplates, lvTemplates),
+                new ResultView(gbRoles, lvRoles),
 
             };
         }
@@ -66,6 +67,10 @@ namespace Xrm.DevOPs.Controls
         public ListView LVTemplates
         {
             get { return lvTemplates; }
+        }
+        public ListView LVRoles
+        {
+            get { return lvRoles; }
         }
 
         public void OptimizeDisplay()

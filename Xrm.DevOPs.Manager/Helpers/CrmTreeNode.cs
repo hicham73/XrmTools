@@ -18,6 +18,7 @@ namespace Xrm.DevOPs.Manager.ComponentModel
             {
                 component = value;
                 Text = component.Text;
+                Name = component.Name;
             }
         }
         public CrmComponentCollection<T> Collection { get; set; }

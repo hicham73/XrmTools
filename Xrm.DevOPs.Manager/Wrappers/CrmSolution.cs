@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Xrm.DevOPs.ComponentModel;
 using Xrm.DevOPs.Manager.Helpers;
+using Xrm.DevOPs.Manager.UI.Forms;
 using Xrm.DevOPs.Manager.Util;
 using static Xrm.DevOPs.ComponentModel.EnumTypes;
 
@@ -18,30 +19,27 @@ namespace Xrm.DevOPs.Manager.Wrappers
         #region Properties
 
         public List<CrmComponent> Components { get; set; }
-        public CrmComponentCollection<CrmSolution> ChildSolutions { get; set; } = new CrmComponentCollection<CrmSolution>(new List<KeyValuePair<string, string>>() {
-            new KeyValuePair<string, string>("Name","Name")
-        });
-        public CrmComponentCollection<EntityComponent> EntityComponents { get; set; } = new CrmComponentCollection<EntityComponent>(new List<KeyValuePair<string, string>>() {
-            new KeyValuePair<string, string>("DisplayName","Display Name"),
-            new KeyValuePair<string, string>("Name","Name"),
-            new KeyValuePair<string, string>("IsManaged","State"),
-            new KeyValuePair<string, string>("IsCustomizable","Customizable"),
-
-        });
-        public CrmComponentCollection<OptionSetComponent> OptionSetComponents { get; set; } = new CrmComponentCollection<OptionSetComponent>(new List<KeyValuePair<string, string>>() {
+        public CrmComponentCollection<CrmSolution> ChildSolutions { get; set; } = new CrmComponentCollection<CrmSolution>("Solutions", new List<KeyValuePair<string, string>>() {
+                new KeyValuePair<string, string>("Name","Name")});
+        public CrmComponentCollection<EntityComponent> EntityComponents { get; set; } = new CrmComponentCollection<EntityComponent>("Entities",new List<KeyValuePair<string, string>>() {
+                new KeyValuePair<string, string>("DisplayName","Display Name"),
+                new KeyValuePair<string, string>("Name","Name"),
+                new KeyValuePair<string, string>("IsManaged","State"),
+                new KeyValuePair<string, string>("IsCustomizable","Customizable")});
+        public CrmComponentCollection<OptionSetComponent> OptionSetComponents { get; set; } = new CrmComponentCollection<OptionSetComponent>("OptionSets", new List<KeyValuePair<string, string>>() {
             new KeyValuePair<string, string>("DisplayName","Display Name"),
             new KeyValuePair<string, string>("Name","Name"),
             new KeyValuePair<string, string>("Description","Description"),
             new KeyValuePair<string, string>("IsManaged","State"),
             new KeyValuePair<string, string>("IsCustomizable","Customizable"),
         });
-        public CrmComponentCollection<PluginAssemblyComponent> PluginAssemblyComponents { get; set; } = new CrmComponentCollection<PluginAssemblyComponent>(new List<KeyValuePair<string, string>>() {
+        public CrmComponentCollection<PluginAssemblyComponent> PluginAssemblyComponents { get; set; } = new CrmComponentCollection<PluginAssemblyComponent>("PluginAssemblies",new List<KeyValuePair<string, string>>() {
             new KeyValuePair<string, string>("DisplayName","Display Name"),
             new KeyValuePair<string, string>("Name","Name"),
             new KeyValuePair<string, string>("IsManaged","State"),
             new KeyValuePair<string, string>("IsCustomizable","Customizable"),
         });
-        public CrmComponentCollection<WorkflowComponent> WorkflowComponents { get; set; } = new CrmComponentCollection<WorkflowComponent>(new List<KeyValuePair<string, string>>() {
+        public CrmComponentCollection<WorkflowComponent> WorkflowComponents { get; set; } = new CrmComponentCollection<WorkflowComponent>("Workflows",new List<KeyValuePair<string, string>>() {
             new KeyValuePair<string, string>("Name","Name"),
             new KeyValuePair<string, string>("Uniquename","Unique Name"),
             new KeyValuePair<string, string>("CategoryValue","Category"),
@@ -51,45 +49,45 @@ namespace Xrm.DevOPs.Manager.Wrappers
             new KeyValuePair<string, string>("SubProcess","Sub Process"),
             new KeyValuePair<string, string>("BusinessProcessTypeValue","Business Process Type"),
         });
-        public CrmComponentCollection<WebResourceComponent> WebResourceComponents { get; set; } = new CrmComponentCollection<WebResourceComponent>(new List<KeyValuePair<string, string>>() {
+        public CrmComponentCollection<WebResourceComponent> WebResourceComponents { get; set; } = new CrmComponentCollection<WebResourceComponent>("WebResources",new List<KeyValuePair<string, string>>() {
             new KeyValuePair<string, string>("DisplayName","Display Name"),
             new KeyValuePair<string, string>("Name","Name"),
             new KeyValuePair<string, string>("IsManaged","State"),
             new KeyValuePair<string, string>("IsCustomizable","Customizable"),
         });
-        public CrmComponentCollection<SecurityRoleComponent> SecurityRoleComponents { get; set; } = new CrmComponentCollection<SecurityRoleComponent>(new List<KeyValuePair<string, string>>() {
+        public CrmComponentCollection<SecurityRoleComponent> SecurityRoleComponents { get; set; } = new CrmComponentCollection<SecurityRoleComponent>("SecurityRoles",new List<KeyValuePair<string, string>>() {
             new KeyValuePair<string, string>("DisplayName","Display Name"),
             new KeyValuePair<string, string>("Name","Name"),
             new KeyValuePair<string, string>("IsManaged","State"),
             new KeyValuePair<string, string>("IsCustomizable","Customizable"),
         });
-        public CrmComponentCollection<RoutingRuleComponent> RoutingRuleComponents { get; set; } = new CrmComponentCollection<RoutingRuleComponent>(new List<KeyValuePair<string, string>>() {
+        public CrmComponentCollection<RoutingRuleComponent> RoutingRuleComponents { get; set; } = new CrmComponentCollection<RoutingRuleComponent>("RoutingRules",new List<KeyValuePair<string, string>>() {
             new KeyValuePair<string, string>("DisplayName","Display Name"),
             new KeyValuePair<string, string>("Name","Name"),
             new KeyValuePair<string, string>("IsManaged","State"),
             new KeyValuePair<string, string>("IsCustomizable","Customizable"),
         });
-        public CrmComponentCollection<EmailTemplateComponent> EmailTemplateComponents { get; set; } = new CrmComponentCollection<EmailTemplateComponent>(new List<KeyValuePair<string, string>>() {
+        public CrmComponentCollection<EmailTemplateComponent> EmailTemplateComponents { get; set; } = new CrmComponentCollection<EmailTemplateComponent>("EmailTemplates",new List<KeyValuePair<string, string>>() {
             new KeyValuePair<string, string>("DisplayName","Display Name"),
             new KeyValuePair<string, string>("Name","Name"),
             new KeyValuePair<string, string>("IsManaged","State"),
             new KeyValuePair<string, string>("IsCustomizable","Customizable"),
         });
-        public CrmComponentCollection<KbArticleTemplateComponent> KbArticleTemplateComponents { get; set; } = new CrmComponentCollection<KbArticleTemplateComponent>(new List<KeyValuePair<string, string>>() {
-            new KeyValuePair<string, string>("DisplayName","Display Name"),
-            new KeyValuePair<string, string>("Name","Name"),
-            new KeyValuePair<string, string>("Description","Description"),
-            new KeyValuePair<string, string>("IsManaged","State"),
-            new KeyValuePair<string, string>("IsCustomizable","Customizable"),
-        });
-        public CrmComponentCollection<MailMergeTemplateComponent> MailMergeTemplateComponents { get; set; } = new CrmComponentCollection<MailMergeTemplateComponent>(new List<KeyValuePair<string, string>>() {
+        public CrmComponentCollection<KbArticleTemplateComponent> KbArticleTemplateComponents { get; set; } = new CrmComponentCollection<KbArticleTemplateComponent>("KbArticles",new List<KeyValuePair<string, string>>() {
             new KeyValuePair<string, string>("DisplayName","Display Name"),
             new KeyValuePair<string, string>("Name","Name"),
             new KeyValuePair<string, string>("Description","Description"),
             new KeyValuePair<string, string>("IsManaged","State"),
             new KeyValuePair<string, string>("IsCustomizable","Customizable"),
         });
-        public CrmComponentCollection<ContractTemplateComponent> ContractTemplateComponents { get; set; } = new CrmComponentCollection<ContractTemplateComponent>(new List<KeyValuePair<string, string>>() {
+        public CrmComponentCollection<MailMergeTemplateComponent> MailMergeTemplateComponents { get; set; } = new CrmComponentCollection<MailMergeTemplateComponent>("MailMergeTemplates",new List<KeyValuePair<string, string>>() {
+            new KeyValuePair<string, string>("DisplayName","Display Name"),
+            new KeyValuePair<string, string>("Name","Name"),
+            new KeyValuePair<string, string>("Description","Description"),
+            new KeyValuePair<string, string>("IsManaged","State"),
+            new KeyValuePair<string, string>("IsCustomizable","Customizable"),
+        });
+        public CrmComponentCollection<ContractTemplateComponent> ContractTemplateComponents { get; set; } = new CrmComponentCollection<ContractTemplateComponent>("ContractTemplates",new List<KeyValuePair<string, string>>() {
             new KeyValuePair<string, string>("DisplayName","Display Name"),
             new KeyValuePair<string, string>("Name","Name"),
             new KeyValuePair<string, string>("IsManaged","State"),
@@ -197,9 +195,13 @@ namespace Xrm.DevOPs.Manager.Wrappers
 
         public void LoadFromComponents(List<CrmComponent> components, IOrganizationService service)
         {
+            var mainForm = (MainForm)Application.OpenForms[0];
+            mainForm.ProgressStart("Loading Components...", 1, 2 * components.Count);
+
             foreach (var component in components)
             {
-                if (component.ComponentType == ComponentType.Entity)
+
+                if(component.ComponentType == ComponentType.Entity)
                 {
                     RetrieveEntityRequest request = new RetrieveEntityRequest
                     {
@@ -210,7 +212,7 @@ namespace Xrm.DevOPs.Manager.Wrappers
                     RetrieveEntityResponse response = (RetrieveEntityResponse)service.Execute(request);
                     AddEntity(new EntityComponent(component, response.EntityMetadata));
                 }
-                else if (component.ComponentType == ComponentType.PluginAssembly)
+                else if(component.ComponentType == ComponentType.PluginAssembly)
                 {
                     var e = service.Retrieve("pluginassembly", component.ObjectId, new ColumnSet(true));
 
@@ -285,12 +287,15 @@ namespace Xrm.DevOPs.Manager.Wrappers
                 }
                 else if (component.ComponentType == ComponentType.OptionSet)
                 {
-
                     var optionSetMetabase = Organization.OptionSets.Where(x => x.MetadataId == component.ObjectId).FirstOrDefault<OptionSetMetadataBase>();
 
                     if(optionSetMetabase != null)
                         OptionSetComponents.Components.Add(new OptionSetComponent(component, optionSetMetabase));
                 }
+
+                mainForm.ProgressPerformStep();
+
+
             }
 
             foreach (var component in components)
@@ -310,6 +315,7 @@ namespace Xrm.DevOPs.Manager.Wrappers
 
                 }
 
+                mainForm.ProgressPerformStep();
             }
 
         }

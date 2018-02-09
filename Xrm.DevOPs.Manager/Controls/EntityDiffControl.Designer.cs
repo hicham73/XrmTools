@@ -105,6 +105,11 @@
             this.columnHeader56 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader57 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader58 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.gbRoles = new System.Windows.Forms.GroupBox();
+            this.lvRoles = new System.Windows.Forms.ListView();
+            this.columnHeader40 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader42 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader43 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gbAttributes.SuspendLayout();
             this.gbOneToMany.SuspendLayout();
             this.gbManyToMany.SuspendLayout();
@@ -115,6 +120,7 @@
             this.gbPlugins.SuspendLayout();
             this.gbPluginSteps.SuspendLayout();
             this.gbTemplates.SuspendLayout();
+            this.gbRoles.SuspendLayout();
             this.SuspendLayout();
             // 
             // lvAttributes
@@ -730,12 +736,58 @@
             this.columnHeader58.Text = "Description";
             this.columnHeader58.Width = 300;
             // 
+            // gbRoles
+            // 
+            this.gbRoles.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.gbRoles.Controls.Add(this.lvRoles);
+            this.gbRoles.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gbRoles.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbRoles.ForeColor = System.Drawing.Color.SteelBlue;
+            this.gbRoles.Location = new System.Drawing.Point(0, 735);
+            this.gbRoles.Name = "gbRoles";
+            this.gbRoles.Size = new System.Drawing.Size(1188, 75);
+            this.gbRoles.TabIndex = 15;
+            this.gbRoles.TabStop = false;
+            this.gbRoles.Text = "Security Roles";
+            // 
+            // lvRoles
+            // 
+            this.lvRoles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader40,
+            this.columnHeader42,
+            this.columnHeader43});
+            this.lvRoles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvRoles.FullRowSelect = true;
+            this.lvRoles.GridLines = true;
+            this.lvRoles.Location = new System.Drawing.Point(3, 16);
+            this.lvRoles.Name = "lvRoles";
+            this.lvRoles.Size = new System.Drawing.Size(1182, 56);
+            this.lvRoles.TabIndex = 0;
+            this.lvRoles.UseCompatibleStateImageBehavior = false;
+            this.lvRoles.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader40
+            // 
+            this.columnHeader40.Text = "Name";
+            this.columnHeader40.Width = 300;
+            // 
+            // columnHeader42
+            // 
+            this.columnHeader42.Text = "Id";
+            this.columnHeader42.Width = 300;
+            // 
+            // columnHeader43
+            // 
+            this.columnHeader43.Text = "Id";
+            this.columnHeader43.Width = 300;
+            // 
             // EntityDiffControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.Controls.Add(this.gbRoles);
             this.Controls.Add(this.gbTemplates);
             this.Controls.Add(this.gbPluginSteps);
             this.Controls.Add(this.gbPlugins);
@@ -759,6 +811,7 @@
             this.gbPlugins.ResumeLayout(false);
             this.gbPluginSteps.ResumeLayout(false);
             this.gbTemplates.ResumeLayout(false);
+            this.gbRoles.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -841,5 +894,10 @@
         private System.Windows.Forms.ColumnHeader columnHeader56;
         private System.Windows.Forms.ColumnHeader columnHeader57;
         private System.Windows.Forms.ColumnHeader columnHeader58;
+        private System.Windows.Forms.GroupBox gbRoles;
+        private System.Windows.Forms.ListView lvRoles;
+        private System.Windows.Forms.ColumnHeader columnHeader40;
+        private System.Windows.Forms.ColumnHeader columnHeader42;
+        private System.Windows.Forms.ColumnHeader columnHeader43;
     }
 }

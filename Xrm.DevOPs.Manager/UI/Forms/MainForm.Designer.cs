@@ -33,12 +33,18 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.MIFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.MILoadOrganizations = new System.Windows.Forms.ToolStripMenuItem();
+            this.MIExit = new System.Windows.Forms.ToolStripMenuItem();
             this.organizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MIOrgCompare = new System.Windows.Forms.ToolStripMenuItem();
             this.MIOrgSync = new System.Windows.Forms.ToolStripMenuItem();
             this.solutionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MISolCompare = new System.Windows.Forms.ToolStripMenuItem();
             this.MISolTransfer = new System.Windows.Forms.ToolStripMenuItem();
+            this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MICloseActiveWindow = new System.Windows.Forms.ToolStripMenuItem();
+            this.MICloseAllWindows = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tvOrgs = new System.Windows.Forms.TreeView();
             this.tabControlMain = new System.Windows.Forms.TabControl();
@@ -63,12 +69,10 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.BtnSyncOrgs = new System.Windows.Forms.Button();
             this.BtnTransfer = new System.Windows.Forms.Button();
             this.pbHome = new System.Windows.Forms.PictureBox();
-            this.MIFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.MILoadOrganizations = new System.Windows.Forms.ToolStripMenuItem();
-            this.MIExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MICloseActiveWindow = new System.Windows.Forms.ToolStripMenuItem();
-            this.MICloseAllWindows = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusMessage = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -84,6 +88,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.tabSolCompare.SuspendLayout();
             this.tabSyncTool.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHome)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -101,6 +106,30 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // MIFile
+            // 
+            this.MIFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MILoadOrganizations,
+            this.MIExit});
+            this.MIFile.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.MIFile.Name = "MIFile";
+            this.MIFile.Size = new System.Drawing.Size(38, 20);
+            this.MIFile.Text = "File";
+            // 
+            // MILoadOrganizations
+            // 
+            this.MILoadOrganizations.Name = "MILoadOrganizations";
+            this.MILoadOrganizations.Size = new System.Drawing.Size(179, 22);
+            this.MILoadOrganizations.Text = "Load Organizations";
+            this.MILoadOrganizations.Click += new System.EventHandler(this.MILoadOrganizations_Click);
+            // 
+            // MIExit
+            // 
+            this.MIExit.Name = "MIExit";
+            this.MIExit.Size = new System.Drawing.Size(179, 22);
+            this.MIExit.Text = "Exit";
+            this.MIExit.Click += new System.EventHandler(this.MIExit_Click);
+            // 
             // organizationToolStripMenuItem
             // 
             this.organizationToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
@@ -116,14 +145,14 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             // MIOrgCompare
             // 
             this.MIOrgCompare.Name = "MIOrgCompare";
-            this.MIOrgCompare.Size = new System.Drawing.Size(152, 22);
+            this.MIOrgCompare.Size = new System.Drawing.Size(124, 22);
             this.MIOrgCompare.Text = "Compare";
             this.MIOrgCompare.Click += new System.EventHandler(this.MIOrgDiff_Click);
             // 
             // MIOrgSync
             // 
             this.MIOrgSync.Name = "MIOrgSync";
-            this.MIOrgSync.Size = new System.Drawing.Size(152, 22);
+            this.MIOrgSync.Size = new System.Drawing.Size(124, 22);
             this.MIOrgSync.Text = "Sync";
             this.MIOrgSync.Click += new System.EventHandler(this.MIOrgSync_Click);
             // 
@@ -141,16 +170,40 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             // MISolCompare
             // 
             this.MISolCompare.Name = "MISolCompare";
-            this.MISolCompare.Size = new System.Drawing.Size(152, 22);
+            this.MISolCompare.Size = new System.Drawing.Size(124, 22);
             this.MISolCompare.Text = "Compare";
             this.MISolCompare.Click += new System.EventHandler(this.MISolCompare_Click);
             // 
             // MISolTransfer
             // 
             this.MISolTransfer.Name = "MISolTransfer";
-            this.MISolTransfer.Size = new System.Drawing.Size(152, 22);
+            this.MISolTransfer.Size = new System.Drawing.Size(124, 22);
             this.MISolTransfer.Text = "Transfer";
             this.MISolTransfer.Click += new System.EventHandler(this.MISolTransfer_Click);
+            // 
+            // windowsToolStripMenuItem
+            // 
+            this.windowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MICloseActiveWindow,
+            this.MICloseAllWindows});
+            this.windowsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
+            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.windowsToolStripMenuItem.Text = "Windows";
+            // 
+            // MICloseActiveWindow
+            // 
+            this.MICloseActiveWindow.Name = "MICloseActiveWindow";
+            this.MICloseActiveWindow.Size = new System.Drawing.Size(142, 22);
+            this.MICloseActiveWindow.Text = "Close Active";
+            this.MICloseActiveWindow.Click += new System.EventHandler(this.MICloseActiveWindow_Click);
+            // 
+            // MICloseAllWindows
+            // 
+            this.MICloseAllWindows.Name = "MICloseAllWindows";
+            this.MICloseAllWindows.Size = new System.Drawing.Size(142, 22);
+            this.MICloseAllWindows.Text = "Close All";
+            this.MICloseAllWindows.Click += new System.EventHandler(this.MICloseAllWindows_Click);
             // 
             // splitContainer1
             // 
@@ -165,16 +218,17 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControlMain);
-            this.splitContainer1.Size = new System.Drawing.Size(1170, 824);
+            this.splitContainer1.Size = new System.Drawing.Size(1170, 848);
             this.splitContainer1.SplitterDistance = 170;
             this.splitContainer1.TabIndex = 1;
             // 
             // tvOrgs
             // 
+            this.tvOrgs.CheckBoxes = true;
             this.tvOrgs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvOrgs.Location = new System.Drawing.Point(0, 0);
             this.tvOrgs.Name = "tvOrgs";
-            this.tvOrgs.Size = new System.Drawing.Size(170, 824);
+            this.tvOrgs.Size = new System.Drawing.Size(170, 848);
             this.tvOrgs.TabIndex = 0;
             this.tvOrgs.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TVOrgs_AfterSelect);
             // 
@@ -185,7 +239,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.tabControlMain.Location = new System.Drawing.Point(0, 0);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(996, 824);
+            this.tabControlMain.Size = new System.Drawing.Size(996, 848);
             this.tabControlMain.TabIndex = 0;
             // 
             // imageList1
@@ -396,7 +450,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.tabDeploymentExplorer.Location = new System.Drawing.Point(4, 22);
             this.tabDeploymentExplorer.Name = "tabDeploymentExplorer";
             this.tabDeploymentExplorer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDeploymentExplorer.Size = new System.Drawing.Size(1176, 830);
+            this.tabDeploymentExplorer.Size = new System.Drawing.Size(1176, 854);
             this.tabDeploymentExplorer.TabIndex = 0;
             this.tabDeploymentExplorer.Text = "Deployment Explorer";
             // 
@@ -599,70 +653,53 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.pbHome.BackColor = System.Drawing.Color.LightGray;
             this.pbHome.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbHome.BackgroundImage")));
             this.pbHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pbHome.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbHome.InitialImage = null;
-            this.pbHome.Location = new System.Drawing.Point(0, 24);
+            this.pbHome.Location = new System.Drawing.Point(788, 27);
             this.pbHome.Name = "pbHome";
-            this.pbHome.Size = new System.Drawing.Size(1184, 856);
+            this.pbHome.Size = new System.Drawing.Size(352, 297);
             this.pbHome.TabIndex = 3;
             this.pbHome.TabStop = false;
             // 
-            // MIFile
+            // tabPage1
             // 
-            this.MIFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MILoadOrganizations,
-            this.MIExit});
-            this.MIFile.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.MIFile.Name = "MIFile";
-            this.MIFile.Size = new System.Drawing.Size(38, 20);
-            this.MIFile.Text = "File";
+            this.tabPage1.Location = new System.Drawing.Point(4, 23);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(988, 821);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // MILoadOrganizations
+            // statusStrip1
             // 
-            this.MILoadOrganizations.Name = "MILoadOrganizations";
-            this.MILoadOrganizations.Size = new System.Drawing.Size(179, 22);
-            this.MILoadOrganizations.Text = "Load Organizations";
-            this.MILoadOrganizations.Click += new System.EventHandler(this.MILoadOrganizations_Click);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusMessage,
+            this.statusProgressBar});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 858);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1184, 22);
+            this.statusStrip1.TabIndex = 4;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // MIExit
+            // statusMessage
             // 
-            this.MIExit.Name = "MIExit";
-            this.MIExit.Size = new System.Drawing.Size(179, 22);
-            this.MIExit.Text = "Exit";
-            this.MIExit.Click += new System.EventHandler(this.MIExit_Click);
+            this.statusMessage.Name = "statusMessage";
+            this.statusMessage.Size = new System.Drawing.Size(50, 17);
+            this.statusMessage.Text = "Loading";
             // 
-            // windowsToolStripMenuItem
+            // statusProgressBar
             // 
-            this.windowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MICloseActiveWindow,
-            this.MICloseAllWindows});
-            this.windowsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
-            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
-            this.windowsToolStripMenuItem.Text = "Windows";
-            // 
-            // MICloseActiveWindow
-            // 
-            this.MICloseActiveWindow.Name = "MICloseActiveWindow";
-            this.MICloseActiveWindow.Size = new System.Drawing.Size(152, 22);
-            this.MICloseActiveWindow.Text = "Close Active";
-            this.MICloseActiveWindow.Click += new System.EventHandler(this.MICloseActiveWindow_Click);
-            // 
-            // MICloseAllWindows
-            // 
-            this.MICloseAllWindows.Name = "MICloseAllWindows";
-            this.MICloseAllWindows.Size = new System.Drawing.Size(152, 22);
-            this.MICloseAllWindows.Text = "Close All";
-            this.MICloseAllWindows.Click += new System.EventHandler(this.MICloseAllWindows_Click);
+            this.statusProgressBar.Name = "statusProgressBar";
+            this.statusProgressBar.Size = new System.Drawing.Size(1100, 16);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 880);
-            this.Controls.Add(this.pbHome);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tabCtrlMain);
+            this.Controls.Add(this.pbHome);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "CRM DevOPs Manager";
@@ -684,6 +721,8 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.tabSolCompare.ResumeLayout(false);
             this.tabSyncTool.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbHome)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -728,6 +767,10 @@ namespace Xrm.DevOPs.Manager.UI.Forms
         private System.Windows.Forms.ToolStripMenuItem windowsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem MICloseActiveWindow;
         private System.Windows.Forms.ToolStripMenuItem MICloseAllWindows;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel statusMessage;
+        private System.Windows.Forms.ToolStripProgressBar statusProgressBar;
     }
 }
 
