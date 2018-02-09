@@ -285,6 +285,8 @@ namespace Xrm.DevOPs.Manager.Diff
             // Instantiate QueryExpression QEsavedquery
             var qe = new QueryExpression("savedquery");
             qe.Criteria.AddCondition(new ConditionExpression("iscustom", ConditionOperator.Equal, true));
+            qe.Criteria.AddCondition(new ConditionExpression("iscustomizable", ConditionOperator.Equal, true));
+            qe.Criteria.AddCondition(new ConditionExpression("ismanaged", ConditionOperator.Equal, false));
             qe.ColumnSet.AddColumns("name", "querytype", "returnedtypecode", "iscustom");
 
             var views1 = LeftService.RetrieveMultiple(qe).Entities;

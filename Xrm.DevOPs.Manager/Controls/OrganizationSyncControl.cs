@@ -66,10 +66,10 @@ namespace Xrm.DevOPs.Manager.Controls
                 OrgControls[i].TvMasterConfig = masterOrgControl.Tree;
             }
 
-            ReloadSolutions();
+            //ReloadTFSFiles();
         }
 
-        private void ReloadSolutions()
+        private void ReloadTFSFiles()
         {
             tvTFS.Nodes.Clear();
 
@@ -141,7 +141,7 @@ namespace Xrm.DevOPs.Manager.Controls
 
         private void BtnReload_Click(object sender, EventArgs e)
         {
-            ReloadSolutions();
+            ReloadTFSFiles();
         }
     }
 
