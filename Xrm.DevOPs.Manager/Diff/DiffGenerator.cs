@@ -24,6 +24,7 @@ namespace Xrm.DevOPs.Manager.Diff
         public DiffResult DiffResult { get { return _diffResult; } }
         public DiffResult Compare(List<string> options)
         {
+            _diffResult.Clear();
             mainForm = ((MainForm)Application.OpenForms[0]);
             
 

@@ -18,6 +18,17 @@ namespace Xrm.DevOPs.Manager.Diff
         public List<ComponentDiff<Entity>> Forms = new List<ComponentDiff<Entity>>();
         public List<ComponentDiff<Entity>> Views = new List<ComponentDiff<Entity>>();
         public List<ComponentDiff<Entity>> Roles = new List<ComponentDiff<Entity>>();
+
+        public void Clear()
+        {
+            Entities.Clear();
+            Workflows.Clear();
+            Plugins.Clear();
+            SdkMessageProcessingSteps.Clear();
+            Templates.Clear();
+            Views.Clear();
+            Roles.Clear();
+        }
     }
 
     public class EntityDiffResult
@@ -50,4 +61,6 @@ namespace Xrm.DevOPs.Manager.Diff
 
         public int LRI { get; set; }
     }
+
+
 }

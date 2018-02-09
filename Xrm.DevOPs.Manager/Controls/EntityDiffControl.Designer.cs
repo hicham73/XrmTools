@@ -87,9 +87,7 @@
             this.lvPlugins = new System.Windows.Forms.ListView();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader32 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gbPluginSteps = new System.Windows.Forms.GroupBox();
             this.lvPluginSteps = new System.Windows.Forms.ListView();
             this.columnHeader54 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -578,9 +576,7 @@
             this.lvPlugins.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader4,
             this.columnHeader11,
-            this.columnHeader23,
-            this.columnHeader17,
-            this.columnHeader32});
+            this.columnHeader17});
             this.lvPlugins.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvPlugins.FullRowSelect = true;
             this.lvPlugins.GridLines = true;
@@ -599,22 +595,12 @@
             // columnHeader11
             // 
             this.columnHeader11.Text = "Friendly Name";
-            this.columnHeader11.Width = 150;
-            // 
-            // columnHeader23
-            // 
-            this.columnHeader23.Text = "Is Activity";
-            this.columnHeader23.Width = 150;
+            this.columnHeader11.Width = 300;
             // 
             // columnHeader17
             // 
             this.columnHeader17.Text = "Friendly Name";
-            this.columnHeader17.Width = 150;
-            // 
-            // columnHeader32
-            // 
-            this.columnHeader32.Text = "Is Activity";
-            this.columnHeader32.Width = 150;
+            this.columnHeader17.Width = 300;
             // 
             // gbPluginSteps
             // 
@@ -870,9 +856,7 @@
         private System.Windows.Forms.ListView lvPlugins;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader11;
-        private System.Windows.Forms.ColumnHeader columnHeader23;
         private System.Windows.Forms.ColumnHeader columnHeader17;
-        private System.Windows.Forms.ColumnHeader columnHeader32;
         private System.Windows.Forms.ColumnHeader columnHeader33;
         private System.Windows.Forms.ColumnHeader columnHeader34;
         private System.Windows.Forms.ColumnHeader columnHeader35;
