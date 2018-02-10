@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xrm.DevOPs.ComponentModel
+namespace Xrm.DevOPs.Manager.Component
 {
     public static class Helper
     {
@@ -12,7 +12,5 @@ namespace Xrm.DevOPs.ComponentModel
         {
             return T.GetType().GetProperty(PropName) == null ? null : T.GetType().GetProperty(PropName).GetValue(T, null);
         }
-
-
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xrm.Sdk.Metadata;
 using System.ComponentModel;
 
-namespace Xrm.DevOPs.ComponentModel
+namespace Xrm.DevOPs.Manager.Component
 {
     public class AttributeComponent : CrmComponent
     {

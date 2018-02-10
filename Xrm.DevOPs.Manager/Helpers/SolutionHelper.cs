@@ -8,8 +8,8 @@ using Xrm.DevOPs.Manager.Wrappers;
 using Microsoft.Xrm.Sdk;
 using Xrm.DevOPs.Manager.Util;
 using System.Linq;
-using Xrm.DevOPs.ComponentModel;
-using static Xrm.DevOPs.ComponentModel.EnumTypes;
+using Xrm.DevOPs.Manager.Component;
+using static Xrm.DevOPs.Manager.Component.EnumTypes;
 
 namespace Xrm.DevOPs.Manager.Helpers
 {

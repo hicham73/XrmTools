@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using Xrm.DevOPs.Manager.Diff;
 using Xrm.DevOPs.Manager.Helpers;
 using Xrm.DevOPs.Manager.Wrappers;
-using Xrm.DevOPs.ComponentModel;
+using Xrm.DevOPs.Manager.Component;
 using Xrm.DevOPs.Manager.ComponentModel;
 
 

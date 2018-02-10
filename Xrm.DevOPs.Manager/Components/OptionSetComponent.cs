@@ -4,7 +4,7 @@ using System;
 using System.ComponentModel;
 using Xrm.DevOPs.Manager.ComponentModel.Property;
 
-namespace Xrm.DevOPs.ComponentModel
+namespace Xrm.DevOPs.Manager.Component
 {
     public class OptionSetComponent : CrmComponent
     {

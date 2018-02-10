@@ -37,12 +37,17 @@
             this.BtnReload = new System.Windows.Forms.ToolStripButton();
             this.masterOrgControl = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
             this.splitter1 = new System.Windows.Forms.Splitter();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.orgControlDev6 = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
+            this.orgControlDev5 = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
             this.orgControlDev1 = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
             this.orgControlDev2 = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
-            this.orgControlDev3 = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
             this.orgControlDev4 = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
+            this.orgControlDev3 = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
             this.rtSyncLog = new System.Windows.Forms.RichTextBox();
+            this.integrationOrgControl = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -52,6 +57,14 @@
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,8 +82,7 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainer2.Panel2.Controls.Add(this.rtSyncLog);
+            this.splitContainer2.Panel2.Controls.Add(this.splitContainer1);
             this.splitContainer2.Size = new System.Drawing.Size(1047, 612);
             this.splitContainer2.SplitterDistance = 233;
             this.splitContainer2.TabIndex = 10;
@@ -153,24 +165,85 @@
             this.splitter1.TabIndex = 0;
             this.splitter1.TabStop = false;
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.splitContainer3);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.integrationOrgControl);
+            this.splitContainer1.Size = new System.Drawing.Size(810, 612);
+            this.splitContainer1.SplitterDistance = 582;
+            this.splitContainer1.TabIndex = 2;
+            // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.tableLayoutPanel1);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.rtSyncLog);
+            this.splitContainer3.Size = new System.Drawing.Size(582, 612);
+            this.splitContainer3.SplitterDistance = 474;
+            this.splitContainer3.TabIndex = 0;
+            // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.Controls.Add(this.orgControlDev6, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.orgControlDev5, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.orgControlDev1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.orgControlDev2, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.orgControlDev4, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.orgControlDev3, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.orgControlDev4, 3, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(810, 329);
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(582, 474);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // orgControlDev6
+            // 
+            this.orgControlDev6.CrmMasterOrg = null;
+            this.orgControlDev6.CrmOrg = null;
+            this.orgControlDev6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.orgControlDev6.Location = new System.Drawing.Point(391, 240);
+            this.orgControlDev6.Name = "orgControlDev6";
+            this.orgControlDev6.Size = new System.Drawing.Size(188, 231);
+            this.orgControlDev6.TabIndex = 5;
+            this.orgControlDev6.TvMasterConfig = null;
+            this.orgControlDev6.TvTfs = null;
+            // 
+            // orgControlDev5
+            // 
+            this.orgControlDev5.CrmMasterOrg = null;
+            this.orgControlDev5.CrmOrg = null;
+            this.orgControlDev5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.orgControlDev5.Location = new System.Drawing.Point(197, 240);
+            this.orgControlDev5.Name = "orgControlDev5";
+            this.orgControlDev5.Size = new System.Drawing.Size(188, 231);
+            this.orgControlDev5.TabIndex = 4;
+            this.orgControlDev5.TvMasterConfig = null;
+            this.orgControlDev5.TvTfs = null;
             // 
             // orgControlDev1
             // 
@@ -179,7 +252,7 @@
             this.orgControlDev1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.orgControlDev1.Location = new System.Drawing.Point(3, 3);
             this.orgControlDev1.Name = "orgControlDev1";
-            this.orgControlDev1.Size = new System.Drawing.Size(196, 323);
+            this.orgControlDev1.Size = new System.Drawing.Size(188, 231);
             this.orgControlDev1.TabIndex = 0;
             this.orgControlDev1.TvMasterConfig = null;
             this.orgControlDev1.TvTfs = null;
@@ -189,45 +262,57 @@
             this.orgControlDev2.CrmMasterOrg = null;
             this.orgControlDev2.CrmOrg = null;
             this.orgControlDev2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.orgControlDev2.Location = new System.Drawing.Point(205, 3);
+            this.orgControlDev2.Location = new System.Drawing.Point(197, 3);
             this.orgControlDev2.Name = "orgControlDev2";
-            this.orgControlDev2.Size = new System.Drawing.Size(196, 323);
+            this.orgControlDev2.Size = new System.Drawing.Size(188, 231);
             this.orgControlDev2.TabIndex = 1;
             this.orgControlDev2.TvMasterConfig = null;
             this.orgControlDev2.TvTfs = null;
-            // 
-            // orgControlDev3
-            // 
-            this.orgControlDev3.CrmMasterOrg = null;
-            this.orgControlDev3.CrmOrg = null;
-            this.orgControlDev3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.orgControlDev3.Location = new System.Drawing.Point(407, 3);
-            this.orgControlDev3.Name = "orgControlDev3";
-            this.orgControlDev3.Size = new System.Drawing.Size(196, 323);
-            this.orgControlDev3.TabIndex = 2;
-            this.orgControlDev3.TvMasterConfig = null;
-            this.orgControlDev3.TvTfs = null;
             // 
             // orgControlDev4
             // 
             this.orgControlDev4.CrmMasterOrg = null;
             this.orgControlDev4.CrmOrg = null;
             this.orgControlDev4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.orgControlDev4.Location = new System.Drawing.Point(609, 3);
+            this.orgControlDev4.Location = new System.Drawing.Point(3, 240);
             this.orgControlDev4.Name = "orgControlDev4";
-            this.orgControlDev4.Size = new System.Drawing.Size(198, 323);
+            this.orgControlDev4.Size = new System.Drawing.Size(188, 231);
             this.orgControlDev4.TabIndex = 3;
             this.orgControlDev4.TvMasterConfig = null;
             this.orgControlDev4.TvTfs = null;
             // 
+            // orgControlDev3
+            // 
+            this.orgControlDev3.CrmMasterOrg = null;
+            this.orgControlDev3.CrmOrg = null;
+            this.orgControlDev3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.orgControlDev3.Location = new System.Drawing.Point(391, 3);
+            this.orgControlDev3.Name = "orgControlDev3";
+            this.orgControlDev3.Size = new System.Drawing.Size(188, 231);
+            this.orgControlDev3.TabIndex = 2;
+            this.orgControlDev3.TvMasterConfig = null;
+            this.orgControlDev3.TvTfs = null;
+            // 
             // rtSyncLog
             // 
-            this.rtSyncLog.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.rtSyncLog.Location = new System.Drawing.Point(0, 329);
+            this.rtSyncLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtSyncLog.Location = new System.Drawing.Point(0, 0);
             this.rtSyncLog.Name = "rtSyncLog";
-            this.rtSyncLog.Size = new System.Drawing.Size(810, 283);
+            this.rtSyncLog.Size = new System.Drawing.Size(582, 134);
             this.rtSyncLog.TabIndex = 0;
             this.rtSyncLog.Text = "";
+            // 
+            // integrationOrgControl
+            // 
+            this.integrationOrgControl.CrmMasterOrg = null;
+            this.integrationOrgControl.CrmOrg = null;
+            this.integrationOrgControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.integrationOrgControl.Location = new System.Drawing.Point(0, 0);
+            this.integrationOrgControl.Name = "integrationOrgControl";
+            this.integrationOrgControl.Size = new System.Drawing.Size(224, 612);
+            this.integrationOrgControl.TabIndex = 4;
+            this.integrationOrgControl.TvMasterConfig = null;
+            this.integrationOrgControl.TvTfs = null;
             // 
             // OrganizationSyncControl
             // 
@@ -247,6 +332,14 @@
             this.splitContainer4.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -268,5 +361,10 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripButton BtnReload;
+        private OrganizationControl orgControlDev6;
+        private OrganizationControl orgControlDev5;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainer3;
+        private OrganizationControl integrationOrgControl;
     }
 }

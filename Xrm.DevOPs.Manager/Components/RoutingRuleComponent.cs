@@ -3,7 +3,7 @@ using Microsoft.Xrm.Sdk;
 using System;
 using System.ComponentModel;
 
-namespace Xrm.DevOPs.ComponentModel
+namespace Xrm.DevOPs.Manager.Component
 {
     public class RoutingRuleComponent : CrmComponent
     {

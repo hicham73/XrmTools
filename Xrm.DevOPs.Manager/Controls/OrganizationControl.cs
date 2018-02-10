@@ -17,11 +17,14 @@ using System.Net.Http.Headers;
 using System.IO;
 using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
+using Microsoft.TeamFoundation.VersionControl.Client;
 
 namespace Xrm.DevOPs.Manager.Controls
 {
     public partial class OrganizationControl : UserControl
     {
+
+        public RichTextBox Log { get; set; }
         public CrmOrganization CrmMasterOrg { get; set; }
         public TreeView TvTfs { get; set; }
         public TreeView TvMasterConfig { get; set; }
@@ -40,9 +43,7 @@ namespace Xrm.DevOPs.Manager.Controls
 
         public void LoadSolutions(CrmOrganization crmOrg)
         {
-
             CrmOrg = crmOrg;
-
             ReLoadSolutions();
         }
 
@@ -118,25 +119,6 @@ namespace Xrm.DevOPs.Manager.Controls
 
                 }
             }
-
-
-            //var masterConfig = _config.GetOrgConfigByName("MasterConfig");
-            //var configPatchPrefix = $"MasterConfigBase_Patch";
-
-            //fromOrg.LoadConfigSolutions(configPatchPrefix);
-            //toOrg.LoadConfigSolutions(configPatchPrefix);
-
-            //int count = 0;
-            //foreach (var sol in fromOrg.ConfigSolutions)
-            //{
-            //    var isOld = toOrg.ConfigSolutions.Where(x => x.UniqueName == sol.UniqueName && x.Version == sol.Version).Any<CrmSolution>();
-
-            //    if (!isOld)
-            //    {
-            //        SolutionHelper.TransferSolution(fromOrg, toOrg, sol.UniqueName);
-            //        count++;
-            //    }
-            //}
         }
 
         List<TreeNode> DiffFiles = new List<TreeNode>();
@@ -144,10 +126,9 @@ namespace Xrm.DevOPs.Manager.Controls
         {
             try
             {
-                var config = (ManagerSection)ConfigurationManager.GetSection("Manager");
-
-                foreach (ProjectElement proj in config.Projects)
+                foreach (ProjectElement proj in GlobalContext.Config.Projects)
                 {
+                    
                     var projectName = proj.Name;
                     var baseNode = FindSolProjectNode(tvSolutions, projectName);
                     if (baseNode != null)
@@ -185,16 +166,13 @@ namespace Xrm.DevOPs.Manager.Controls
 
                 foreach (TreeNode node in DiffFiles)
                 {
-                    TransferPatch(((Value)(node.Tag))?.path);
+                    TransferPatch((Item)node.Tag);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Exception while sycning projects, Message: {ex.Message}, Inner: {ex.InnerException?.Message}");
             }
-
-
-
         }
 
         private void BtnSyncAll_Click(object sender, EventArgs e)
@@ -238,66 +216,17 @@ namespace Xrm.DevOPs.Manager.Controls
             return null;
         }
 
-        private async void TransferPatch(string tfsPath)
+        private void TransferPatch(Item item)
         {
-            string credentials = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", "", "f55jctcmowqpla3rmjic64wxpho4d6pxw66kvuh2y35xuu6uisyq")));
+            var stream = item.DownloadFile();
+            var bytes = StreamHelper.ReadToEnd(stream);
 
-            using (var client = new HttpClient())
+            ImportSolutionRequest impSolReq = new ImportSolutionRequest()
             {
-                client.BaseAddress = new Uri("https://hwahbi.visualstudio.com/DefaultCollection/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                //client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
+                CustomizationFile = bytes
+            };
 
-                var qs = $"_apis/tfvc/items/{tfsPath}";
-                HttpResponseMessage response = client.GetAsync(qs).Result;
-                //using (Stream streamToReadFrom = await response.Content.ReadAsStreamAsync())
-                //{
-                //    var fileName = Path.GetFileName(tfsPath);
-                //    string fileToWriteTo = $"c:/temp/{fileName}";
-                //    using (Stream streamToWriteTo = File.Open(fileToWriteTo, FileMode.Create))
-                //    {
-                //        await streamToReadFrom.CopyToAsync(streamToWriteTo);
-                //    }
-
-                //    response.Content = null;
-                //}
-                var bytes = response.Content.ReadAsByteArrayAsync().Result;
-
-                ImportSolutionRequest impSolReq = new ImportSolutionRequest()
-                {
-                    CustomizationFile = bytes
-                };
-
-                CrmOrg.Service.Execute(impSolReq);
-            }
-        }
-        private async void DownloadFile(string tfsPath)
-        {
-            string credentials = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", "", "f55jctcmowqpla3rmjic64wxpho4d6pxw66kvuh2y35xuu6uisyq")));
-
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://hwahbi.visualstudio.com/DefaultCollection/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                //client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
-
-                var qs = $"_apis/tfvc/items/{tfsPath}";
-                HttpResponseMessage response = client.GetAsync(qs).Result;
-
-                using (Stream streamToReadFrom = await response.Content.ReadAsStreamAsync())
-                {
-                    var fileName = Path.GetFileName(tfsPath);
-                    string fileToWriteTo = $"c:/temp/{fileName}";
-                    using (Stream streamToWriteTo = File.Open(fileToWriteTo, FileMode.Create))
-                    {
-                        await streamToReadFrom.CopyToAsync(streamToWriteTo);
-                    }
-
-                    response.Content = null;
-                }
-            }
+            CrmOrg.Service.Execute(impSolReq);
         }
 
         #endregion

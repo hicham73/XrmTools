@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Xrm.DevOPs.ComponentModel;
+using Xrm.DevOPs.Manager.Component;
 
 
 namespace Xrm.DevOPs.Manager.ComponentModel

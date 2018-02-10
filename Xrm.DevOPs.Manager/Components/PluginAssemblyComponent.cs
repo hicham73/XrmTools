@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Xrm.DevOPs.ComponentModel
+namespace Xrm.DevOPs.Manager.Component
 {
     public class PluginAssemblyComponent : CrmComponent
     {

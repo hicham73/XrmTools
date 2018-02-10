@@ -1,4 +1,4 @@
-﻿namespace Xrm.DevOPs.ComponentModel
+﻿namespace Xrm.DevOPs.Manager.Component
 {
     public class EnumTypes
     {

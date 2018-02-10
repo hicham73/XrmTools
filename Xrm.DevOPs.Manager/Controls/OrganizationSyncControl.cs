@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.IO;
 using Newtonsoft.Json;
+using Xrm.DevOPs.Manager.TFS;
 
 namespace Xrm.DevOPs.Manager.Controls
 {
@@ -26,7 +27,9 @@ namespace Xrm.DevOPs.Manager.Controls
                 orgControlDev1,
                 orgControlDev2,
                 orgControlDev3,
-                orgControlDev4
+                orgControlDev4,
+                orgControlDev5,
+                orgControlDev6,
             };
         }
 
@@ -49,11 +52,19 @@ namespace Xrm.DevOPs.Manager.Controls
                 {
                     masterOrgControl.LoadSolutions(org);
                     masterOrgControl.LblOrgName.Text = org.Name;
+                    masterOrgControl.Log = rtSyncLog;
+                }
+                else if (org.Name == "Integration")
+                {
+                    integrationOrgControl.LoadSolutions(org);
+                    integrationOrgControl.LblOrgName.Text = org.Name;
+                    integrationOrgControl.Log = rtSyncLog;
                 }
                 else
                 {
                     OrgControls[i].LoadSolutions(org);
                     OrgControls[i].LblOrgName.Text = org.Name;
+                    OrgControls[i].Log = rtSyncLog;
                     i++;
                 }
 
@@ -66,27 +77,27 @@ namespace Xrm.DevOPs.Manager.Controls
                 OrgControls[i].TvMasterConfig = masterOrgControl.Tree;
             }
 
-            //ReloadTFSFiles();
+            ReloadTFSFiles();
         }
 
         private void ReloadTFSFiles()
         {
-            tvTFS.Nodes.Clear();
+            var tfsConfig = GlobalContext.Config.TFS;
 
-            var folderContent = GetFolderItems("$/CRMDevOPs/Solutions");
-            List<Value> paths = folderContent.Result.value;
-            string rootPath = "$/CRMDevOPs/";
-            char pathSeparator = '/';
-            
+            SourceControl sc = new SourceControl(tfsConfig.Url, tfsConfig.Username, tfsConfig.Password);
+            var items = sc.GetFolderItems("$/CRMDevOPs/Solutions");
+            char pathSeperator = '/';
+
             TreeNode lastNode = null;
             string subPathAgg;
-            foreach (var item in paths)
+            for(int i = 0; i < items.Length; i++)
             {
+                var item = items[i];
                 subPathAgg = string.Empty;
-                var p = item.path.Replace(rootPath, "");
-                foreach (string subPath in p.Split(pathSeparator))
+                //var p = item.path.Replace(rootPath, "");
+                foreach (string subPath in item.ServerItem.Split(pathSeperator))
                 {
-                    subPathAgg += subPath + pathSeparator;
+                    subPathAgg += subPath + pathSeperator;
                     TreeNode[] nodes = tvTFS.Nodes.Find(subPathAgg, true);
                     if (nodes.Length == 0)
                     {
@@ -107,30 +118,6 @@ namespace Xrm.DevOPs.Manager.Controls
             tvTFS.ExpandAll();
         }
 
-        private async Task<FolderContent> GetFolderItems(string folderPath)
-        {
-            string credentials = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", "", "f55jctcmowqpla3rmjic64wxpho4d6pxw66kvuh2y35xuu6uisyq")));
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://hwahbi.visualstudio.com/DefaultCollection/");  //url of our account
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
-
-                var qs = $"_apis/tfvc/items?scopePath={folderPath}&api-version=1.0&recursionLevel=Full";
-                HttpResponseMessage response = client.GetAsync(qs).Result;
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = response.Content;
-                    var c = await content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<FolderContent>(c);
-
-                }
-            }
-
-            return null;
-        }
 
 
         #endregion
@@ -145,20 +132,5 @@ namespace Xrm.DevOPs.Manager.Controls
         }
     }
 
-    public class Value
-    {
-        public int version { get; set; }
-        public DateTime changeDate { get; set; }
-        public string path { get; set; }
-        public bool isFolder { get; set; }
-        public string url { get; set; }
-        public string hashValue { get; set; }
-    }
-
-    public class FolderContent
-    {
-        public List<Value> value { get; set; }
-        public int count { get; set; }
-    }
-
+ 
 }

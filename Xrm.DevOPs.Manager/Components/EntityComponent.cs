@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace Xrm.DevOPs.ComponentModel
+namespace Xrm.DevOPs.Manager.Component
 {
     public class EntityComponent : CrmComponent
     {

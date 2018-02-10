@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
-using static Xrm.DevOPs.ComponentModel.EnumTypes;
+using static Xrm.DevOPs.Manager.Component.EnumTypes;
 
-namespace Xrm.DevOPs.ComponentModel
+namespace Xrm.DevOPs.Manager.Component
 {
     public class CrmComponent
     {

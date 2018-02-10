@@ -3,9 +3,9 @@ using Microsoft.Xrm.Sdk.Metadata;
 using System;
 using System.Collections.Generic;
 
-using Xrm.DevOPs.ComponentModel;
+using Xrm.DevOPs.Manager.Component;
 using Xrm.DevOPs.Manager.Helpers;
-using static Xrm.DevOPs.ComponentModel.EnumTypes;
+using static Xrm.DevOPs.Manager.Component.EnumTypes;
 
 namespace Xrm.DevOPs.Manager.Wrappers
 {

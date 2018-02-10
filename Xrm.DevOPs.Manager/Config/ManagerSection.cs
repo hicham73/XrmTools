@@ -8,14 +8,22 @@ using System.Xml;
 
 namespace Xrm.DevOPs.Manager.Config
 {
-    public class ManagerSection : ConfigurationSection
+    public class ManagerConfig : ConfigurationSection
     {
         [ConfigurationProperty("projects")]
         public ProjectElementCollection Projects
         {
             get { return (ProjectElementCollection)this["projects"]; }
         }
+        [ConfigurationProperty("tfs")]
+        public TFSElement TFS
+        {
+            get { return (TFSElement)this["tfs"];  }
+        }
     }
+
+
+
     public class ProjectElementCollection : ConfigurationElementCollection
     {
         protected override ConfigurationElement CreateNewElement()
@@ -38,5 +46,27 @@ namespace Xrm.DevOPs.Manager.Config
         }
     }
 
-    
+    public class TFSElement : ConfigurationElement
+    {
+        [ConfigurationProperty("url", IsKey = true, IsRequired = true)]
+        public string Url
+        {
+            get { return (string)this["url"]; }
+        }
+
+        [ConfigurationProperty("username", IsKey = false, IsRequired = false)]
+        public string Username
+        {
+            get { return (string)this["username"]; }
+        }
+
+        [ConfigurationProperty("password", IsKey = false, IsRequired = false)]
+        public string Password
+        {
+            get { return (string)this["password"]; }
+        }
+
+    }
+
+
 }

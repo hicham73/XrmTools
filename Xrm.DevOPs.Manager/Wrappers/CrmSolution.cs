@@ -5,11 +5,11 @@ using Microsoft.Xrm.Sdk.Query;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using Xrm.DevOPs.ComponentModel;
+using Xrm.DevOPs.Manager.Component;
 using Xrm.DevOPs.Manager.Helpers;
 using Xrm.DevOPs.Manager.UI.Forms;
 using Xrm.DevOPs.Manager.Util;
-using static Xrm.DevOPs.ComponentModel.EnumTypes;
+using static Xrm.DevOPs.Manager.Component.EnumTypes;
 
 namespace Xrm.DevOPs.Manager.Wrappers
 {
