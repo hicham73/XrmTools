@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Xrm.DevOPs.Manager.Util
+﻿namespace Xrm.DevOPs.Manager.Util
 {
     public class EnumTypes
     {
@@ -76,6 +70,20 @@ namespace Xrm.DevOPs.Manager.Util
             SLAItem = 153,
             ConvertRule = 154,
             ConvertRuleItem = 155,
+        }
+
+        public enum RecursionType
+        {
+            Full,
+            FirstLevel
+        }
+
+        public enum SearchPaternType
+        {
+            Exact,
+            Contains,
+            StartsWith,
+            EndsWith
         }
     }
 }

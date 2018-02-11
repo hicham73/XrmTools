@@ -9,7 +9,7 @@ using Xrm.DevOPs.Manager.Component;
 using Xrm.DevOPs.Manager.Helpers;
 using Xrm.DevOPs.Manager.UI.Forms;
 using Xrm.DevOPs.Manager.Util;
-using static Xrm.DevOPs.Manager.Component.EnumTypes;
+using static Xrm.DevOPs.Manager.Util.EnumTypes;
 
 namespace Xrm.DevOPs.Manager.Wrappers
 {

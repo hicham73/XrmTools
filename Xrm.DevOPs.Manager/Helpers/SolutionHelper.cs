@@ -9,7 +9,7 @@ using Microsoft.Xrm.Sdk;
 using Xrm.DevOPs.Manager.Util;
 using System.Linq;
 using Xrm.DevOPs.Manager.Component;
-using static Xrm.DevOPs.Manager.Component.EnumTypes;
+using static Xrm.DevOPs.Manager.Util.EnumTypes;
 
 namespace Xrm.DevOPs.Manager.Helpers
 {
@@ -21,7 +21,6 @@ namespace Xrm.DevOPs.Manager.Helpers
 
 
         #endregion Class Level Members
-
 
         public static List<CrmSolution> GetSolutions(IOrganizationService service)
         {
@@ -49,7 +48,7 @@ namespace Xrm.DevOPs.Manager.Helpers
 
                 };
 
-                if(sol.ParentSolutionId == null)
+                if (sol.ParentSolutionId == null)
                     sol.IsParent = true;
 
                 sols.Add(sol);
@@ -57,7 +56,7 @@ namespace Xrm.DevOPs.Manager.Helpers
 
 
             var sols2 = new List<CrmSolution>();
-            foreach (var sol in sols)
+            foreach (var sol in sols.OrderBy(o => o.Version).ToList())
             {
                 if (sol.IsParent)
                     sols2.Add(sol);
@@ -71,7 +70,6 @@ namespace Xrm.DevOPs.Manager.Helpers
 
             return sols2;
         }
-
 
         public static List<CrmComponent> RetrieveComponentsFromSolution(CrmSolution sol, IOrganizationService service)
         {
@@ -96,7 +94,7 @@ namespace Xrm.DevOPs.Manager.Helpers
                 components.Add(new CrmComponent()
                 {
                     Id = e.Id,
-                    ComponentType = (ComponentType)(e.GetAttributeValue<OptionSetValue>("componenttype")?.Value),
+                    ComponentType = (ComponentType)e.GetAttributeValue<OptionSetValue>("componenttype")?.Value,
                     RootComponentBehavior = e.GetAttributeValue<OptionSetValue>("rootcomponentbehavior")?.Value,
                     ObjectId = e.GetAttributeValue<Guid>("objectid"),
                     RootSolutionComponentId = e.GetAttributeValue<Guid>("rootsolutioncomponentid"),
@@ -138,6 +136,35 @@ namespace Xrm.DevOPs.Manager.Helpers
             };
 
             targetOrg.Service.Execute(impSolReq);
+        }
+
+        public static string[] DownloadSolutionFile(CrmOrganization org, string uniqueName)
+        {
+            var qa = new QueryByAttribute("solution");
+            qa.AddAttributeValue("uniquename", uniqueName);
+            qa.ColumnSet = new ColumnSet("version");
+
+            var entities = org.Service.RetrieveMultiple(qa).Entities;
+            if (entities.Count != 0)
+            {
+                var version = entities[0].GetAttributeValue<string>("version");
+                ExportSolutionRequest exportSolutionRequest = new ExportSolutionRequest();
+                exportSolutionRequest.Managed = false;
+                exportSolutionRequest.SolutionName = uniqueName;
+
+                ExportSolutionResponse resp = (ExportSolutionResponse)org.Service.Execute(exportSolutionRequest);
+
+                byte[] exportXml = resp.ExportSolutionFile;
+                string filename = $"{uniqueName}_{version.Replace(".","_")}.zip";
+                string filePath = Path.Combine("c:/temp", filename);
+                File.WriteAllBytes(filePath, exportXml);
+
+                return new string[] { filePath, version };
+
+            }
+
+            return null;
+
         }
 
     }

@@ -37,13 +37,12 @@ namespace Xrm.DevOPs.Manager.Controls
 
         #region Properties
         List<OrganizationControl> OrgControls;
-
         public GlobalContext Context { get; internal set; }
 
         #endregion
 
         #region Methods
-        internal void LoadSolutions()
+        public void LoadSolutions()
         {
             int i = 0;
             foreach (var org in Context.CrmOrganizations)
@@ -53,18 +52,24 @@ namespace Xrm.DevOPs.Manager.Controls
                     masterOrgControl.LoadSolutions(org);
                     masterOrgControl.LblOrgName.Text = org.Name;
                     masterOrgControl.Log = rtSyncLog;
+                    masterOrgControl.OrgName = org.Name;
+                    masterOrgControl.ParentControl = this;
                 }
                 else if (org.Name == "Integration")
                 {
                     integrationOrgControl.LoadSolutions(org);
                     integrationOrgControl.LblOrgName.Text = org.Name;
                     integrationOrgControl.Log = rtSyncLog;
+                    integrationOrgControl.OrgName = org.Name;
+                    integrationOrgControl.ParentControl = this;
                 }
                 else
                 {
                     OrgControls[i].LoadSolutions(org);
                     OrgControls[i].LblOrgName.Text = org.Name;
                     OrgControls[i].Log = rtSyncLog;
+                    OrgControls[i].OrgName = org.Name;
+                    OrgControls[i].ParentControl = this;
                     i++;
                 }
 
@@ -80,12 +85,13 @@ namespace Xrm.DevOPs.Manager.Controls
             ReloadTFSFiles();
         }
 
-        private void ReloadTFSFiles()
+        public void ReloadTFSFiles()
         {
+            
             var tfsConfig = GlobalContext.Config.TFS;
+            var sc = GlobalContext.SourceControl;
 
-            SourceControl sc = new SourceControl(tfsConfig.Url, tfsConfig.Username, tfsConfig.Password);
-            var items = sc.GetFolderItems("$/CRMDevOPs/Solutions");
+            var items = sc.GetFolderItems(tfsConfig.SolsFolder);
             char pathSeperator = '/';
 
             TreeNode lastNode = null;
@@ -94,8 +100,8 @@ namespace Xrm.DevOPs.Manager.Controls
             {
                 var item = items[i];
                 subPathAgg = string.Empty;
-                //var p = item.path.Replace(rootPath, "");
-                foreach (string subPath in item.ServerItem.Split(pathSeperator))
+                var p = item.ServerItem; //.Replace(tfsConfig.SolsFolder, "");
+                foreach (string subPath in p.Split(pathSeperator))
                 {
                     subPathAgg += subPath + pathSeperator;
                     TreeNode[] nodes = tvTFS.Nodes.Find(subPathAgg, true);
@@ -117,8 +123,6 @@ namespace Xrm.DevOPs.Manager.Controls
 
             tvTFS.ExpandAll();
         }
-
-
 
         #endregion
 

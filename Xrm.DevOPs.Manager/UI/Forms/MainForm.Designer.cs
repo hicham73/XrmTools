@@ -219,16 +219,15 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControlMain);
             this.splitContainer1.Size = new System.Drawing.Size(1170, 848);
-            this.splitContainer1.SplitterDistance = 170;
+            this.splitContainer1.SplitterDistance = 222;
             this.splitContainer1.TabIndex = 1;
             // 
             // tvOrgs
             // 
-            this.tvOrgs.CheckBoxes = true;
             this.tvOrgs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvOrgs.Location = new System.Drawing.Point(0, 0);
             this.tvOrgs.Name = "tvOrgs";
-            this.tvOrgs.Size = new System.Drawing.Size(170, 848);
+            this.tvOrgs.Size = new System.Drawing.Size(222, 848);
             this.tvOrgs.TabIndex = 0;
             this.tvOrgs.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TVOrgs_AfterSelect);
             // 
@@ -239,7 +238,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.tabControlMain.Location = new System.Drawing.Point(0, 0);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(996, 848);
+            this.tabControlMain.Size = new System.Drawing.Size(944, 848);
             this.tabControlMain.TabIndex = 0;
             // 
             // imageList1
@@ -620,7 +619,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.tabSyncTool.Name = "tabSyncTool";
             this.tabSyncTool.Size = new System.Drawing.Size(1176, 830);
             this.tabSyncTool.TabIndex = 3;
-            this.tabSyncTool.Text = "Sync Tool";
+            this.tabSyncTool.Text = "Deployment Manager";
             // 
             // orgSyncControl
             // 

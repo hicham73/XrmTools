@@ -18,11 +18,17 @@ using System.IO;
 using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using Microsoft.TeamFoundation.VersionControl.Client;
+using Xrm.DevOPs.Manager.Util;
 
 namespace Xrm.DevOPs.Manager.Controls
 {
     public partial class OrganizationControl : UserControl
     {
+
+        Color m_headerBackColor;
+        OrganizationSyncControl m_parentControl;
+
+        public string OrgName { get; set; } = string.Empty;
 
         public RichTextBox Log { get; set; }
         public CrmOrganization CrmMasterOrg { get; set; }
@@ -34,7 +40,23 @@ namespace Xrm.DevOPs.Manager.Controls
         public TreeView Tree { get { return tvSolutions;  } }
 
         public ToolStripLabel LblOrgName { get { return lblOrgName; } }
+        public Color HeaderBackColor
+        {
+            get
+            {
+                return m_headerBackColor;
+            }
+            set
+            {
+                m_headerBackColor = value;
+                toolbar.BackColor = value;
+            }
+        }
 
+        public OrganizationSyncControl ParentControl
+        {
+            set { m_parentControl = value;  }
+        }
         public OrganizationControl()
         {
             InitializeComponent();
@@ -107,15 +129,24 @@ namespace Xrm.DevOPs.Manager.Controls
                 foreach (CrmTreeNode<CrmSolution> cn in masterNode.Nodes)
                 {
                     var patch = (CrmSolution)cn.Component;
+
+                    Log.AppendText($"checking for patch {patch.UniqueName}, version {patch.Version}...{Environment.NewLine}");
                     var qa = new QueryByAttribute("solution");
                     qa.AddAttributeValue("uniquename", patch.UniqueName);
                     qa.AddAttributeValue("version", patch.Version);
 
                     if (!CrmOrg.Service.RetrieveMultiple(qa).Entities.Any())
                     {
+                        Log.AppendText($"installing patch...{Environment.NewLine}");
                         SolutionHelper.TransferSolution(CrmMasterOrg, CrmOrg, patch.UniqueName);
+                        Log.AppendText($"Done! {Environment.NewLine}");
                         MessageBox.Show($"solution {patch.UniqueName} transfered");
                     }
+                    else
+                    {
+                        Log.AppendText($"Patch already installed. {Environment.NewLine}");
+                    }
+                    Log.AppendText($"---------------------------------------------------------{Environment.NewLine}");
 
                 }
             }
@@ -230,6 +261,57 @@ namespace Xrm.DevOPs.Manager.Controls
         }
 
         #endregion
+
+        private void BtnUpdateTFS_Click(object sender, EventArgs e)
+        {
+            var sc = GlobalContext.SourceControl;
+            Log.AppendText($"Reloading solutions to check if there is an update to {OrgName}...");
+
+            ReLoadSolutions();
+            m_parentControl.ReloadTFSFiles();
+
+            var baseSolNode = FindBaseSolNode(OrgName);
+            if(baseSolNode != null)
+            {
+                foreach (CrmTreeNode<CrmSolution> n in baseSolNode.Nodes)
+                {
+                    var sol = (CrmSolution)n.Component;
+                    WriteLine($"patch unique name: {sol.UniqueName}");
+                    var node = TreeViewHelper.SearchTree(TvTfs.Nodes, sol.UniqueName, EnumTypes.RecursionType.Full, EnumTypes.SearchPaternType.Contains);
+                    if (node == null)
+                    {
+                        var res = SolutionHelper.DownloadSolutionFile(CrmOrg, sol.UniqueName);
+
+                        if (res != null)
+                            sc.AddProjectPatch(OrgName, res[0], res[1], Log);
+                    }
+                        
+                }
+            }
+            else
+            {
+                WriteLine("Organization Base Project solution not found");
+            }
+            
+
+        }
+
+        private CrmTreeNode<CrmSolution> FindBaseSolNode(string name)
+        {
+            
+            foreach (TreeNode bn in tvSolutions.Nodes)
+            {
+                if (bn.Name.StartsWith(name))
+                    return  (CrmTreeNode<CrmSolution>)bn;
+            }
+
+            return null;
+        }
+
+        private void WriteLine(string msg)
+        {
+            Log.AppendText($"{msg}{Environment.NewLine}");
+        }
     }
 
     enum SearchOption

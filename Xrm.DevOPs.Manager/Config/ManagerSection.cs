@@ -65,6 +65,16 @@ namespace Xrm.DevOPs.Manager.Config
         {
             get { return (string)this["password"]; }
         }
+        [ConfigurationProperty("sols-folder", IsKey = false, IsRequired = false)]
+        public string SolsFolder
+        {
+            get { return (string)this["sols-folder"]; }
+        }
+        [ConfigurationProperty("workspace-path", IsKey = false, IsRequired = false)]
+        public string WorkspacePath
+        {
+            get { return (string)this["workspace-path"]; }
+        }
 
     }
 

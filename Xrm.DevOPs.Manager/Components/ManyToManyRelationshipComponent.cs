@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk.Metadata;
 using System;
 using System.ComponentModel;
+using Xrm.DevOPs.Manager.Util;
 
 namespace Xrm.DevOPs.Manager.Component
 {

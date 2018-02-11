@@ -36,6 +36,7 @@
             this.BtnSyncAll = new System.Windows.Forms.ToolStripButton();
             this.BtnRefresh = new System.Windows.Forms.ToolStripButton();
             this.tvSolutions = new System.Windows.Forms.TreeView();
+            this.BtnUpdateTFS = new System.Windows.Forms.ToolStripButton();
             this.toolbar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,6 +48,7 @@
             this.BtnSyncConfig,
             this.BtnSyncProjects,
             this.BtnSyncAll,
+            this.BtnUpdateTFS,
             this.BtnRefresh});
             this.toolbar.Location = new System.Drawing.Point(0, 0);
             this.toolbar.Name = "toolbar";
@@ -56,7 +58,7 @@
             // 
             // lblOrgName
             // 
-            this.lblOrgName.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblOrgName.BackColor = System.Drawing.Color.DarkKhaki;
             this.lblOrgName.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.lblOrgName.Name = "lblOrgName";
             this.lblOrgName.Size = new System.Drawing.Size(39, 22);
@@ -70,7 +72,7 @@
             this.BtnSyncConfig.Margin = new System.Windows.Forms.Padding(20, 1, 0, 2);
             this.BtnSyncConfig.Name = "BtnSyncConfig";
             this.BtnSyncConfig.Size = new System.Drawing.Size(23, 22);
-            this.BtnSyncConfig.Text = "Config";
+            this.BtnSyncConfig.Text = "Sync with MasterConfig";
             this.BtnSyncConfig.Click += new System.EventHandler(this.BtnSyncConfig_Click);
             // 
             // BtnSyncProjects
@@ -81,7 +83,7 @@
             this.BtnSyncProjects.Margin = new System.Windows.Forms.Padding(0, 1, 5, 2);
             this.BtnSyncProjects.Name = "BtnSyncProjects";
             this.BtnSyncProjects.Size = new System.Drawing.Size(23, 22);
-            this.BtnSyncProjects.Text = "Projects";
+            this.BtnSyncProjects.Text = "Sync Projects from TFS";
             this.BtnSyncProjects.Click += new System.EventHandler(this.BtnSyncProjects_Click);
             // 
             // BtnSyncAll
@@ -92,7 +94,7 @@
             this.BtnSyncAll.Margin = new System.Windows.Forms.Padding(0, 1, 5, 2);
             this.BtnSyncAll.Name = "BtnSyncAll";
             this.BtnSyncAll.Size = new System.Drawing.Size(23, 22);
-            this.BtnSyncAll.Text = "All";
+            this.BtnSyncAll.Text = "Sync Config and Projects";
             this.BtnSyncAll.Click += new System.EventHandler(this.BtnSyncAll_Click);
             // 
             // BtnRefresh
@@ -116,6 +118,16 @@
             this.tvSolutions.Name = "tvSolutions";
             this.tvSolutions.Size = new System.Drawing.Size(405, 383);
             this.tvSolutions.TabIndex = 1;
+            // 
+            // BtnUpdateTFS
+            // 
+            this.BtnUpdateTFS.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.BtnUpdateTFS.Image = ((System.Drawing.Image)(resources.GetObject("BtnUpdateTFS.Image")));
+            this.BtnUpdateTFS.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BtnUpdateTFS.Name = "BtnUpdateTFS";
+            this.BtnUpdateTFS.Size = new System.Drawing.Size(23, 22);
+            this.BtnUpdateTFS.Text = "Update TFS";
+            this.BtnUpdateTFS.Click += new System.EventHandler(this.BtnUpdateTFS_Click);
             // 
             // OrganizationControl
             // 
@@ -141,5 +153,6 @@
         private System.Windows.Forms.ToolStripButton BtnRefresh;
         private System.Windows.Forms.TreeView tvSolutions;
         private System.Windows.Forms.ToolStripLabel lblOrgName;
+        private System.Windows.Forms.ToolStripButton BtnUpdateTFS;
     }
 }

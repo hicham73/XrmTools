@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 using Xrm.DevOPs.Manager.Component;
 using Xrm.DevOPs.Manager.Helpers;
-using static Xrm.DevOPs.Manager.Component.EnumTypes;
+using static Xrm.DevOPs.Manager.Util.EnumTypes;
 
 namespace Xrm.DevOPs.Manager.Wrappers
 {

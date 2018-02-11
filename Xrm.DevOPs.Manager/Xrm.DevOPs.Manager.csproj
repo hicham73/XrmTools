@@ -319,7 +319,7 @@
     <Compile Include="Helpers\CrmTreeNode.cs" />
     <Compile Include="Helpers\EntityReferenceProperty.cs" />
     <Compile Include="Helpers\EntityReferenceTypeConverter.cs" />
-    <Compile Include="Helpers\EnumTypes.cs" />
+    <Compile Include="Util\EnumTypes.cs" />
     <Compile Include="Components\Helper.cs" />
     <Compile Include="Helpers\MetadataHelper.cs" />
     <Compile Include="Helpers\OrganizationHelper.cs" />
@@ -342,6 +342,7 @@
     <Compile Include="Components\Properties\OptionSetMetadataInfo.cs" />
     <Compile Include="Components\Properties\TypeConverter.cs" />
     <Compile Include="Helpers\StreamHelper.cs" />
+    <Compile Include="Helpers\TreeViewHelper.cs" />
     <Compile Include="TFS\SourceControl.cs" />
     <Compile Include="UI\Forms\MainForm.cs">
       <SubType>Form</SubType>

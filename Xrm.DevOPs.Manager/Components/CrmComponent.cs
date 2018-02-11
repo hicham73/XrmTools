@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using static Xrm.DevOPs.Manager.Component.EnumTypes;
+using static Xrm.DevOPs.Manager.Util.EnumTypes;
 
 namespace Xrm.DevOPs.Manager.Component
 {
