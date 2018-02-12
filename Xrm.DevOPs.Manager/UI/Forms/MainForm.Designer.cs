@@ -36,13 +36,14 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.MIFile = new System.Windows.Forms.ToolStripMenuItem();
             this.MILoadOrganizations = new System.Windows.Forms.ToolStripMenuItem();
             this.MIExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.MIDeployment = new System.Windows.Forms.ToolStripMenuItem();
+            this.MIDeploymentManager = new System.Windows.Forms.ToolStripMenuItem();
             this.organizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MIOrgCompare = new System.Windows.Forms.ToolStripMenuItem();
-            this.MIOrgSync = new System.Windows.Forms.ToolStripMenuItem();
             this.solutionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MISolCompare = new System.Windows.Forms.ToolStripMenuItem();
             this.MISolTransfer = new System.Windows.Forms.ToolStripMenuItem();
-            this.windowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MIView = new System.Windows.Forms.ToolStripMenuItem();
             this.MICloseActiveWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.MICloseAllWindows = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -96,9 +97,10 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.menuStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MIFile,
+            this.MIDeployment,
             this.organizationToolStripMenuItem,
             this.solutionToolStripMenuItem,
-            this.windowsToolStripMenuItem});
+            this.MIView});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -130,12 +132,28 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             this.MIExit.Text = "Exit";
             this.MIExit.Click += new System.EventHandler(this.MIExit_Click);
             // 
+            // MIDeployment
+            // 
+            this.MIDeployment.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MIDeploymentManager});
+            this.MIDeployment.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.MIDeployment.Name = "MIDeployment";
+            this.MIDeployment.Size = new System.Drawing.Size(88, 20);
+            this.MIDeployment.Text = "Deployment";
+            // 
+            // MIDeploymentManager
+            // 
+            this.MIDeploymentManager.Enabled = false;
+            this.MIDeploymentManager.Name = "MIDeploymentManager";
+            this.MIDeploymentManager.Size = new System.Drawing.Size(152, 22);
+            this.MIDeploymentManager.Text = "Manager";
+            this.MIDeploymentManager.Click += new System.EventHandler(this.MIDeploymentManager_Click);
+            // 
             // organizationToolStripMenuItem
             // 
             this.organizationToolStripMenuItem.BackColor = System.Drawing.Color.Transparent;
             this.organizationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MIOrgCompare,
-            this.MIOrgSync});
+            this.MIOrgCompare});
             this.organizationToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.organizationToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.organizationToolStripMenuItem.Name = "organizationToolStripMenuItem";
@@ -144,17 +162,11 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             // 
             // MIOrgCompare
             // 
+            this.MIOrgCompare.Enabled = false;
             this.MIOrgCompare.Name = "MIOrgCompare";
-            this.MIOrgCompare.Size = new System.Drawing.Size(124, 22);
+            this.MIOrgCompare.Size = new System.Drawing.Size(152, 22);
             this.MIOrgCompare.Text = "Compare";
             this.MIOrgCompare.Click += new System.EventHandler(this.MIOrgDiff_Click);
-            // 
-            // MIOrgSync
-            // 
-            this.MIOrgSync.Name = "MIOrgSync";
-            this.MIOrgSync.Size = new System.Drawing.Size(124, 22);
-            this.MIOrgSync.Text = "Sync";
-            this.MIOrgSync.Click += new System.EventHandler(this.MIOrgSync_Click);
             // 
             // solutionToolStripMenuItem
             // 
@@ -169,39 +181,41 @@ namespace Xrm.DevOPs.Manager.UI.Forms
             // 
             // MISolCompare
             // 
+            this.MISolCompare.Enabled = false;
             this.MISolCompare.Name = "MISolCompare";
-            this.MISolCompare.Size = new System.Drawing.Size(124, 22);
+            this.MISolCompare.Size = new System.Drawing.Size(152, 22);
             this.MISolCompare.Text = "Compare";
             this.MISolCompare.Click += new System.EventHandler(this.MISolCompare_Click);
             // 
             // MISolTransfer
             // 
+            this.MISolTransfer.Enabled = false;
             this.MISolTransfer.Name = "MISolTransfer";
-            this.MISolTransfer.Size = new System.Drawing.Size(124, 22);
+            this.MISolTransfer.Size = new System.Drawing.Size(152, 22);
             this.MISolTransfer.Text = "Transfer";
             this.MISolTransfer.Click += new System.EventHandler(this.MISolTransfer_Click);
             // 
-            // windowsToolStripMenuItem
+            // MIView
             // 
-            this.windowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MIView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MICloseActiveWindow,
             this.MICloseAllWindows});
-            this.windowsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.windowsToolStripMenuItem.Name = "windowsToolStripMenuItem";
-            this.windowsToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
-            this.windowsToolStripMenuItem.Text = "Windows";
+            this.MIView.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.MIView.Name = "MIView";
+            this.MIView.Size = new System.Drawing.Size(47, 20);
+            this.MIView.Text = "View";
             // 
             // MICloseActiveWindow
             // 
             this.MICloseActiveWindow.Name = "MICloseActiveWindow";
-            this.MICloseActiveWindow.Size = new System.Drawing.Size(142, 22);
+            this.MICloseActiveWindow.Size = new System.Drawing.Size(152, 22);
             this.MICloseActiveWindow.Text = "Close Active";
             this.MICloseActiveWindow.Click += new System.EventHandler(this.MICloseActiveWindow_Click);
             // 
             // MICloseAllWindows
             // 
             this.MICloseAllWindows.Name = "MICloseAllWindows";
-            this.MICloseAllWindows.Size = new System.Drawing.Size(142, 22);
+            this.MICloseAllWindows.Size = new System.Drawing.Size(152, 22);
             this.MICloseAllWindows.Text = "Close All";
             this.MICloseAllWindows.Click += new System.EventHandler(this.MICloseAllWindows_Click);
             // 
@@ -757,19 +771,20 @@ namespace Xrm.DevOPs.Manager.UI.Forms
         private System.Windows.Forms.TabPage tabSyncTool;
         private System.Windows.Forms.Button BtnTransfer;
         private System.Windows.Forms.Button BtnSyncOrgs;
-        private System.Windows.Forms.ToolStripMenuItem MIOrgSync;
         private Controls.OrganizationSyncControl orgSyncControl;
         private System.Windows.Forms.PictureBox pbHome;
         private System.Windows.Forms.ToolStripMenuItem MIFile;
         private System.Windows.Forms.ToolStripMenuItem MILoadOrganizations;
         private System.Windows.Forms.ToolStripMenuItem MIExit;
-        private System.Windows.Forms.ToolStripMenuItem windowsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem MIView;
         private System.Windows.Forms.ToolStripMenuItem MICloseActiveWindow;
         private System.Windows.Forms.ToolStripMenuItem MICloseAllWindows;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel statusMessage;
         private System.Windows.Forms.ToolStripProgressBar statusProgressBar;
+        private System.Windows.Forms.ToolStripMenuItem MIDeployment;
+        private System.Windows.Forms.ToolStripMenuItem MIDeploymentManager;
     }
 }
 

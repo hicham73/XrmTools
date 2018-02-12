@@ -1,17 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.IO;
-using Newtonsoft.Json;
-using Xrm.DevOPs.Manager.TFS;
 
 namespace Xrm.DevOPs.Manager.Controls
 {
@@ -87,7 +76,6 @@ namespace Xrm.DevOPs.Manager.Controls
 
         public void ReloadTFSFiles()
         {
-            
             var tfsConfig = GlobalContext.Config.TFS;
             var sc = GlobalContext.SourceControl;
 
@@ -100,7 +88,7 @@ namespace Xrm.DevOPs.Manager.Controls
             {
                 var item = items[i];
                 subPathAgg = string.Empty;
-                var p = item.ServerItem; //.Replace(tfsConfig.SolsFolder, "");
+                var p = item.ServerItem;
                 foreach (string subPath in p.Split(pathSeperator))
                 {
                     subPathAgg += subPath + pathSeperator;
@@ -127,13 +115,14 @@ namespace Xrm.DevOPs.Manager.Controls
         #endregion
 
         #region UI
-
-        #endregion
-
         private void BtnReload_Click(object sender, EventArgs e)
         {
             ReloadTFSFiles();
         }
+
+        #endregion
+
+
     }
 
  

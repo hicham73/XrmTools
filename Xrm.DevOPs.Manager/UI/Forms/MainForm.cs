@@ -340,8 +340,8 @@ namespace Xrm.DevOPs.Manager.UI.Forms
                 var item = new ListViewItem(new string[] {
                         vd.EntityName,
                         vd.Name,
-                        left?.GetAttributeValue<OptionSetValue>("type")?.Value.ToString(),
-                        right?.GetAttributeValue<OptionSetValue>("type")?.Value.ToString(),
+                        left?.GetAttributeValue<OptionSetValue>("querytype")?.Value.ToString(),
+                        right?.GetAttributeValue<OptionSetValue>("querytype")?.Value.ToString(),
                     });
 
                 entityDiffControl1.LVViews.Items.Add(item);
@@ -370,8 +370,8 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
                 var item = new ListViewItem(new string[] {
                     pd.Name,
-                    left?.GetAttributeValue<bool>("iswokflowactivity").ToString(),
-                    right?.GetAttributeValue<bool>("iswokflowactivity").ToString(),
+                    left?.GetAttributeValue<string>("friendlyname"),
+                    right?.GetAttributeValue<string>("friendlyname"),
                 });
 
                 entityDiffControl1.LVPlugins.Items.Add(item);
@@ -475,6 +475,7 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
         private void MILoadOrganizations_Click(object sender, EventArgs e)
         {
+
             int count = ConfigurationManager.ConnectionStrings.Count;
             List<KeyValuePair<String, String>> filteredConnectionStrings = new List<KeyValuePair<String, String>>();
 
@@ -519,12 +520,22 @@ namespace Xrm.DevOPs.Manager.UI.Forms
 
                 Context.IsOrganizationLoaded = true;
             }
-            else
-                RefreshOrganizations();
+            //else
+            //    RefreshOrganizations();
 
             tvOrgs.ExpandAll();
 
             ShowTab(tabDeploymentExplorer);
+
+            EnableMenu();
+        }
+
+        private void EnableMenu()
+        {
+            MIDeploymentManager.Enabled = true;
+            MIOrgCompare.Enabled = true;
+            MISolCompare.Enabled = true;
+            MISolTransfer.Enabled = true;
         }
 
         private void MIExit_Click(object sender, EventArgs e)
@@ -554,6 +565,14 @@ namespace Xrm.DevOPs.Manager.UI.Forms
         public void ProgressPerformStep()
         {
             statusProgressBar.PerformStep();
+        }
+
+        private void MIDeploymentManager_Click(object sender, EventArgs e)
+        {
+            orgSyncControl.Context = Context;
+            orgSyncControl.LoadSolutions();
+
+            ShowTab(tabSyncTool);
         }
     }
 
