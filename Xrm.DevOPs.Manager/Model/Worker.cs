@@ -20,6 +20,7 @@ namespace Xrm.DevOPs.Manager.Model
             };
             _worker.DoWork += info.PerformWork;
 
+
             if (_worker.WorkerReportsProgress && info.ProgressChanged != null)
             {
                 _worker.ProgressChanged += info.PerformProgressChange;
