@@ -35,19 +35,19 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.BtnReload = new System.Windows.Forms.ToolStripButton();
-            this.masterOrgControl = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.integrationOrgControl = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
+            this.masterOrgControl = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
             this.orgControlDev6 = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
             this.orgControlDev5 = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
             this.orgControlDev1 = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
             this.orgControlDev2 = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
             this.orgControlDev4 = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
             this.orgControlDev3 = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
-            this.rtSyncLog = new System.Windows.Forms.RichTextBox();
+            this.integrationOrgControl = new Xrm.DevOPs.Manager.Controls.OrganizationControl();
+            this.solutionImportControl = new Xrm.DevOPs.Manager.Controls.SolutionImportControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -143,22 +143,6 @@
             this.BtnReload.Text = "Reload";
             this.BtnReload.Click += new System.EventHandler(this.BtnReload_Click);
             // 
-            // masterOrgControl
-            // 
-            this.masterOrgControl.BackColor = System.Drawing.SystemColors.Control;
-            this.masterOrgControl.CrmMasterOrg = null;
-            this.masterOrgControl.CrmOrg = null;
-            this.masterOrgControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.masterOrgControl.HeaderBackColor = System.Drawing.Color.SteelBlue;
-            this.masterOrgControl.Location = new System.Drawing.Point(0, 0);
-            this.masterOrgControl.Log = null;
-            this.masterOrgControl.Name = "masterOrgControl";
-            this.masterOrgControl.OrgName = "";
-            this.masterOrgControl.Size = new System.Drawing.Size(230, 331);
-            this.masterOrgControl.TabIndex = 6;
-            this.masterOrgControl.TvMasterConfig = null;
-            this.masterOrgControl.TvTfs = null;
-            // 
             // splitter1
             // 
             this.splitter1.Cursor = System.Windows.Forms.Cursors.HSplit;
@@ -198,9 +182,9 @@
             // 
             // splitContainer3.Panel2
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.rtSyncLog);
+            this.splitContainer3.Panel2.Controls.Add(this.solutionImportControl);
             this.splitContainer3.Size = new System.Drawing.Size(582, 612);
-            this.splitContainer3.SplitterDistance = 474;
+            this.splitContainer3.SplitterDistance = 369;
             this.splitContainer3.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -221,23 +205,23 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(582, 474);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(582, 369);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
-            // integrationOrgControl
+            // masterOrgControl
             // 
-            this.integrationOrgControl.CrmMasterOrg = null;
-            this.integrationOrgControl.CrmOrg = null;
-            this.integrationOrgControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.integrationOrgControl.HeaderBackColor = System.Drawing.Color.SteelBlue;
-            this.integrationOrgControl.Location = new System.Drawing.Point(0, 0);
-            this.integrationOrgControl.Log = null;
-            this.integrationOrgControl.Name = "integrationOrgControl";
-            this.integrationOrgControl.OrgName = "";
-            this.integrationOrgControl.Size = new System.Drawing.Size(224, 612);
-            this.integrationOrgControl.TabIndex = 4;
-            this.integrationOrgControl.TvMasterConfig = null;
-            this.integrationOrgControl.TvTfs = null;
+            this.masterOrgControl.BackColor = System.Drawing.SystemColors.Control;
+            this.masterOrgControl.CrmMasterOrg = null;
+            this.masterOrgControl.CrmOrg = null;
+            this.masterOrgControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.masterOrgControl.HeaderBackColor = System.Drawing.Color.SteelBlue;
+            this.masterOrgControl.Location = new System.Drawing.Point(0, 0);
+            this.masterOrgControl.Name = "masterOrgControl";
+            this.masterOrgControl.OrgName = "";
+            this.masterOrgControl.Size = new System.Drawing.Size(230, 331);
+            this.masterOrgControl.TabIndex = 6;
+            this.masterOrgControl.TvMasterConfig = null;
+            this.masterOrgControl.TvTfs = null;
             // 
             // orgControlDev6
             // 
@@ -245,11 +229,10 @@
             this.orgControlDev6.CrmOrg = null;
             this.orgControlDev6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.orgControlDev6.HeaderBackColor = System.Drawing.Color.DarkSlateGray;
-            this.orgControlDev6.Location = new System.Drawing.Point(391, 240);
-            this.orgControlDev6.Log = null;
+            this.orgControlDev6.Location = new System.Drawing.Point(391, 187);
             this.orgControlDev6.Name = "orgControlDev6";
             this.orgControlDev6.OrgName = "";
-            this.orgControlDev6.Size = new System.Drawing.Size(188, 231);
+            this.orgControlDev6.Size = new System.Drawing.Size(188, 179);
             this.orgControlDev6.TabIndex = 5;
             this.orgControlDev6.TvMasterConfig = null;
             this.orgControlDev6.TvTfs = null;
@@ -260,11 +243,10 @@
             this.orgControlDev5.CrmOrg = null;
             this.orgControlDev5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.orgControlDev5.HeaderBackColor = System.Drawing.Color.DarkSlateGray;
-            this.orgControlDev5.Location = new System.Drawing.Point(197, 240);
-            this.orgControlDev5.Log = null;
+            this.orgControlDev5.Location = new System.Drawing.Point(197, 187);
             this.orgControlDev5.Name = "orgControlDev5";
             this.orgControlDev5.OrgName = "";
-            this.orgControlDev5.Size = new System.Drawing.Size(188, 231);
+            this.orgControlDev5.Size = new System.Drawing.Size(188, 179);
             this.orgControlDev5.TabIndex = 4;
             this.orgControlDev5.TvMasterConfig = null;
             this.orgControlDev5.TvTfs = null;
@@ -276,10 +258,9 @@
             this.orgControlDev1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.orgControlDev1.HeaderBackColor = System.Drawing.Color.DarkSlateGray;
             this.orgControlDev1.Location = new System.Drawing.Point(3, 3);
-            this.orgControlDev1.Log = null;
             this.orgControlDev1.Name = "orgControlDev1";
             this.orgControlDev1.OrgName = "";
-            this.orgControlDev1.Size = new System.Drawing.Size(188, 231);
+            this.orgControlDev1.Size = new System.Drawing.Size(188, 178);
             this.orgControlDev1.TabIndex = 0;
             this.orgControlDev1.TvMasterConfig = null;
             this.orgControlDev1.TvTfs = null;
@@ -291,10 +272,9 @@
             this.orgControlDev2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.orgControlDev2.HeaderBackColor = System.Drawing.Color.DarkSlateGray;
             this.orgControlDev2.Location = new System.Drawing.Point(197, 3);
-            this.orgControlDev2.Log = null;
             this.orgControlDev2.Name = "orgControlDev2";
             this.orgControlDev2.OrgName = "";
-            this.orgControlDev2.Size = new System.Drawing.Size(188, 231);
+            this.orgControlDev2.Size = new System.Drawing.Size(188, 178);
             this.orgControlDev2.TabIndex = 1;
             this.orgControlDev2.TvMasterConfig = null;
             this.orgControlDev2.TvTfs = null;
@@ -305,11 +285,10 @@
             this.orgControlDev4.CrmOrg = null;
             this.orgControlDev4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.orgControlDev4.HeaderBackColor = System.Drawing.Color.DarkSlateGray;
-            this.orgControlDev4.Location = new System.Drawing.Point(3, 240);
-            this.orgControlDev4.Log = null;
+            this.orgControlDev4.Location = new System.Drawing.Point(3, 187);
             this.orgControlDev4.Name = "orgControlDev4";
             this.orgControlDev4.OrgName = "";
-            this.orgControlDev4.Size = new System.Drawing.Size(188, 231);
+            this.orgControlDev4.Size = new System.Drawing.Size(188, 179);
             this.orgControlDev4.TabIndex = 3;
             this.orgControlDev4.TvMasterConfig = null;
             this.orgControlDev4.TvTfs = null;
@@ -321,22 +300,34 @@
             this.orgControlDev3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.orgControlDev3.HeaderBackColor = System.Drawing.Color.DarkSlateGray;
             this.orgControlDev3.Location = new System.Drawing.Point(391, 3);
-            this.orgControlDev3.Log = null;
             this.orgControlDev3.Name = "orgControlDev3";
             this.orgControlDev3.OrgName = "";
-            this.orgControlDev3.Size = new System.Drawing.Size(188, 231);
+            this.orgControlDev3.Size = new System.Drawing.Size(188, 178);
             this.orgControlDev3.TabIndex = 2;
             this.orgControlDev3.TvMasterConfig = null;
             this.orgControlDev3.TvTfs = null;
             // 
-            // rtSyncLog
+            // integrationOrgControl
             // 
-            this.rtSyncLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtSyncLog.Location = new System.Drawing.Point(0, 0);
-            this.rtSyncLog.Name = "rtSyncLog";
-            this.rtSyncLog.Size = new System.Drawing.Size(582, 134);
-            this.rtSyncLog.TabIndex = 0;
-            this.rtSyncLog.Text = "";
+            this.integrationOrgControl.CrmMasterOrg = null;
+            this.integrationOrgControl.CrmOrg = null;
+            this.integrationOrgControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.integrationOrgControl.HeaderBackColor = System.Drawing.Color.SteelBlue;
+            this.integrationOrgControl.Location = new System.Drawing.Point(0, 0);
+            this.integrationOrgControl.Name = "integrationOrgControl";
+            this.integrationOrgControl.OrgName = "";
+            this.integrationOrgControl.Size = new System.Drawing.Size(224, 612);
+            this.integrationOrgControl.TabIndex = 4;
+            this.integrationOrgControl.TvMasterConfig = null;
+            this.integrationOrgControl.TvTfs = null;
+            // 
+            // solutionImportControl
+            // 
+            this.solutionImportControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.solutionImportControl.Location = new System.Drawing.Point(0, 0);
+            this.solutionImportControl.Name = "solutionImportControl";
+            this.solutionImportControl.Size = new System.Drawing.Size(582, 239);
+            this.solutionImportControl.TabIndex = 0;
             // 
             // OrganizationSyncControl
             // 
@@ -381,7 +372,6 @@
         private OrganizationControl orgControlDev2;
         private OrganizationControl orgControlDev3;
         private OrganizationControl orgControlDev4;
-        private System.Windows.Forms.RichTextBox rtSyncLog;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripButton BtnReload;
@@ -390,5 +380,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private OrganizationControl integrationOrgControl;
+        private SolutionImportControl solutionImportControl;
     }
 }

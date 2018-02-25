@@ -33,7 +33,6 @@ namespace Xrm.DevOPs.Manager.Controls
 
         #region Properties
         public string OrgName { get; set; } = string.Empty;
-        public RichTextBox Log { get; set; }
         public CrmOrganization CrmMasterOrg { get; set; }
         public TreeView TvTfs { get; set; }
         public TreeView TvMasterConfig { get; set; }
@@ -59,6 +58,7 @@ namespace Xrm.DevOPs.Manager.Controls
             set { m_parentControl = value;  }
         }
 
+        public SolutionImportControl SolutionImportControl { get; set; }
         #endregion
 
         #region Constructors
@@ -73,6 +73,7 @@ namespace Xrm.DevOPs.Manager.Controls
         #region UI
         private void BtnSyncConfig_Click(object sender, EventArgs e)
         {
+            SolutionImportControl.Reset();
             var fromOrg = CrmMasterOrg;
             var toOrg = CrmOrg;
 
@@ -88,27 +89,23 @@ namespace Xrm.DevOPs.Manager.Controls
 
             if (masterNode != null)
             {
+                SolutionImportControl.SourceOrg = CrmMasterOrg;
+                SolutionImportControl.TargetOrg = CrmOrg;
+
                 foreach (CrmTreeNode<CrmSolution> cn in masterNode.Nodes)
                 {
                     var patch = (CrmSolution)cn.Component;
 
-                    Log.AppendText($"checking for patch {patch.UniqueName}, version {patch.Version}...{Environment.NewLine}");
                     var qa = new QueryByAttribute("solution");
                     qa.AddAttributeValue("uniquename", patch.UniqueName);
                     qa.AddAttributeValue("version", patch.Version);
 
-                    if (!CrmOrg.Service.RetrieveMultiple(qa).Entities.Any())
-                    {
-                        Log.AppendText($"installing patch...{Environment.NewLine}");
-                        SolutionHelper.TransferSolution(CrmMasterOrg, CrmOrg, patch.UniqueName);
-                        Log.AppendText($"Done! {Environment.NewLine}");
-                        MessageBox.Show($"solution {patch.UniqueName} transfered");
-                    }
-                    else
-                    {
-                        Log.AppendText($"Patch already installed. {Environment.NewLine}");
-                    }
-                    Log.AppendText($"---------------------------------------------------------{Environment.NewLine}");
+                    //if (!CrmOrg.Service.RetrieveMultiple(qa).Entities.Any())
+                    //{
+                        //SolutionHelper.TransferSolution(CrmMasterOrg, CrmOrg, patch.UniqueName);
+                        SolutionImportControl.AddSolution(patch);
+                        
+                    //}
 
                 }
             }
@@ -171,7 +168,6 @@ namespace Xrm.DevOPs.Manager.Controls
         private void BtnUpdateTFS_Click(object sender, EventArgs e)
         {
             var sc = GlobalContext.SourceControl;
-            Log.AppendText($"Reloading solutions to check if there is an update to {OrgName}...");
 
             ReLoadSolutions();
             m_parentControl.ReloadTFSFiles();
@@ -182,21 +178,20 @@ namespace Xrm.DevOPs.Manager.Controls
                 foreach (CrmTreeNode<CrmSolution> n in baseSolNode.Nodes)
                 {
                     var sol = (CrmSolution)n.Component;
-                    WriteLine($"patch unique name: {sol.UniqueName}");
                     var node = TreeViewHelper.SearchTree(TvTfs.Nodes, sol.UniqueName, EnumTypes.RecursionType.Full, EnumTypes.SearchPaternType.Contains);
                     if (node == null)
                     {
                         var res = SolutionHelper.DownloadSolutionFile(CrmOrg, sol.UniqueName);
 
                         if (res != null)
-                            sc.AddProjectPatch(OrgName, res[0], res[1], Log);
+                            sc.AddProjectPatch(OrgName, res[0], res[1]);
                     }
                         
                 }
             }
             else
             {
-                WriteLine("Organization Base Project solution not found");
+                MessageBox.Show("Organization Base Project solution not found");
             }
             
 
@@ -298,7 +293,6 @@ namespace Xrm.DevOPs.Manager.Controls
         {
             try
             {
-                WriteLine($"Transfering Patch {item.ServerItem}...");
                 var stream = item.DownloadFile();
                 var bytes = StreamHelper.ReadToEnd(stream);
 
@@ -311,7 +305,7 @@ namespace Xrm.DevOPs.Manager.Controls
             }
             catch (Exception ex)
             {
-                WriteLine($"Exception transfering Patch {item.ServerItem}, Message: {ex.Message}");
+                MessageBox.Show($"Exception transfering Patch {item.ServerItem}, Message: {ex.Message}");
             }
         }
 
@@ -327,10 +321,6 @@ namespace Xrm.DevOPs.Manager.Controls
             return null;
         }
 
-        private void WriteLine(string msg)
-        {
-            Log.AppendText($"{msg}{Environment.NewLine}");
-        }
 
         #endregion
         

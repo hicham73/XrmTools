@@ -106,9 +106,12 @@ namespace Xrm.DevOPs.Manager.Helpers
             return components;
         }
 
-        public static void TransferSolution(CrmOrganization sourceOrg, CrmOrganization targetOrg, string solutionUniqueName)
+        public static void TransferSolution(CrmOrganization sourceOrg, CrmOrganization targetOrg, string solutionUniqueName, Guid? importJobId = null)
         {
             Log.Text($"Transfering solution {solutionUniqueName}...");
+
+            if (importJobId == null)
+                importJobId = Guid.NewGuid();
 
             ExportSolutionRequest exportSolutionRequest = new ExportSolutionRequest();
             exportSolutionRequest.Managed = false;
@@ -120,11 +123,11 @@ namespace Xrm.DevOPs.Manager.Helpers
 
             ImportSolutionRequest impSolReq = new ImportSolutionRequest()
             {
-                CustomizationFile = exportXml
+                CustomizationFile = exportXml,
+                ImportJobId = (Guid)importJobId
             };
 
             targetOrg.Service.Execute(impSolReq);
-            Log.Text($"Solution transfered successfully.");
         }
         public static void TransferSolutionFromFile(string filePath, CrmOrganization targetOrg)
         {

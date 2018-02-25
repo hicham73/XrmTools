@@ -40,25 +40,25 @@ namespace Xrm.DevOPs.Manager.Controls
                 {
                     masterOrgControl.LoadSolutions(org);
                     masterOrgControl.LblOrgName.Text = org.Name;
-                    masterOrgControl.Log = rtSyncLog;
                     masterOrgControl.OrgName = org.Name;
                     masterOrgControl.ParentControl = this;
+                    masterOrgControl.SolutionImportControl = solutionImportControl;
                 }
                 else if (org.Name == "Integration")
                 {
                     integrationOrgControl.LoadSolutions(org);
                     integrationOrgControl.LblOrgName.Text = org.Name;
-                    integrationOrgControl.Log = rtSyncLog;
                     integrationOrgControl.OrgName = org.Name;
                     integrationOrgControl.ParentControl = this;
+                    integrationOrgControl.SolutionImportControl = solutionImportControl;
                 }
                 else
                 {
                     OrgControls[i].LoadSolutions(org);
                     OrgControls[i].LblOrgName.Text = org.Name;
-                    OrgControls[i].Log = rtSyncLog;
                     OrgControls[i].OrgName = org.Name;
                     OrgControls[i].ParentControl = this;
+                    OrgControls[i].SolutionImportControl = solutionImportControl;
                     i++;
                 }
 

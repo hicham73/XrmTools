@@ -51,7 +51,7 @@ namespace Xrm.DevOPs.Manager.TFS
             return items.Items;
         }
 
-        public void AddProjectPatch(string projectName, string patchPath, string patchVer, RichTextBox log)
+        public void AddProjectPatch(string projectName, string patchPath, string patchVer)
         {
             var server = m_tpc.GetService<VersionControlServer>();
             var workspace = server.GetWorkspace(GlobalContext.Config.TFS.WorkspacePath);
@@ -81,34 +81,21 @@ namespace Xrm.DevOPs.Manager.TFS
                 File.Copy(patchPath, patchWsPath);
                 workspace.PendAdd(patchWsPath, true);
 
-                WriteLine(log, "--- Show our pending changes.");
                 PendingChange[] pendingChanges = workspace.GetPendingChanges();
-                WriteLine(log, "  Your current pending changes:");
-                foreach (PendingChange pendingChange in pendingChanges)
-                {
-                    WriteLine(log, "    path: " + pendingChange.LocalItem +
-                                      ", change: " + PendingChange.GetLocalizedStringForChangeType(pendingChange.ChangeType));
-                }
 
-                WriteLine(log, "--- Checkin the items we added.");
                 int changesetNumber = workspace.CheckIn(pendingChanges, "Sample changes");
-                WriteLine(log, "  Checked in changeset " + changesetNumber);
-
-                WriteLine(log, "--- Checkout and modify the file.");
                 workspace.PendEdit(fileName);
                 using (StreamWriter sw = new StreamWriter(fileName))
                 {
                     sw.WriteLine("revision 2 of basic.cs");
                 }
 
-                WriteLine(log, "--- Get the pending change and check in the new revision.");
                 pendingChanges = workspace.GetPendingChanges();
                 changesetNumber = workspace.CheckIn(pendingChanges, "Modified basic.cs");
-                WriteLine(log, "  Checked in changeset " + changesetNumber);
             }
             catch(Exception ex)
             {
-                WriteLine(log, $"Exception while adding file to TFS, Message: {ex.Message}");
+                MessageBox.Show($"Exception while adding file to TFS, Message: {ex.Message}");
             }
             
         }

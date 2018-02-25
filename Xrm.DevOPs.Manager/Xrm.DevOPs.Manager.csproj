@@ -250,6 +250,12 @@
     <Compile Include="Controls\OrganizationSyncControl.Designer.cs">
       <DependentUpon>OrganizationSyncControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SolutionImportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SolutionImportControl.Designer.cs">
+      <DependentUpon>SolutionImportControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="GlobalContext.cs" />
     <Compile Include="Components\AttributeComponent.cs" />
     <Compile Include="Components\ContractTemplate.cs" />
@@ -319,6 +325,10 @@
     <Compile Include="Helpers\CrmTreeNode.cs" />
     <Compile Include="Helpers\EntityReferenceProperty.cs" />
     <Compile Include="Helpers\EntityReferenceTypeConverter.cs" />
+    <Compile Include="Helpers\ImportJob.cs" />
+    <Compile Include="Model\JobLogItem.cs" />
+    <Compile Include="Model\WorkAsyncInfo.cs" />
+    <Compile Include="Model\Worker.cs" />
     <Compile Include="Util\EnumTypes.cs" />
     <Compile Include="Components\Helper.cs" />
     <Compile Include="Helpers\MetadataHelper.cs" />
@@ -386,6 +396,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SolutionCompareControl.resx">
       <DependentUpon>SolutionCompareControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\SolutionImportControl.resx">
+      <DependentUpon>SolutionImportControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SolutionSelecterControl.resx">
       <DependentUpon>SolutionSelecterControl.cs</DependentUpon>
