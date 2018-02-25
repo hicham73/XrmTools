@@ -26,6 +26,7 @@ namespace Xrm.DevOPs.Manager.Model
                 _worker.ProgressChanged += info.PerformProgressChange;
             }
 
+
             _worker.RunWorkerCompleted += (s, e) =>
             {
                 if (info.PostWorkCallBack != null)
