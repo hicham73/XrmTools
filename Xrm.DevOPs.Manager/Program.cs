@@ -16,7 +16,7 @@ namespace Xrm.DevOPs.Manager
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
 
-            //this is a new update
+            //this is pushed from the command line (git)
 
 
         }
